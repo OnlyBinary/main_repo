@@ -8,58 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<html lang="ko">
-<head>
-    <title>Bootstrap 4 Website Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/modals/">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-
-    <%--kakao map API--%>
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=
-    ${kakaoServiceKey}&libraries=services"></script>
-
-</head>
-<style>
-    #map {
-        /*width: 80%;*/
-        height: 100vh;
-    }
-    #placeList {
-        height: 100%;
-        list-style: none;
-
-    }
-
-    #placeList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-    #placeList .item span {display: block;margin-top:4px;}
-    #placeList .info .jibun {padding-left:0px;}
-    #placeList .info .gray {color: #8a8a8a;}
-    #placeList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-    #placeList .item h5, #placeList .item .info { text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-    #placeList .item .info {padding: 10px 0 10px 0px;}
-    #placeList .item .marker_1 {background-position: 0 -10px;}
-
-    .modal-title {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .modal-sheet .modal-dialog {
-        width: 380px;
-        transition: bottom .75s ease-in-out;
-    }
-    .modal-sheet .modal-footer {
-        padding-bottom: 2rem;
-    }
-</style>
+<link rel="stylesheet" href="/css/kakaotest.css">
+<%-- jQuery --%>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<%--kakao map API--%>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}&libraries=services"></script>
 <script>
     let geo2 = {
 
@@ -115,11 +70,11 @@
 
             let content3 = '<div class="card" style="width:200px">' +
                 '<img class="card-img-top" src="' + place.IMGURL + '" alt="Card image" style="height:200px">' +
-                    '<div class="card-body">' +
-                        '<h6 class="card-title">' + place.SVCNM + '</h6>' +
-                        '<a href="#" class="btn btn-primary">' + 'See Profile' + '</a>' +
-                    '</div>' +
-            '</div>';
+                '<div class="card-body">' +
+                '<h6 class="card-title">' + place.SVCNM + '</h6>' +
+                '<a href="#" class="btn btn-primary">' + 'See Profile' + '</a>' +
+                '</div>' +
+                '</div>';
 
             let content2 = '<div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSheet">' +
                 '<div class="modal-dialog" role="document">' +
@@ -160,12 +115,19 @@
                 '</div>';
 
             let el = document.createElement('li');
-            el.innerHTML =
-                '<div class="info">' +
-                '<h5>' + place.SVCNM + '</h5>' +
-                '<span>' + place.PLACENM + '</span>' +
-                '<span class="jibun gray">' + address + '</span>' +
-                '</div>';
+            // el.innerHTML =
+            //     '<div class="info">' +
+            //     '<h5>' + place.SVCNM + '</h5>' +
+            //     '<span>' + place.PLACENM + '</span>' +
+            //     '<span class="jibun gray">' + address + '</span>' +
+            //     '</div>';
+            el.innerHTML = '<div class="portfolio-details portfolio-info">'+
+                '<h5>' + place.SVCNM + '</h5>'+
+                '<ul>' +
+                '<li><strong>' + '장소' + '</strong>' + ': ' + place.PLACENM + '</li>' +
+                '<li><strong>' + '주소' + '</strong>' + ': ' + address + '</li>' +
+                '</ul>' +
+            '</div>';
             el.className = 'item';
 
             fragment.appendChild(el);
@@ -176,7 +138,7 @@
 
             marker.setMap(geo2.map);
 
-            kakao.maps.event.addListener(marker, 'mouseover', function(){
+            kakao.maps.event.addListener(marker, 'mouseover', function () {
                 overlay = new kakao.maps.CustomOverlay({
                     content: content2,
                     map: geo2.map,
@@ -186,7 +148,7 @@
                 });
             });
 
-            kakao.maps.event.addListener(marker, 'mouseout', function(){
+            kakao.maps.event.addListener(marker, 'mouseout', function () {
                 overlay.setMap(null);
             });
 
@@ -195,7 +157,7 @@
             //     window.open(place.place_url);
             // });
 
-            el.onmouseover = function() {
+            el.onmouseover = function () {
                 overlay = new kakao.maps.CustomOverlay({
                     content: content2,
                     map: geo2.map,
@@ -205,22 +167,22 @@
                 });
             };
 
-            el.onmouseout = function() {
+            el.onmouseout = function () {
                 overlay.setMap(null);
             }
 
             // 리스트 클릭시 이벤트 추가
 
         },
-        display: function(geoData) {
+        display: function (geoData) {
             let listEl = document.querySelector("#placeList");
             fragment = document.createDocumentFragment();
 
-            $(geoData).each(function(index, item){
+            $(geoData).each(function (index, item) {
                 let geocoder = new kakao.maps.services.Geocoder();
 
                 let coord = new kakao.maps.LatLng(item.Y, item.X);
-                let callback = function(result, status) {
+                let callback = function (result, status) {
                     if (status == kakao.maps.services.Status.OK) {
                         geo2.displayStoreGpsMarker(item, result[0].address.address_name);
                         if (index === geoData.length - 1) {
@@ -237,8 +199,29 @@
     })
 </script>
 <body>
-<div class="container" style="display: flex;">
-    <ul class="col-3" id="placeList"></ul>
-    <div class="col-9" id="map"></div>
+<div class="container">
+<%--    <div style="width: 100%;">--%>
+<%--        <!-- Example single danger button -->--%>
+<%--        <div class="btn-group">--%>
+<%--            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                Action--%>
+<%--            </button>--%>
+<%--            <ul class="dropdown-menu">--%>
+<%--                <li><a class="dropdown-item" href="#">Action</a></li>--%>
+<%--                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
+<%--                <li><a class="dropdown-item" href="#">Something else here</a></li>--%>
+<%--                <li><hr class="dropdown-divider"></li>--%>
+<%--                <li><a class="dropdown-item" href="#">Separated link</a></li>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+    <div style="display: flex;">
+        <div class="col-3" style="overflow:scroll;">
+            <ul id="placeList"></ul>
+        </div>
+
+        <div class="col-9" id="map"></div>
+    </div>
 </div>
+
 </body>

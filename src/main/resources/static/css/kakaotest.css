@@ -1,0 +1,26 @@
+#map {
+    /*width: 80%;*/
+    height: 100vh;
+}
+#placeList {
+    height: 100%;
+    list-style: none !important;
+
+}
+
+.modal-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal-sheet .modal-dialog {
+    width: 380px;
+    transition: bottom .75s ease-in-out;
+}
+.modal-sheet .modal-footer {
+    padding-bottom: 2rem;
+}
+
+ul{
+    padding:0px !important;
+}
