@@ -19,16 +19,16 @@ spring:
     view:
       prefix: /views/
       suffix: .jsp
-#  datasource:
-#    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-#    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8
-    #    driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://sb2.cdmkygage9u5.ap-northeast-2.rds.amazonaws.com:3306/publicdb?characterEncoding=utf8
+   #    driver-class-name: com.mysql.cj.jdbc.Driver
     #    url: jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8
-#    username: ENC(MnwkZ8v1Q4XKi0A2pmpYtg==)
-#    password: ENC(aw+f75OaXMFdAQ89qAPvfA==)
+    username: ENC(fGIHFnBehqbzi4DDRRE5yA==)
+    password: ENC(qF1qCuCQEp/b2NzFzUX2oQ==)
 
 mybatis:
-  type-aliases-package: com.hana.app.data.dto
+  type-aliases-package: com.hana.data.dto
   mapper-locations: classpath:/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
