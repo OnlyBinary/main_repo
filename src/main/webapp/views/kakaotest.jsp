@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
     <%--kakao map API--%>
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=
-    ${kakaoServiceKey}&libraries=services"></script>
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9e1c6a20d65fd94d833f6984f6e0f2ba&libraries=services"></script>
 
 </head>
 <style>
