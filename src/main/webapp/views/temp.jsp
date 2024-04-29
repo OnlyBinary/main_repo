@@ -7,10 +7,11 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>행사명</h2>
+        <h2>${serviceId}</h2>
         <ol>
           <li><a href="index.html">Home</a></li>
-          <li>Portfolio Details</li>
+          <li>${prevMenu}</li>
+          <li>행사 상세정보</li>
         </ol>
       </div>
 

@@ -20,8 +20,14 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-        <img src="/img/mainlogo.png" alt="mainlogo" style="height:82px;width:5rem;"/>
-        <h1 class="logo"><a href="index.html">Only Binary</a></h1>
+
+            <a href="<c:url value="/"/>">
+                <div style="display:flex !important; align-items:center;">
+                <img src="/img/mainlogo.png" alt="mainlogo" style="height:82px;width:5rem;"/>
+                <h1 class="logo ml-2">Only Binary</h1>
+                </div>
+            </a>
+
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -34,20 +40,20 @@
                 <%--          <li><a class="nav-link scrollto" href="#team">Team</a></li>--%>
                 <li class="dropdown"><a href="#"><span>컨텐츠별</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a class="nav-link scrollto " href="#portfolio">공간시설</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">교육강좌</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">문화체험</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">진료복지</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">체육시설</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/contents/gongan"/>">공간시설</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/contents/edulec"/>">교육강좌</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/contents/culexper"/>">문화체험</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/contents/medical"/>">진료복지</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/contents/sportsfacilities"/>">체육시설</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><span>서비스대상별</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a class="nav-link scrollto " href="#portfolio">가족</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">성인</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">청소년</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">어린이</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">기타</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/target/family"/>">가족</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/target/adult"/>">성인</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/target/teenager"/>">청소년</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/target/child"/>">어린이</a></li>
+                        <li><a class="nav-link scrollto " href="<c:url value="/target/etc"/>">기타</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><span>지역구별</span> <i class="bi bi-chevron-down"></i></a>
@@ -102,8 +108,8 @@
                         <%--              <li><a href="#">Drop Down 4</a></li>--%>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                <li><a class="getstarted scrollto" href="#about">로그인</a></li>
+                <li><a class="nav-link scrollto" href="<c:url value="/contact"/>">Contact</a></li>
+                <li><a class="getstarted scrollto" href="<c:url value="/login"/>">로그인</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->

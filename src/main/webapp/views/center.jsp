@@ -25,7 +25,7 @@
                 <h1>Seoul, My Soul</h1>
                 <h2>마음이 모이면 서울이 됩니다</h2>
                 <div class="d-flex">
-                    <a href="#about" class="btn-get-started scrollto">지도로 서비스 조회</a>
+                    <a href="<c:url value="/map"/>" class="btn-get-started scrollto">지도로 서비스 조회</a>
                     <%--            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>--%>
                 </div>
                 <%--          <div class="row footer-newsletter justify-content-center">--%>

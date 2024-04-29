@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<spring:eval var="kakaoKey" expression="@keyStore.kakaoServiceKey"/>
 <link rel="stylesheet" href="/css/kakaotest.css">
 <%-- jQuery --%>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -172,6 +173,10 @@
             }
 
             // 리스트 클릭시 이벤트 추가
+            let url = '/service?detail=' + place.SVCID;
+            el.addEventListener('click', function() {
+                window.location.href = url;
+            });
 
         },
         display: function (geoData) {
@@ -200,23 +205,8 @@
 </script>
 <body>
 <div class="container">
-<%--    <div style="width: 100%;">--%>
-<%--        <!-- Example single danger button -->--%>
-<%--        <div class="btn-group">--%>
-<%--            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">--%>
-<%--                Action--%>
-<%--            </button>--%>
-<%--            <ul class="dropdown-menu">--%>
-<%--                <li><a class="dropdown-item" href="#">Action</a></li>--%>
-<%--                <li><a class="dropdown-item" href="#">Another action</a></li>--%>
-<%--                <li><a class="dropdown-item" href="#">Something else here</a></li>--%>
-<%--                <li><hr class="dropdown-divider"></li>--%>
-<%--                <li><a class="dropdown-item" href="#">Separated link</a></li>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-    <div style="display: flex;">
-        <div class="col-3" style="overflow:scroll;">
+    <div style="display: flex;" class="mb-5">
+        <div class="col-3" style="overflow:scroll;height:100vh;" >
             <ul id="placeList"></ul>
         </div>
 
