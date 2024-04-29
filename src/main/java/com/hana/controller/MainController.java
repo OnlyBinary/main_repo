@@ -2,6 +2,7 @@ package com.hana.controller;
 
 import com.hana.data.KeyStore;
 import com.hana.util.PublicServiceUtil;
+import com.hana.util.WeatherUtil;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -18,6 +19,9 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class MainController {
 
+    @Value("${app.key.whkey}")
+    String whkey;
+
     final KeyStore keyStore;
 
     @RequestMapping("/")
@@ -28,6 +32,18 @@ public class MainController {
     @RequestMapping("/login")
     public String login(Model model) {
 //        model.addAttribute("center", "login Page");
+        return "index";
+    }
+
+    @RequestMapping("/getweather")
+    @ResponseBody
+    public Object wh2() throws IOException, ParseException {
+        return WeatherUtil.getWeatherByCoordinates("37.56061111","127.039", whkey);
+    }
+
+    @RequestMapping("/weather")
+    public String weather(Model model) {
+        model.addAttribute("center", "weather");
         return "index";
     }
 }

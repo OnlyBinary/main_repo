@@ -69,8 +69,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <%--kakao map API--%>
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}&libraries=services"></script>
->>>>>>> f70fcd3a0eb301967aa49ca1ce718932d68266c5
-<script>
+
     let geo2 = {
 
         map: null,
@@ -110,6 +109,7 @@
                 url: '/getPublicServiceData',
                 success: function(data) {
                     geo2.display(data.tvYeyakCOllect.row);
+                    console.log(data)
                 }
             })
         },
@@ -236,7 +236,7 @@
         display: function (geoData) {
             let listEl = document.querySelector("#placeList");
             fragment = document.createDocumentFragment();
-
+            console.log(geoData)
             $(geoData).each(function (index, item) {
                 let geocoder = new kakao.maps.services.Geocoder();
 
