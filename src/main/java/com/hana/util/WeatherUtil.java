@@ -42,11 +42,13 @@ public class WeatherUtil {
         conn.disconnect();
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(sb.toString());
+        System.out.println(jsonObject);
         return jsonObject;
     }
 
+    //api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}&appid={API key}
     public static Object getWeatherForecastByCoordinates(String lat, String lon, String key) throws IOException, ParseException {
-        String sendUrl = "https://api.openweathermap.org/data/2.5/weather";
+        String sendUrl = "https://api.openweathermap.org/data/2.5/forecast";
         StringBuilder urlBuilder = new StringBuilder(sendUrl); /* URL */
         urlBuilder.append("?" + URLEncoder.encode("lat","UTF-8") + "=" + lat);
         urlBuilder.append("&" + URLEncoder.encode("lon","UTF-8") + "=" + lon);
