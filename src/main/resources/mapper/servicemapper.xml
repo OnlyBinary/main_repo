@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hana.repository.ServiceRepository">
+
+    <select id="selectOne" parameterType="String" resultType="ServiceDto">
+        SELECT * FROM service WHERE svcid=#{svcid}
+    </select>
+    <select id="select" resultType="ServiceDto">
+        SELECT * FROM service
+    </select>
+    <select id="selectByContent" parameterType="String" resultType="ServiceDto">
+        SELECT * FROM service WHERE maxclassnm=#{detail}
+    </select>
+    <select id="selectByTarget" parameterType="String" resultType="ServiceDto">
+        SELECT * FROM service WHERE usertgtinfo like concat('%', #{detail}, '%');
+    </select>
+    <insert id="insert" parameterType="ServiceDto">
+        INSERT INTO service VALUES (#{svcid}, #{svcnm}, #{placenm}, #{payatnm}, #{usertgtinfo}, #{areanm}, #{lat},
+                                    #{imgurl}, #{lng}, #{detail}, #{tel}, #{svcstr}, #{svcfin}, #{rcptstr}, #{rcptfin},
+                                    #{svcstrtime}, #{svcfintime}, #{maxclassnm}, #{minclassnm})
+    </insert>
+    <update id="update" parameterType="ServiceDto">
+        UPDATE service SET svcnm=#{svcnm} WHERE memberid=#{svcid}
+    </update>
+    <delete id="delete" parameterType="String">
+        DELETE FROM service WHERE svcid=#{svcid}
+    </delete>
+
+</mapper>

@@ -25,6 +25,9 @@ ul{
     padding:0px !important;
 }
 
+.content div{
+    height:70px;background-color:greenyellow;display:flex;align-items:center;justify-content:center;
+}
 /*#item:hover {*/
 /*    background-color: #6c757d !important;*/
 /*}*/

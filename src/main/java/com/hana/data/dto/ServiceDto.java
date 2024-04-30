@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServicerDto {
+public class ServiceDto {
     private String svcid;
     private String svcnm;
     private String placenm;
@@ -28,4 +28,6 @@ public class ServicerDto {
     private LocalDateTime rcptfin;
     private Time svcstrtime;
     private Time svcfintime;
+    private String maxclassnm;
+    private String minclassnm;
 }
