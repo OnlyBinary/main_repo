@@ -23,9 +23,6 @@ public class MainController {
     @Value("${app.key.whkey}")
     String whkey;
 
-    @Value("${app.key.forcastkey}")
-    String forcastkey;
-
     final KeyStore keyStore;
 
     @RequestMapping("/")
