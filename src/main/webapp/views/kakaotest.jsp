@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<<<<<<< HEAD
 <html lang="ko">
 <head>
     <title>Bootstrap 4 Website Example</title>
@@ -60,15 +59,15 @@
         padding-bottom: 2rem;
     }
 </style>
-=======
 <spring:eval var="kakaoKey" expression="@keyStore.kakaoServiceKey"/>
-<link rel="stylesheet" href="/css/kakaotest.css">
+<link rel="stylesheet" href="<c:url value="/css/kakaotest.css"/>">
 <%-- jQuery --%>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <%--kakao map API--%>
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}&libraries=services"></script>
+<script>
 
     let geo2 = {
 
@@ -102,14 +101,13 @@
 
             // 마커 새로고침
             this.displayGpsMarker(moveLatLon);
-            this.getServiceData();
+            // this.getServiceData();
         },
         getServiceData: function() {
             $.ajax({
                 url: '/getPublicServiceData',
                 success: function(data) {
-                    geo2.display(data.tvYeyakCOllect.row);
-                    console.log(data)
+                    geo2.display(data);
                 }
             })
         },
@@ -121,47 +119,18 @@
         },
         displayStoreGpsMarker: function(place, address) {
             let overlay;
-            let dataLoc = new kakao.maps.LatLng(place.Y, place.X);
-
-            let content3 = '<div class="card" style="width:200px">' +
-                '<img class="card-img-top" src="' + place.IMGURL + '" alt="Card image" style="height:200px">' +
-                '<div class="card-body">' +
-                '<h6 class="card-title">' + place.SVCNM + '</h6>' +
-                '<a href="#" class="btn btn-primary">' + 'See Profile' + '</a>' +
-                '</div>' +
-                '</div>';
-
-            let content2 = '<div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSheet">' +
-                '<div class="modal-dialog" role="document">' +
-                '<div class="modal-content rounded-4 shadow">' +
-                '<div class="modal-header border-bottom-0">' +
-                '<h4 class="modal-title fs-5 col-10">' + place.SVCNM + '</h4>' +
-                '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
-                '</div>' +
-                // '<div class="modal-body py-0">' +
-                // '<p>' + 'This is a modal sheet, a variation of the modal that docs itself to the bottom of the viewport like the newer share sheets in iOS.' + '</p>' +
-                // '</div>' +
-                '<div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">' +
-                '<h6>' + place.MAXCLASSNM + ' > ' + place.MINCLASSNM + '</h6>' +
-                '<h5>' + '장소) ' + place.PLACENM + '</h5>' +
-                '<h5>' + '주소) ' + address + '</h5>' +
-                // '<button type="button" class="btn btn-lg btn-primary">' + 'Save Changes' + '</button>' +
-                // '<button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">' + 'Close' + '</button>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
+            let dataLoc = new kakao.maps.LatLng(place.lat, place.lng);
 
             let content = '<div class="wrap" style="position: absolute;left: 0;bottom: 40px;width: 200px;height: 100px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: \'Malgun Gothic\', dotum, \'돋움\', sans-serif;line-height: 1.5;">' +
                 '<div class="info" style="width: 286px;height: 140px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">' +
                 '<div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">' +
-                '<div>' + place.SVCNM + '</div>' +
+                '<div>' + place.svcnm + '</div>' +
                 // '<div style="float:right;margin:15px 10px 0 0;font-size:12px;font-color:red;text-align:center">위생등급: <h2>' + hgAsgnLv + '</h2></div>' +
                 '</div>' +
                 '<div class="body" style="position: relative;overflow: hidden;">' +
                 '<div class="desc" style="position: relative;margin: 10px 10px 10px 10px;height: 100px;">' +
-                '<div class="jibun" style="font-size: 11px;color: #888;margin-top: -2px;">' + place.MAXCLASSNM + '>' + place.MINCLASSNM + '</div>' +
-                '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">장소) ' + place.PLACENM + '</div>' +
+                // '<div class="jibun" style="font-size: 11px;color: #888;margin-top: -2px;">' + place.MAXCLASSNM + '>' + place.MINCLASSNM + '</div>' +
+                '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">장소) ' + place.placenm + '</div>' +
                 '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소) ' + address + '</div>' +
                 // '<button type="button" onClick="window.location.href = \'' + place.place_url + '\'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">카카오맵에서 보기</button>' +
                 '</div>' +
@@ -170,16 +139,10 @@
                 '</div>';
 
             let el = document.createElement('li');
-            // el.innerHTML =
-            //     '<div class="info">' +
-            //     '<h5>' + place.SVCNM + '</h5>' +
-            //     '<span>' + place.PLACENM + '</span>' +
-            //     '<span class="jibun gray">' + address + '</span>' +
-            //     '</div>';
-            el.innerHTML = '<div class="portfolio-details portfolio-info">'+
-                '<h5>' + place.SVCNM + '</h5>'+
+            el.innerHTML = '<div>'+
+                '<h5>' + place.svcnm + '</h5>'+
                 '<ul>' +
-                '<li><strong>' + '장소' + '</strong>' + ': ' + place.PLACENM + '</li>' +
+                '<li><strong>' + '장소' + '</strong>' + ': ' + place.placenm + '</li>' +
                 '<li><strong>' + '주소' + '</strong>' + ': ' + address + '</li>' +
                 '</ul>' +
             '</div>';
@@ -195,7 +158,7 @@
 
             kakao.maps.event.addListener(marker, 'mouseover', function () {
                 overlay = new kakao.maps.CustomOverlay({
-                    content: content2,
+                    content: content,
                     map: geo2.map,
                     position: dataLoc,
                     xAnchor: 0.5,
@@ -207,14 +170,9 @@
                 overlay.setMap(null);
             });
 
-            // kakao.maps.event.addListener(marker, 'click', function(){
-            //     // window.location.href=place.place_url;
-            //     window.open(place.place_url);
-            // });
-
             el.onmouseover = function () {
                 overlay = new kakao.maps.CustomOverlay({
-                    content: content2,
+                    content: content,
                     map: geo2.map,
                     position: dataLoc,
                     xAnchor: 0.3,
@@ -227,20 +185,25 @@
             }
 
             // 리스트 클릭시 이벤트 추가
-            let url = '/service?detail=' + place.SVCID;
+            let url = '/service?detail=' + place.svcid;
+            kakao.maps.event.addListener(marker, 'click', function(){
+                window.location.href=url;
+                // window.open(place.place_url);
+            });
+
             el.addEventListener('click', function() {
                 window.location.href = url;
             });
 
         },
         display: function (geoData) {
+            // console.log(geoData);
             let listEl = document.querySelector("#placeList");
             fragment = document.createDocumentFragment();
-            console.log(geoData)
             $(geoData).each(function (index, item) {
                 let geocoder = new kakao.maps.services.Geocoder();
 
-                let coord = new kakao.maps.LatLng(item.Y, item.X);
+                let coord = new kakao.maps.LatLng(item.lat, item.lng);
                 let callback = function (result, status) {
                     if (status == kakao.maps.services.Status.OK) {
                         geo2.displayStoreGpsMarker(item, result[0].address.address_name);
@@ -253,19 +216,110 @@
             });
         }
     };
+    let showList = {
+        init: function(id) {
+            document.querySelectorAll('.content').forEach(function(el) {
+                el.style.display='none';
+            });
+            document.getElementById(id).style.display='block';
+            let text = "";
+
+            if (id === 'content1') text = '컨텐츠별';
+            else if (id === 'content2') text = '서비스대상별';
+            else if (id === 'content3') text = '지역구별';
+
+            $('#cateBtn').text(text);
+        },
+        allList: function() {
+            document.querySelectorAll('.content').forEach(function(el) {
+                el.style.display='none';
+            });
+            $('#cateBtn').text("전체");
+            geo2.getServiceData();
+        }
+    }
+    let changeContentList = {
+        content: function(data) {
+            // maxclassnm = data 가져와서 geo2.display()
+            $.ajax({
+                url: '<c:url value="/getContentListData"/>',
+                data: {'detail': data, 'category': 'content'},
+                success: function(result) {
+                    // console.log(result);
+                    changeContentList.initialization(result);
+                }
+            })
+        },
+        target: function(data) {
+            $.ajax({
+                url: '<c:url value="/getContentListData"/>',
+                data: {'detail': data, 'category': 'target'},
+                success: function(result) {
+                    changeContentList.initialization(result);
+                }
+            })
+        },
+        initialization: function(data) {
+            // 기존 지도 초기화
+            document.querySelector("#map").innerHTML = '';
+            geo2.mapdisplay(); // 기본지도 띄어주기
+            // 옆에 목록 초기화
+            document.querySelector("#placeList").innerHTML = '';
+            geo2.display(data); // 마커 찍어주기
+        }
+    }
     $(function() {
         geo2.mapdisplay();
+        showList.init(0);
+        let currentPosition = parseInt($("#quickmenu").css("top"));
+        $(window).scroll(function() {
+            let position = $(window).scrollTop();
+            $("#quickmenu").stop().animate({"top":position+currentPosition+"px"}, 1000);
+        });
     })
 </script>
 <body>
 <div class="container">
     <div style="display: flex;" class="mb-5">
+        <div class="col-1" id="quickmenu" style="padding:0px;z-index:1;">
+            <div class="dropdown">
+                <button id="cateBtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width:100%;">
+                    선택
+                </button>
+                <div class="dropdown-menu">
+                    <%-- 클릭하면 가져와서 값 뿌려주기 -> onclick --%>
+                    <a class="dropdown-item" onclick="showList.allList()">전체</a>
+                    <a class="dropdown-item" onclick="showList.init('content1')">컨텐츠별</a>
+                    <a class="dropdown-item" onclick="showList.init('content2')">서비스대상별</a>
+                    <a class="dropdown-item" onclick="showList.init('content3')">지역구별</a>
+                </div>
+            </div>
+            <div id="content1" class="content">
+                <div onclick="changeContentList.content('공간시설')">공간시설</div>
+                <div onclick="changeContentList.content('교육강좌')">교육강좌</div>
+                <div onclick="changeContentList.content('문화체험')">문화체험</div>
+                <div onclick="changeContentList.content('진료복지')">진료복지</div>
+                <div onclick="changeContentList.content('체육시설')">체육시설</div>
+            </div>
+            <div id="content2" class="content">
+                <div onclick="changeContentList.target('가족')">가족</div>
+                <div onclick="changeContentList.target('성인')">성인</div>
+                <div onclick="changeContentList.target('청소년')">청소년</div>
+                <div onclick="changeContentList.target('어린이')">어린이</div>
+                <div onclick="changeContentList.target('')">기타</div>
+            </div>
+            <div id="content3" class="content">
+                <div>서울중부</div>
+                <div>서울동부</div>
+                <div>서울서부</div>
+                <div>서울남부</div>
+                <div>서울북부</div>
+            </div>
+        </div>
         <div class="col-3" style="overflow:scroll;height:100vh;" >
             <ul id="placeList"></ul>
         </div>
-
-        <div class="col-9" id="map"></div>
+        <div class="col-8" id="map"></div>
     </div>
 </div>
-
 </body>
