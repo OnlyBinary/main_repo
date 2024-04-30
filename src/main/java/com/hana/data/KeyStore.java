@@ -12,4 +12,7 @@ public class KeyStore {
 
     @Value("${app.key.kakaoKey}")
     public String kakaoServiceKey; // 카카오 api key
+
+    @Value("${app.key.kakaoApiKey}")
+    public String kakaoApiServiceKey;
 }
