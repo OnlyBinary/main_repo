@@ -5,6 +5,7 @@ import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.MemberDto;
 import com.hana.service.InterestlistService;
 import com.hana.service.MemberService;
+import com.hana.util.AirPollutionUtil;
 import com.hana.util.PublicServiceUtil;
 import com.hana.util.WeatherUtil;
 import jakarta.servlet.http.HttpSession;
@@ -97,8 +98,20 @@ public class MainController {
 
     @RequestMapping("/getweather")
     @ResponseBody
-    public Object wh2() throws IOException, ParseException {
+    public Object getweather() throws IOException, ParseException {
         return WeatherUtil.getWeatherByCoordinates("37.56061111","127.039", whkey);
+    }
+
+    @RequestMapping("/getwhforcast")
+    @ResponseBody
+    public Object getwhforcast() throws IOException, ParseException {
+        return WeatherUtil.getWeatherForecastByCoordinates("37.56061111","127.039", whkey);
+    }
+
+    @RequestMapping("/getairpollution")
+    @ResponseBody
+    public Object getairpollution() throws IOException, ParseException {
+        return AirPollutionUtil.getAirPollution("37.56061111","127.039", whkey);
     }
 
     @RequestMapping("/weather")
