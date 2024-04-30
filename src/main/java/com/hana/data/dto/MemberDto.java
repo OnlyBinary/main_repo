@@ -2,6 +2,8 @@ package com.hana.data.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @ToString
 @Builder

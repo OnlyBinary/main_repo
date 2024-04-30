@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hana.repository.InterestlistRepository">
+
+    <resultMap id="memberinterest" type="interestlistDto">
+        <id column="memberid" property="memberid"/>
+        <result column="svcid" property="svcid"/>
+        <result column="regdate" property="regdate"/>
+        <collection property="serviceList" ofType="serviceDto">
+            <id column="svcid" property="svcid"/>
+            <result column="svcnm" property="svcnm"/>
+            <result column="rcptstr" property="rcptstr"/>
+            <result column="rcptfin" property="rcptfin"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectinterest" parameterType="String" resultMap="memberinterest">
+        select interestlist.memberid, interestlist.svcid, service.svcnm, service.rcptstr, service.rcptfin, interestlist.regdate
+        FROM interestlist
+                 LEFT JOIN service ON interestlist.svcid = service.svcid
+        WHERE interestlist.memberid = #{memberid};
+    </select>
+    <select id="selectOne" parameterType="String" resultType="interestlistDto">
+        SELECT * FROM interestlist WHERE memberid=#{memberid}
+    </select>
+    <select id="select" resultType="interestlistDto">
+        SELECT * FROM interestlist
+    </select>
+    <insert id="insert" parameterType="interestlistDto">
+        INSERT INTO interestlist VALUES (#{memberid}, #{svcid}, now())
+    </insert>
+    <update id="update" parameterType="interestlistDto">
+        UPDATE interestlist SET svcid=#{svcid} WHERE memberid=#{memberid}
+    </update>
+    <delete id="delete" parameterType="String">
+        DELETE FROM interestlist WHERE memberid=#{memberid}
+    </delete>
+
+</mapper>
