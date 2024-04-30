@@ -2,6 +2,9 @@ package com.hana.data.dto;
 
 import lombok.*;
 
+import java.sql.Date;
+import java.util.List;
+
 @Data
 @ToString
 @Builder
@@ -10,5 +13,7 @@ import lombok.*;
 public class InterestlistDto {
     private String memberid;
     private String svcid;
+    private Date regdate;
+    private List<ServiceDto> serviceList;
 }
 

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script>
     let header = {
         init: function () {
@@ -109,8 +110,17 @@
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="<c:url value="/contact"/>">Contact</a></li>
-                <li><a class="getstarted scrollto" href="<c:url value="/login"/>">로그인</a></li>
-            </ul>
+                <c:choose>
+                    <c:when test="${sessionScope.id == null}">
+                        <li><a href="<c:url value="/login"/>" style="font-size: 12px;">로그인</a></li>
+                        <li><a href="<c:url value="/register"/>" style="font-size: 12px;">회원가입</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="<c:url value="/mypage"/>" style="font-size: 12px;">마이페이지</a></li>
+                        <li><a href="<c:url value="/logout"/>" style="font-size: 12px;">로그아웃</a></li>
+                    </c:otherwise>
+                </c:choose>
+        </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 

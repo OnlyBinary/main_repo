@@ -2,6 +2,7 @@ package com.hana.data.dto;
 
 import lombok.*;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServicerDto {
+public class ServiceDto {
     private String svcid;
     private String svcnm;
     private String placenm;
@@ -24,8 +25,10 @@ public class ServicerDto {
     private String tel;
     private LocalDateTime svcstr;
     private LocalDateTime svcfin;
-    private LocalDateTime rcptstr;
-    private LocalDateTime rcptfin;
+    private Date rcptstr;
+    private Date rcptfin;
     private Time svcstrtime;
     private Time svcfintime;
+    private String maxclassnm;
+    private String minclassnm;
 }
