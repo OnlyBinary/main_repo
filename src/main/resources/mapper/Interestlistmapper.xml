@@ -17,7 +17,7 @@
     </resultMap>
 
     <select id="selectinterest" parameterType="String" resultMap="memberinterest">
-        select interestlist.memberid, interestlist.svcid, service.svcnm, service.rcptstr, service.rcptfin, interestlist.regdate
+        select interestlist.memberid, interestlist.svcid, interestlist.regdate, service.svcnm, service.rcptstr, service.rcptfin
         FROM interestlist
                  LEFT JOIN service ON interestlist.svcid = service.svcid
         WHERE interestlist.memberid = #{memberid};

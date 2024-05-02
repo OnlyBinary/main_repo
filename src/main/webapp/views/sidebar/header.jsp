@@ -39,7 +39,7 @@
                 <%--          <li><a class="nav-link scrollto" href="#services">Services</a></li>--%>
                 <%--          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>--%>
                 <%--          <li><a class="nav-link scrollto" href="#team">Team</a></li>--%>
-                <li class="dropdown"><a href="#"><span>컨텐츠별</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/contents/main"><span>컨텐츠별</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a class="nav-link scrollto " href="<c:url value="/contents/gongan"/>">공간시설</a></li>
                         <li><a class="nav-link scrollto " href="<c:url value="/contents/edulec"/>">교육강좌</a></li>
@@ -48,7 +48,7 @@
                         <li><a class="nav-link scrollto " href="<c:url value="/contents/sportsfacilities"/>">체육시설</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>서비스대상별</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/target/main"><span>서비스대상별</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a class="nav-link scrollto " href="<c:url value="/target/family"/>">가족</a></li>
                         <li><a class="nav-link scrollto " href="<c:url value="/target/adult"/>">성인</a></li>
@@ -62,46 +62,46 @@
                         <%--              <li><a href="#">서울 북부</a></li>--%>
                         <li class="dropdown"><a href="#"><span>서울 중부</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a href="#">동대문구</a></li>
-                                <li><a href="#">성동구</a></li>
-                                <li><a href="#">용산구</a></li>
-                                <li><a href="#">종로구</a></li>
-                                <li><a href="#">중구</a></li>
+                                <li><a href="/location/동대문구">동대문구</a></li>
+                                <li><a href="/location/성동구">성동구</a></li>
+                                <li><a href="/location/용산구">용산구</a></li>
+                                <li><a href="/location/종로구">종로구</a></li>
+                                <li><a href="/location/중구">중구</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a href="#"><span>서울 동부</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a href="#">강동구</a></li>
-                                <li><a href="#">광진구</a></li>
-                                <li><a href="#">송파구</a></li>
-                                <li><a href="#">중랑구</a></li>
+                                <li><a href="/location/강동구">강동구</a></li>
+                                <li><a href="/location/광진구">광진구</a></li>
+                                <li><a href="/location/송파구">송파구</a></li>
+                                <li><a href="/location/중랑구">중랑구</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a href="#"><span>서울 서부</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a href="#">강서구</a></li>
-                                <li><a href="#">구로구</a></li>
-                                <li><a href="#">금천구</a></li>
-                                <li><a href="#">마포구</a></li>
-                                <li><a href="#">서대문구</a></li>
-                                <li><a href="#">양천구</a></li>
-                                <li><a href="#">영등포구</a></li>
+                                <li><a href="/location/강서구">강서구</a></li>
+                                <li><a href="/location/구로구">구로구</a></li>
+                                <li><a href="/location/금천구">금천구</a></li>
+                                <li><a href="/location/마포구">마포구</a></li>
+                                <li><a href="/location/서대문구">서대문구</a></li>
+                                <li><a href="/location/양천구">양천구</a></li>
+                                <li><a href="/location/영등포구">영등포구</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a href="#"><span>서울 남부</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a href="#">강남구</a></li>
-                                <li><a href="#">관악구</a></li>
-                                <li><a href="#">동작구</a></li>
-                                <li><a href="#">서초구</a></li>
+                                <li><a href="/location/강남구">강남구</a></li>
+                                <li><a href="/location/관악구">관악구</a></li>
+                                <li><a href="/location/동작구">동작구</a></li>
+                                <li><a href="/location/서초구">서초구</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a href="#"><span>서울 북부</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a href="#">강북구</a></li>
-                                <li><a href="#">노원구</a></li>
-                                <li><a href="#">도봉구</a></li>
-                                <li><a href="#">성북구</a></li>
+                                <li><a href="/location/강북구">강북구</a></li>
+                                <li><a href="/location/노원구">노원구</a></li>
+                                <li><a href="/location/도봉구">도봉구</a></li>
+                                <li><a href="/location/성북구">성북구</a></li>
                             </ul>
                         </li>
                         <%--              <li><a href="#">Drop Down 2</a></li>--%>

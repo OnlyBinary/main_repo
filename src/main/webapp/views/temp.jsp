@@ -31,6 +31,7 @@
     }
   }
   $(function() {
+    // console.log();
     likeClick.init();
   })
 </script>
@@ -304,7 +305,9 @@
             <div class="swiper-pagination"></div>
           </div>
           <div>
-            ${service.detail}
+            ${detail.ListPublicReservationDetail.row[0].NOTICE}
+<%--            ${detail.ListPublicReservationDetail.row[0].DTLCONT}--%>
+<%--            ${service.detail}--%>
           </div>
         </div>
 

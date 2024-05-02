@@ -45,7 +45,7 @@ public class ServiceService implements HanaService<String, ServiceDto> {
         switch(option) {
             case "content" -> serviceDtoList = getByContent(detail);
             case "target" -> serviceDtoList = getByTarget(detail);
-            case "location" -> serviceDtoList = getByTarget(detail);
+            case "location" -> serviceDtoList = getByLocation(detail);
         }
         return serviceDtoList;
     }
@@ -56,5 +56,13 @@ public class ServiceService implements HanaService<String, ServiceDto> {
 
     private List<ServiceDto> getByContent(String content) {
         return serviceRepository.selectByContent(content);
+    }
+
+    private List<ServiceDto> getByLocation(String location) {
+        return serviceRepository.selectByLocation(location);
+    }
+
+    public void deleteAreanmIsNUll() {
+        serviceRepository.deleteAreaIsNull();
     }
 }
