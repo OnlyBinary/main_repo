@@ -132,20 +132,20 @@ public class MainController {
 
 @RequestMapping("/getweather")
     @ResponseBody
-    public Object getweather() throws IOException, ParseException {
-        return WeatherUtil.getWeatherByCoordinates("37.56061111","127.039", whkey);
+    public Object getweather(@RequestParam("lat") String lat, @RequestParam("lng") String lng) throws IOException, ParseException {
+        return WeatherUtil.getWeatherByCoordinates(lat,lng, whkey);
     }
 
     @RequestMapping("/getwhforcast")
     @ResponseBody
-    public Object getwhforcast() throws IOException, ParseException {
-        return WeatherUtil.getWeatherForecastByCoordinates("37.56061111","127.039", whkey);
+    public Object getwhforcast(@RequestParam("lat") String lat, @RequestParam("lng") String lng) throws IOException, ParseException {
+        return WeatherUtil.getWeatherForecastByCoordinates(lat,lng, whkey);
     }
 
     @RequestMapping("/getairpollution")
     @ResponseBody
-    public Object getairpollution() throws IOException, ParseException {
-        return AirPollutionUtil.getAirPollution("37.56061111","127.039", whkey);
+    public Object getairpollution(@RequestParam("lat") String lat, @RequestParam("lng") String lng) throws IOException, ParseException {
+        return AirPollutionUtil.getAirPollution(lat,lng, whkey);
     }
 
     @RequestMapping("/weather")

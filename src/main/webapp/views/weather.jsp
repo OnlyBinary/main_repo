@@ -130,8 +130,9 @@
             $('#w0').html(result.name);
             $('#desc').html(result.weather[0].description);
             $('#wtem').html(result.main.temp+'°');
-            $('#wskin').html('체감온도:' + result.main.feels_like);
-            $('#wlh').html(Math.round(result.main.temp_min)+'°'+"/"+Math.round(result.main.temp_max) + '°');
+            $('#wskin').html('체감온도:' + result.main.feels_like + "°");
+            $('#wlh').html("<span class='temp-value temp-min'>" + Math.round(result.main.temp_min) + "°</span>/" +
+                "<span class='temp-value temp-max'>" + Math.round(result.main.temp_max) + "°</span>");
             $('#wicon').html("<img src=" + iconUrl + " width=100 height=100>");
         }
     };
@@ -222,7 +223,7 @@
 <%-- 위젯 --%>
 
 <div class="container">
-    <div id="weather-card" class="p-2" style="border: 1.5px solid black;">
+    <div id="weather-card" class="p-2">
         <div class="d-flex align-items-center">
             <div class="d-flex flex-column align-items-center p-2"
                  style="width: auto; border: 1.5px solid black; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -233,7 +234,7 @@
                 </div>
                 <h5 id="wicon" class="p-2"></h5>
             </div>
-            <div>
+            <div class="d-flex flex-column">
                 <h5 id="dwsc"></h5>
                 <h5 id="wtem"></h5>
                 <h5 id="wlh"></h5>
