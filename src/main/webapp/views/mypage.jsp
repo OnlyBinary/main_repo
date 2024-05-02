@@ -12,6 +12,12 @@
         margin-bottom: 20px; /* Increase the margin-bottom value to increase spacing between rows */
         line-height: 3; /* Adjust line height to make the cells taller */
     }
+    .favorites-title {
+        margin-bottom: 100px; /* Adjust the margin bottom as needed */
+    }
+    .favorites-icon {
+        margin-bottom: 10px; /* 하트 아이콘과 테이블 사이에 여백을 만들려면 마진 오른쪽 값을 조정하세요. */
+    }
 </style>
 
 <script>
@@ -52,23 +58,27 @@
                         </div>
                         <div class="name">
                             <i class="bi bi-person-square"></i>
-                            <h4>Name:</h4>
+                            <h4>이름:</h4>
                             <p style ="font-size: 20px">${member.membernm}</p>
                         </div>
                         <div class="tel">
                             <i class="bi bi-phone"></i>
-                            <h4>Tel:</h4>
+                            <h4>전화번호:</h4>
                             <p style ="font-size: 20px">${member.membertel}</p>
                         </div>
                         <div class="address">
                             <i class="bi bi-geo-alt"></i>
-                            <h4>Location:</h4>
+                            <h4>주소:</h4>
                             <p style ="font-size: 20px">${member.memberaddr}</p>
                         </div>
                         <div class="email">
                             <i class="bi bi-envelope"></i>
-                            <h4>Email:</h4>
+                            <h4>이메일:</h4>
                             <p style ="font-size: 20px">${member.memberemail}</p>
+                        </div>
+                        <div class="favorites">
+                            <i class="bi bi-bookmark-heart-fill favorites-icon"></i>
+                            <h4 class="favorites-title">관심 추가한 목록:</h4>
                         </div>
                         <table class="table table-striped" id="comment_table">
                             <thead>
@@ -79,14 +89,16 @@
                             </tr>
                             </thead>
                             <tbody>
-<%--                            <c:forEach var="c" items="${interest}">--%>
-<%--                                <tr>--%>
-<%--                                    <td>${c.serviceList}</td> <!-- ServiceDto의 svcnm 속성 -->--%>
-<%--                                    <td>${c.regdate}</td> <!-- ServiceDto의 regdate 속성 -->--%>
-<%--                                </tr>--%>
-<%--                            </c:forEach>--%>
+                            <c:forEach var="c" items="${interest[0].serviceList}">
+                                <tr>
+                                    <td>${c.svcnm}</td>
+                                    <td>${c.rcptstr}</td>
+                                    <td>${c.rcptfin}</td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>

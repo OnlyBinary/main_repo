@@ -96,7 +96,41 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/getweather")
+    @RequestMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("center", "register");
+        return "index";
+    }
+
+    @RequestMapping("/registerimpl")
+    public String registerimpl(Model model,
+                               MemberDto memberDto, HttpSession httpSession){
+
+        try {
+            memberService.add(memberDto);
+            httpSession.setAttribute("id", memberDto.getMemberid());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return "index";
+    }
+
+    @ResponseBody
+    @RequestMapping("/registercheckid")
+    public Object registercheckid(@RequestParam("id") String id) throws Exception {
+        String result = "0";
+        MemberDto memberDto = memberService.get(id);
+        if(memberDto == null){
+            result = "1";
+        }
+        return result;
+    }
+
+
+
+@RequestMapping("/getweather")
     @ResponseBody
     public Object getweather() throws IOException, ParseException {
         return WeatherUtil.getWeatherByCoordinates("37.56061111","127.039", whkey);
