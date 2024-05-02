@@ -27,12 +27,12 @@ public class DetailInfoController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        model.addAttribute("lat", serviceDto.getLat());
+        model.addAttribute("lng", serviceDto.getLng());
         model.addAttribute("service", serviceDto);
         model.addAttribute("prevMenu", "지도로 찾아보기");
         model.addAttribute("center", "temp");
         return "index";
     }
-
     // 카드 뷰 -> 행사 상세정보
 }

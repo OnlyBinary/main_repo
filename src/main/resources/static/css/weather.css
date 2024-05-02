@@ -17,36 +17,64 @@
     background-color: #D1C6AD; /* 안개 색 */
 }
 
-/*#weather-card {*/
-/*    width: auto; !* 카드의 너비 자동 조정 *!*/
-/*    border: 1.5px solid black;*/
-/*    border-radius: 10px; !* 모서리를 더 둥글게 *!*/
-/*    box-shadow: 0 4px 8px rgba(0,0,0,0.1); !* 그림자 추가 *!*/
-/*    background-color: white; !* 배경색 지정 *!*/
-/*    margin: 20px; !* 주변 여백 추가 *!*/
-/*    padding: 15px; !* 내부 패딩 추가 *!*/
-/*}*/
+#weather-card {
+    width: auto; /* 카드의 너비 자동 조정 */
+    border: 1.5px solid black;
+    border-radius: 30px!important; /* 모서리를 더 둥글게 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1)!important; /* 그림자 추가 */
+    /*background-color: white; !* 배경색 지정 *!*/
+    margin: 20px!important; /* 주변 여백 추가 */
+    padding: 15px!important; /* 내부 패딩 추가 */
+}
 #wtem {
     font-size: 60px; /* 글꼴 크기를 24px로 설정 */
     font-weight: bold; /* 글꼴을 굵게 설정 */
     color: #333; /* 글꼴 색상을 어두운 회색으로 설정 */
+    margin-bottom: 20px;
+    justify-content: start!important;
 }
 
-/*.weather-info {*/
-/*    display: flex;*/
-/*    flex-direction: column; !* 수직 정렬 *!*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    margin-top: 10px; !* 상단 여백 추가 *!*/
-/*}*/
-/*.weather-detail {*/
-/*    display: flex;*/
-/*    flex-direction: row; !* 가로 정렬 *!*/
-/*    justify-content: space-between; !* 요소 사이 공간 동등 배분 *!*/
-/*    padding: 10px; !* 패딩 추가 *!*/
-/*    width: 100%; !* 전체 너비 사용 *!*/
-/*}*/
-/*h4, h5 {*/
-/*    margin: 5px 0; !* 상하 여백 추가 *!*/
-/*    text-align: center; !* 텍스트 중앙 정렬 *!*/
-/*}*/
+.weather-info {
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; /* 상단 여백 추가 */
+}
+
+.weather-detail {
+    display: flex;
+    flex-direction: row; /* 가로 정렬 */
+    justify-content: space-between; /* 요소 사이 공간 동등 배분 */
+    padding: 10px; /* 패딩 추가 */
+    width: 100%; /* 전체 너비 사용 */
+}
+h4, h5 {
+    margin: 5px 0; /* 상하 여백 추가 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+h2 {
+    font-weight: bold;
+}
+
+#pm10 {
+    text-align: start;
+}
+
+#pm25 {
+    text-align: start;
+}
+
+.temp-value {
+    font-weight: bold;
+    text-shadow: 0 0 2px #000;
+}
+
+.temp-min {
+    color: blue;
+}
+
+.temp-max {
+    color: red;
+}
