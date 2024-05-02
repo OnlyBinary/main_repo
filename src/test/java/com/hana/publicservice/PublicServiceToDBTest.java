@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class PublicServiceToDBTest {
     @Test
     void contextLoads() throws IOException, ParseException {
         // 먼저 하나만 받아와서 전체 개수 출력
-        JSONObject serviceData = (JSONObject) PublicServiceUtil.getServiceData(keyStore.publicServiceKey, "1", "20");
+        JSONObject serviceData = (JSONObject) PublicServiceUtil.getServiceData(keyStore.publicServiceKey, "1", "500");
         JSONObject collect = (JSONObject) serviceData.get("tvYeyakCOllect");
         JSONArray rows = (JSONArray) collect.get("row");
 
@@ -72,6 +73,21 @@ public class PublicServiceToDBTest {
                 lng = Double.parseDouble(obj.get("X").toString());
             }
 
+            String areanm = "";
+            // 지역구명이 안넘어오는 경우
+            if (obj.get("areanm") == null) {
+                Object placenm = obj.get("PLACENM");
+                JSONObject serviceData1 = (JSONObject) KakaoServiceUtil.getServiceData(keyStore.kakaoApiServiceKey, placenm.toString().split(" ")[0]);
+                JSONArray documents = (JSONArray) serviceData1.get("documents");
+                JSONObject o = (JSONObject) documents.get(0);
+
+                areanm = o.get("address_name").toString().split(" ")[1];
+            } else {
+                areanm = obj.get("areanm").toString();
+            }
+
+            System.out.println(areanm);
+
             // TODO -> usertgtinfo 칼럼 길이 수정
 
             try {
@@ -79,15 +95,18 @@ public class PublicServiceToDBTest {
                 String svcstrString = obj.get("SVCOPNBGNDT").toString();
                 String svcfinString = obj.get("SVCOPNENDDT").toString();
                 String rcptstrString = obj.get("RCPTBGNDT").toString();
-//                String rcptstrString = "2024-04-30 11:30:11.3";
                 String rcptfinString = obj.get("RCPTENDDT").toString();
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 
+
                 LocalDateTime svcstr = LocalDateTime.parse(svcstrString, formatter);
                 LocalDateTime svcfin = LocalDateTime.parse(svcfinString, formatter);
-                LocalDateTime rcptstr = LocalDateTime.parse(rcptstrString, formatter);
-                LocalDateTime rcptfin = LocalDateTime.parse(rcptfinString, formatter);
+                LocalDateTime rcptstrLocal = LocalDateTime.parse(rcptstrString, formatter);
+                LocalDateTime rcptfinLocal = LocalDateTime.parse(rcptfinString, formatter);
+
+                java.sql.Date rcptstr = java.sql.Date.valueOf(rcptstrLocal.toLocalDate());
+                java.sql.Date rcptfin = java.sql.Date.valueOf(rcptfinLocal.toLocalDate());
 
                 // String -> SimpleDateFormat
 
@@ -104,9 +123,9 @@ public class PublicServiceToDBTest {
                         .placenm(obj.get("PLACENM").toString())
                         .payatnm(obj.get("PAYATNM").toString())
                         .usertgtinfo(obj.get("USETGTINFO").toString())
-                        .areanm(obj.get("AREANM").toString())
+                        .areanm(areanm)
                         .lat(lat).imgurl(obj.get("IMGURL").toString()).lng(lng)
-                        .detail(obj.get("DTLCONT").toString())
+//                        .detail(obj.get("DTLCONT").toString())
                         .tel(obj.get("TELNO").toString())
                         .svcstr(svcstr).svcfin(svcfin).rcptstr(rcptstr).rcptfin(rcptfin)
                         .svcstrtime(minTime).svcfintime(maxTime)

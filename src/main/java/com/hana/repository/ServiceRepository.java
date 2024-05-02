@@ -13,4 +13,6 @@ import java.util.List;
 public interface ServiceRepository extends HanaRepository<String, ServiceDto> {
     List<ServiceDto> selectByContent(String detail);
     List<ServiceDto> selectByTarget(String detail);
+    List<ServiceDto> selectByLocation(String detail);
+    void deleteAreaIsNull();
 }

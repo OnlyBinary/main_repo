@@ -21,7 +21,7 @@ public class ServiceDto {
     private double lat;
     private String imgurl;
     private double lng;
-    private String detail;
+//    private String detail;
     private String tel;
     private LocalDateTime svcstr;
     private LocalDateTime svcfin;

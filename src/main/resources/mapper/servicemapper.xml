@@ -16,9 +16,12 @@
     <select id="selectByTarget" parameterType="String" resultType="ServiceDto">
         SELECT * FROM service WHERE usertgtinfo like concat('%', #{detail}, '%');
     </select>
+    <select id="selectByLocation" parameterType="String" resultType="ServiceDto">
+        SELECT * FROM service WHERE areanm = #{detail}
+    </select>
     <insert id="insert" parameterType="ServiceDto">
         INSERT INTO service VALUES (#{svcid}, #{svcnm}, #{placenm}, #{payatnm}, #{usertgtinfo}, #{areanm}, #{lat},
-                                    #{imgurl}, #{lng}, #{detail}, #{tel}, #{svcstr}, #{svcfin}, #{rcptstr}, #{rcptfin},
+                                    #{imgurl}, #{lng}, #{tel}, #{svcstr}, #{svcfin}, #{rcptstr}, #{rcptfin},
                                     #{svcstrtime}, #{svcfintime}, #{maxclassnm}, #{minclassnm})
     </insert>
     <update id="update" parameterType="ServiceDto">
@@ -26,6 +29,9 @@
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM service WHERE svcid=#{svcid}
+    </delete>
+    <delete id="deleteAreaIsNull">
+        DELETE FROM service WHERE areanm = ""
     </delete>
 
 </mapper>

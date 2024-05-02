@@ -1,7 +1,9 @@
 package com.hana.controller;
 
+import com.hana.data.KeyStore;
 import com.hana.data.dto.ServiceDto;
 import com.hana.service.ServiceService;
+import com.hana.util.PublicServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DetailInfoController {
 
     final ServiceService serviceService;
+    final KeyStore keyStore;
 
     // 지도로 찾아보기 -> 행사 상세정보
     @RequestMapping("")
@@ -24,15 +27,21 @@ public class DetailInfoController {
 
         try {
             serviceDto = serviceService.get(serviceId);
+            Object serviceDetailData = PublicServiceUtil.getServiceDetailData(keyStore.publicServiceKey, "1", "1", serviceId);
+
+            model.addAttribute("service", serviceDto);
+            // 서비스 상세정보
+            model.addAttribute("detail", serviceDetailData);
+            model.addAttribute("prevMenu", "지도로 찾아보기");
+            model.addAttribute("center", "temp");
+            model.addAttribute("lat", serviceDto.getLat());
+            model.addAttribute("lng", serviceDto.getLng());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        model.addAttribute("lat", serviceDto.getLat());
-        model.addAttribute("lng", serviceDto.getLng());
-        model.addAttribute("service", serviceDto);
-        model.addAttribute("prevMenu", "지도로 찾아보기");
-        model.addAttribute("center", "temp");
+
         return "index";
     }
+
     // 카드 뷰 -> 행사 상세정보
 }

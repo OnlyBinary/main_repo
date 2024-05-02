@@ -98,14 +98,14 @@
                 <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
                     <div class="icon-box">
                         <div class="icon"><i class="bi bi-card-checklist"></i></div>
-                        <h4 class="title"><a href="">서비스 대상별 서비스 조회</a></h4>
+                        <h4 class="title"><a href="/target/main">서비스 대상별 서비스 조회</a></h4>
                         <p class="description"></p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
                     <div class="icon-box">
                         <div class="icon"><i class="bi bi-clipboard-data"></i></div>
-                        <h4 class="title"><a href="">컨텐츠별 서비스 조회</a></h4>
+                        <h4 class="title"><a href="/contents/main">컨텐츠별 서비스 조회</a></h4>
                         <p class="description">서울시에서 제공하는 공간시설, 교육강좌, 문화체험, 진료복지, 체육시설 서비스를 카테고리별로 조회할 수 있습니다 </p>
                     </div>
                 </div>
