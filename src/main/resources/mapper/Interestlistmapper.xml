@@ -25,6 +25,12 @@
     <select id="selectOne" parameterType="String" resultType="interestlistDto">
         SELECT * FROM interestlist WHERE memberid=#{memberid}
     </select>
+    <select id="selectOneOther" parameterType="String" resultType="interestlistDto">
+        SELECT * FROM interestlist WHERE svcid=#{serviceId}
+    </select>
+    <select id="selectServiceMember" parameterType="String" resultType="interestlistDto">
+        SELECT * FROM interestlist WHERE memberid=#{memberId} and svcid=#{serviceId}
+    </select>
     <select id="select" resultType="interestlistDto">
         SELECT * FROM interestlist
     </select>
@@ -36,6 +42,9 @@
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM interestlist WHERE memberid=#{memberid}
+    </delete>
+    <delete id="deleteServiceMember" parameterType="String">
+        DELETE FROM interestlist WHERE memberid=#{memberId} and svcid=#{serviceId}
     </delete>
 
 </mapper>

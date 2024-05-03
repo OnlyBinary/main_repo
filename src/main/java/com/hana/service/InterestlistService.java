@@ -45,4 +45,16 @@ public class InterestlistService implements HanaService<String, InterestlistDto>
     public List<InterestlistDto> selint(String s) throws Exception {
         return repository.selectinterest(s);
     }
+
+    public List<InterestlistDto> getOther(String serviceId) throws Exception {
+        return repository.selectOneOther(serviceId);
+    }
+
+    public InterestlistDto getByServiceMemberId(String serviceId, String memberId) throws Exception {
+        return repository.selectServiceMember(serviceId, memberId);
+    }
+
+    public void deleteByServiceMemberId(String memberId, String serviceId) {
+        repository.deleteServiceMember(memberId, serviceId);
+    }
 }
