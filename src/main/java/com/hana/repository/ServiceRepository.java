@@ -15,4 +15,5 @@ public interface ServiceRepository extends HanaRepository<String, ServiceDto> {
     List<ServiceDto> selectByTarget(String detail);
     List<ServiceDto> selectByLocation(String detail);
     void deleteAreaIsNull();
+    List<ServiceDto> selectTopFive();
 }

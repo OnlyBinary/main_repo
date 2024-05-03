@@ -17,65 +17,34 @@
     })
 </script>
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
+<section id="hero" style="padding-top:0px!important;" class="d-flex align-items-center">
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h1>Seoul, My Soul</h1>
-                <h2>마음이 모이면 서울이 됩니다</h2>
-                <div class="d-flex">
-                    <a href="<c:url value="/map"/>" class="btn-get-started scrollto">지도로 서비스 조회</a>
-                    <%--            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>--%>
-                </div>
-                <%--          <div class="row footer-newsletter justify-content-center">--%>
-                <%--            <div class="col-lg-6">--%>
-                <%--              <form action="" method="post">--%>
-                <%--                <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe">--%>
-                <%--              </form>--%>
-                <%--            </div>--%>
-                <%--          </div>--%>
-                <%--          <div class="col-lg-5">--%>
-                <%--            <form action="#" class="sign-up-form d-flex" data-aos="fade-up" data-aos-delay="300">--%>
-                <%--              <input type="text" class="form-control" placeholder="Enter email address">--%>
-                <%--              <input type="submit" class="btn btn-primary" value="Sign up">--%>
-                <%--            </form>--%>
-                <%--          </div>--%>
-            </div>
-            <%--        <div class="col-lg-6 order-1 order-lg-2 hero-img">--%>
-            <%--          <img src="/img/hero-img.png" class="img-fluid animated" alt="">--%>
-            <%--        </div>--%>
-            <%--        carousel --%>
-            <div id="demo" class="col-lg-6 carousel slide" data-ride="carousel">
-
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/ex1.jpg" alt="Los Angeles" width="1100" height="500">
+        <%-- carousel --%>
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <!-- The slideshow -->
+            <div class="carousel-inner" style="display:flex;">
+                <c:forEach var="i" items="${imageList}" varStatus="status">
+                    <div class="carousel-item${status.first ? ' active' : ''}"
+                         onclick="window.location.href='/service?detail=${i.svcid}'">
+                        <img src="${i.imgurl}" alt="${i.svcnm}" style="opacity: 0.2;width:100%;height:30rem;">
+                        <span style="position:absolute;top:0px;left:0px;">${i.svcnm}</span>
                     </div>
-                    <div class="carousel-item">
-                        <img src="img/ex2.jpg" alt="Chicago" width="1100" height="500">
+                </c:forEach>
+                <div class="container mt-auto mb-auto" style="z-index:1;display:flex;">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center"
+                    style="vertical-align:bottom;">
+                        <h1>Seoul, My Soul</h1>
+                        <h2>마음이 모이면 서울이 됩니다</h2>
+                        <div class="d-flex">
+                            <a href="<c:url value="/map"/>" class="btn-get-started scrollto">지도로 서비스 조회</a>
+                            <%--            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>--%>
+                        </div>
                     </div>
-                    <%--            <div class="carousel-item">--%>
-                    <%--              <img src="ny.jpg" alt="New York" width="1100" height="500">--%>
-                    <%--            </div>--%>
                 </div>
-
-                <!-- Left and right controls -->
-                <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
             </div>
+
         </div>
     </div>
 
@@ -112,6 +81,8 @@
             </div>
 
         </div>
-    </section><!-- End Featured Services Section -->
+    </section>
+    <!-- End Featured Services Section -->
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->

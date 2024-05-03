@@ -3,8 +3,12 @@ package com.hana.controller;
 import com.hana.data.KeyStore;
 import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.MemberDto;
+import com.hana.data.dto.ServiceDto;
+import com.hana.data.dto.SvccntDto;
 import com.hana.service.InterestlistService;
 import com.hana.service.MemberService;
+import com.hana.service.ServiceService;
+import com.hana.service.SvccntService;
 import com.hana.util.AirPollutionUtil;
 import com.hana.util.PublicServiceUtil;
 import com.hana.util.WeatherUtil;
@@ -14,6 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +33,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MainController {
 
+    private final ServiceService serviceService;
     @Value("${app.key.whkey}")
     String whkey;
 
@@ -35,10 +41,20 @@ public class MainController {
 
     final MemberService memberService;
     final InterestlistService interestlistService;
-
+    final SvccntService svccntService;
 
     @RequestMapping("/")
-    public String main() {
+    public String main(Model model) {
+        List<ServiceDto> serviceDtoList = null;
+
+        try {
+            serviceDtoList = serviceService.selectTopFive();
+            model.addAttribute("imageList", serviceDtoList);
+//            String svcid =
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "index";
     }
 
@@ -130,7 +146,7 @@ public class MainController {
 
 
 
-@RequestMapping("/getweather")
+    @RequestMapping("/getweather")
     @ResponseBody
     public Object getweather(@RequestParam("lat") String lat, @RequestParam("lng") String lng) throws IOException, ParseException {
         return WeatherUtil.getWeatherByCoordinates(lat,lng, whkey);
