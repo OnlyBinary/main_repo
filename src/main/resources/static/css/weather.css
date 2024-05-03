@@ -1,30 +1,11 @@
-.sunny {
-    background-color: #00AAFF; /* 밝은 파란색 */
-}
-.cloudy {
-    background-color: #B1BEC5; /* 연한 회색 */
-}
-.rainy {
-    background-color: #54717A; /* 어두운 회색 */
-}
-.stormy {
-    background-color: #50596B; /* 매우 어두운 회색 */
-}
-.snowy {
-    background-color: #FFF9F9; /* 매우 연한 빨간색 */
-}
-.foggy {
-    background-color: #D1C6AD; /* 안개 색 */
-}
-
 #weather-card {
     width: auto; /* 카드의 너비 자동 조정 */
-    border: 1.5px solid black;
+    border: 3px solid limegreen;
     border-radius: 30px!important; /* 모서리를 더 둥글게 */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1)!important; /* 그림자 추가 */
-    /*background-color: white; !* 배경색 지정 *!*/
+    background-color: white; /* 배경색 지정 */
     margin: 20px!important; /* 주변 여백 추가 */
-    padding: 15px!important; /* 내부 패딩 추가 */
+    padding: 20px 15px!important; /* 내부 패딩 추가 */
 }
 #wtem {
     font-size: 60px; /* 글꼴 크기를 24px로 설정 */
@@ -68,7 +49,6 @@ h2 {
 
 .temp-value {
     font-weight: bold;
-    text-shadow: 0 0 2px #000;
 }
 
 .temp-min {
