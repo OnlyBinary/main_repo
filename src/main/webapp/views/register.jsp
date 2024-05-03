@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="form-group col-md-6 text-center">
-                                        <button id= "button" type="submit">회원가입</button>
+                                        <button id= "btn_register" type="submit">회원가입</button>
                                     </div>
                                 </div>
                             </form>

@@ -112,8 +112,6 @@ public class MainController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
         return "index";
     }
 

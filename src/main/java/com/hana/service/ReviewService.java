@@ -1,6 +1,7 @@
 package com.hana.service;
 
 
+import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.ReviewlistDto;
 import com.hana.frame.HanaService;
 import com.hana.repository.ReviewRepository;
@@ -40,5 +41,9 @@ public class ReviewService implements HanaService<String, ReviewlistDto> {
     @Override
     public List<ReviewlistDto> get() throws Exception {
         return repository.select();
+    }
+
+    public List<ReviewlistDto> selrev(String s) throws Exception {
+        return repository.selectreview(s);
     }
 }
