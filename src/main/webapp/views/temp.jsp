@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link rel="stylesheet" href="/css/weather.css">
+<link rel="stylesheet" href="/css/kakaoparking.css">
 <style>
   #like {
     width:20px;
@@ -14,7 +16,6 @@
 <script>
   function redirectToMap() {
     let url = "https://map.kakao.com/link/to/${service.placenm},${lat},${lng}";
-    console.log(url);
     window.open(url, '_blank'); // 새 창(탭)에서 URL 열기
   }
   function moveToWeather() {
@@ -22,6 +23,12 @@
     const weatherSection = document.getElementById('weather-details');
     if (weatherSection) {
       weatherSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  function moveToParkingLot() {
+    const parkingSection = document.getElementById('parking-lot');
+    if (parkingSection) {
+      parkingSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 </script>
@@ -143,7 +150,6 @@
           let wid = result.weather[0].id
           result.weather[0].description = weatherDescKo[wid]
           let weatherIcon = result.weather[0].icon;
-          console.log(weatherIcon)
           let iconUrl = "http://openweathermap.org/img/w/"+weatherIcon+".png";
           let weatherClass = applyWeatherClass(wid);
           this.display(result, iconUrl, weatherClass);
@@ -151,8 +157,8 @@
       });
     },
     display: function(result, iconUrl, weatherClass){
-      let card = $('#weather-card');
-      card.removeClass().addClass('card rounded p-2 ' + weatherClass);
+      // let card = $('#weather-card');
+      // card.removeClass().addClass('card rounded p-2 ' + weatherClass);
       $('#w0').html(result.name);
       $('#desc').html(result.weather[0].description);
       $('#wtem').html(result.main.temp+'°');
@@ -169,7 +175,6 @@
         data:{"lat":${lat}, "lng": ${lng}},
         type: 'GET',
         success: (result) => {
-          console.log("결과: ",result.list);
           this.display(result.list);
         }
       });
@@ -191,9 +196,6 @@
       list.forEach((forecast, index) => {
         // if (index < 5) {
         const forecastDate = forecast.dt_txt.split(" ")[0]
-        console.log(forecastDate)
-        console.log(forecast.dt_txt.split(" ")[0])
-        console.log(forecastDate === forecast.dt_txt.split(" ")[0])
         if (forecastDate === targetDate) {
           content += `<tr>
                                     <td>\${new Date(forecast.dt * 1000).toLocaleString()}</td>
@@ -218,7 +220,6 @@
         url: '<c:url value="/getairpollution"/>', // Make sure the URL is correctly pointing to your API endpoint
         data:{"lat":${lat}, "lng": ${lng}},
         success: (result) => {
-          console.log(result); // Log the result to verify data structure
           this.display(result);
         }
       });
@@ -374,21 +375,15 @@
           <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToWeather();">날씨보기</button>
 
           <!-- 관심 등록 버튼 -->
+
+          <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToParkingLot();">근처 주차장 정보</button>
+
           <div style="display:flex;">
             <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
             <p class="ml-1" style="align-items: center;" id="likeCnt"></p>
           </div>
 
           <div style="overflow:scroll;">
-            <div class="portfolio-info">
-              <h3>근처 주차장 정보</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>
             <div class="portfolio-info">
               <h3>교통정보</h3>
               <ul>
@@ -406,29 +401,30 @@
 
   <section id="weather-details">
     <div class="portfolio-info">
-      <h3>날씨, 미세먼지, 모기예보</h3>
       <div class="container">
         <div id="weather-card" class="p-2">
-          <div class="d-flex align-items-center">
-            <div class="d-flex flex-column align-items-center p-2"
-                 style="width: auto; border: 1.5px solid black; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                  background-color: white; margin: 20px; padding: 15px;">
-              <div class="d-flex align-items-center justify-content-center p-2">
-                <img src="img/weatherPoint.png" alt="Weather Point" width="30" height="30">
-                <h4 id="w0"></h4>
+          <div>
+            <div class="d-flex align-items-center p-2">
+              <img src="img/weatherPoint.png" alt="Weather Point" width="30" height="30">
+              <h4 id="w0"></h4>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-center">
+              <div class="d-flex flex-column align-items-center p-2">
+                <h5 id="wicon" class="p-2"></h5>
               </div>
-              <h5 id="wicon" class="p-2"></h5>
-            </div>
-            <div class="d-flex flex-column">
-              <h5 id="dwsc"></h5>
-              <h5 id="wtem"></h5>
-              <h5 id="wlh"></h5>
-              <h5 id="wskin"></h5>
-            </div>
-            <div class="container">
-              <h2>Air Pollution Data</h2>
-              <h5 id="pm25">PM2.5: Loading...</h5>
-              <h5 id="pm10">PM10: Loading...</h5>
+              <div class="d-flex flex-column">
+                <h5 id="dwsc"></h5>
+                <h5 id="wtem"></h5>
+                <h5 id="wlh"></h5>
+                <h5 id="wskin"></h5>
+              </div>
+              <div class="container">
+                <h2>Air Pollution Data</h2>
+                <h5 id="pm25">PM2.5: Loading...</h5>
+                <h5 id="pm10">PM10: Loading...</h5>
+              </div>
             </div>
           </div>
         </div>
@@ -438,5 +434,31 @@
     </div>
   </section>
 
+  <section id = "parking-lot">
+      <div class="map_wrap">
+        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+        <div id="menu_wrap" class="bg_white" style="z-index: 1000">
+          <div class="option">
+            <div>
+              <form onsubmit="searchPlaces(); return false;">
+                <input hidden="" type="text" id="keyword" value="${service.areanm} + 주차장" size="15">
+                <button hidden type="submit">검색하기</button>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
+        </div>
+
+    </div>
+  </section>
 
 </main><!-- End #main -->
+<script>
+  const latitude = ${lat};  // JSP EL(Expression Language)을 사용하여 값을 주입
+  const longitude = ${lng};
+  const area = ${service.areanm};
+</script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9e1c6a20d65fd94d833f6984f6e0f2ba&libraries=services"></script>
+<script src="<c:url value="/js/kakao.js" />"></script>
