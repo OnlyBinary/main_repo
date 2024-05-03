@@ -12,30 +12,6 @@
   }
 </style>
 <script>
-  let likeClick = {
-    init: function() {
-      let likeBtn = document.querySelector("#like");
-      // 처음에 접속할 때 해당 게시글을 좋아하는지 아닌지 데이터 가져와서 초기상태 설정
-      // 해당 게시글에 대한 좋아요수 만 가져와서 하트 옆에 출력
-      likeBtn.addEventListener('click', function() {
-        if (likeBtn.classList.contains('active')) {
-          likeBtn.classList.remove('active');
-          alert('좋아요가 취소되었습니다.');
-          // 해당 유저의 해당 게시글 좋아요 취소 쿼리
-        } else {
-          likeBtn.classList.toggle('active');
-          alert("해당 게시글을 좋아합니다.");
-          // 해당 유저의 해당 게시글 좋아요 쿼리
-        }
-      });
-    }
-  }
-  $(function() {
-    // console.log();
-    likeClick.init();
-  })
-</script>
-<script>
   function redirectToMap() {
     let url = "https://map.kakao.com/link/to/${service.placenm},${lat},${lng}";
     console.log(url);
@@ -254,17 +230,88 @@
       $('#pm10').html("미세먼지: "+ pm10 +"µg/m³");
     }
   };
+  let likeClick = {
+    init: function() {
+      // 처음에 접속할 때 해당 게시글을 좋아하는지 아닌지 데이터 가져와서 초기상태 설정
+      let likeBtn = document.querySelector("#like");
+      $.ajax({
+        url: '/service/getLikeData',
+        data: {"serviceId": '${service.svcid}', "memberId": '${sessionScope.id}'},
+        success:function(data) {
+          // console.log("isLike?" + data);
+          if (data === true) {
+            likeBtn.classList.toggle('active');
+          }
+        }
+      });
+      likeClick.display();
+
+      // 하트 버튼 클릭 이벤트 리스너
+      likeBtn.addEventListener('click', function() {
+        if (likeBtn.classList.contains('active')) {
+          likeBtn.classList.remove('active');
+          // 해당 유저의 해당 게시글 좋아요 취소 쿼리
+          alert('나의 관심행사에서 등록 해제되었습니다.');
+          likeClick.dislike();
+        } else {
+          likeBtn.classList.toggle('active');
+          // 해당 유저의 해당 게시글 좋아요 쿼리
+          alert("나의 관심행사에 등록되었습니다.");
+          likeClick.like();
+        }
+      });
+    },
+    like: function() {
+      console.log('like');
+      $.ajax({
+        url: '/service/dolike',
+        data: {"serviceId": '${service.svcid}', "memberId": '${sessionScope.id}'},
+        success: function() {
+          likeClick.display();
+        }
+      });
+    },
+    dislike: function() {
+      $.ajax({
+        url: '/service/dodislike',
+        data: {"serviceId": '${service.svcid}', "memberId": '${sessionScope.id}'},
+        success: function() {
+          likeClick.display();
+        }
+      });
+    },
+    display: function() {
+      // 해당 게시글에 대한 좋아요수 만 가져와서 하트 옆에 출력
+      $.ajax({
+        url: '/service/getLikeCntData',
+        data: {"serviceId": '${service.svcid}'},
+        success: function(data) {
+          $('#likeCnt').text(data);
+        }
+      })
+    }
+  }
+  let increaseCnt = {
+    init: function() {
+      $.ajax({
+        url: '/service/increaseCnt',
+        data: {"serviceId": '${service.svcid}'}
+      })
+    }
+  }
   $(function () {
     weather.init()
     weather2.init();
     airPollution.init();
+    likeClick.init();
+    increaseCnt.init();
   });
 </script>
 
 <main id="main">
 
   <!-- ======= Breadcrumbs ======= -->
-  <section id="breadcrumbs" class="breadcrumbs">
+  <section id="breadcrumbs" style="margin-top:0px!important;" class="breadcrumbs">
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
@@ -312,6 +359,7 @@
         </div>
 
         <div class="col-lg-4">
+          <!-- 행사 관련 간략 정보 -->
           <div class="portfolio-description" style="padding-top:0px!important;">
             <h5>${service.svcnm}</h5>
             <p>가격 : ${service.payatnm}</p>
@@ -324,9 +372,11 @@
           <button style="width:100%;" class="btn btn-success mb-2">홈페이지 이동</button>
           <button style="width:100%;" class="btn btn-success mb-2" onclick="redirectToMap();">길찾기</button>
           <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToWeather();">날씨보기</button>
+
+          <!-- 관심 등록 버튼 -->
           <div style="display:flex;">
             <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
-            <p class="ml-1" style="align-items: center;">1,200</p>
+            <p class="ml-1" style="align-items: center;" id="likeCnt"></p>
           </div>
 
           <div style="overflow:scroll;">

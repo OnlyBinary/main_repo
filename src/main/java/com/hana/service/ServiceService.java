@@ -65,4 +65,8 @@ public class ServiceService implements HanaService<String, ServiceDto> {
     public void deleteAreanmIsNUll() {
         serviceRepository.deleteAreaIsNull();
     }
+
+    public List<ServiceDto> selectTopFive() {
+        return serviceRepository.selectTopFive();
+    }
 }

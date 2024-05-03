@@ -37,7 +37,7 @@
 
     }
 
-    #placeList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+    #placeList .item {position:relative;overflow: hidden;cursor: pointer;min-height: 65px;}
     #placeList .item span {display: block;margin-top:4px;}
     #placeList .info .jibun {padding-left:0px;}
     #placeList .info .gray {color: #8a8a8a;}
@@ -140,9 +140,9 @@
                 '</div>';
 
             let el = document.createElement('li');
-            el.innerHTML = '<div>'+
+            el.innerHTML = '<div class="h-100 p-3 mb-2 text-bg-light rounded-3">'+
                 '<h5>' + place.svcnm + '</h5>'+
-                '<ul>' +
+                '<ul style="list-style:none!important;">' +
                 '<li><strong>' + '장소' + '</strong>' + ': ' + place.placenm + '</li>' +
                 '<li><strong>' + '주소' + '</strong>' + ': ' + address + '</li>' +
                 '</ul>' +
@@ -260,6 +260,15 @@
                 }
             })
         },
+        location: function(data) {
+          $.ajax({
+              url: '<c:url value="/getContentListData"/>',
+              data: {'detail': data, 'category': 'location'},
+              success: function(result) {
+                  changeContentList.initialization(result);
+              }
+          })
+        },
         initialization: function(data) {
             // 기존 지도 초기화
             document.querySelector("#map").innerHTML = '';
@@ -310,11 +319,70 @@
                 <div onclick="changeContentList.target('')">기타</div>
             </div>
             <div id="content3" class="content">
-                <div>서울중부</div>
-                <div>서울동부</div>
-                <div>서울서부</div>
-                <div>서울남부</div>
-                <div>서울북부</div>
+                <div class="dropdown">
+                    <button class="btn btn-default" type="button" data-toggle="dropdown">
+                        서울중부
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li onclick="changeContentList.location('동대문구')"><a tabindex="-1">동대문구</a></li>
+                        <li onclick="changeContentList.location('성동구')"><a tabindex="-1">성동구</a></li>
+                        <li onclick="changeContentList.location('용산구')"><a tabindex="-1">용산구</a></li>
+                        <li onclick="changeContentList.location('종로구')"><a tabindex="-1">종로구</a></li>
+                        <li onclick="changeContentList.location('중구')"><a tabindex="-1">중구</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-default" type="button" data-toggle="dropdown">
+                        서울동부
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li onclick="changeContentList.location('강동구')"><a tabindex="-1">강동구</a></li>
+                        <li onclick="changeContentList.location('광진구')"><a tabindex="-1">광진구</a></li>
+                        <li onclick="changeContentList.location('송파구')"><a tabindex="-1">송파구</a></li>
+                        <li onclick="changeContentList.location('중랑구')"><a tabindex="-1">중랑구</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-default" type="button" data-toggle="dropdown">
+                        서울서부
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li onclick="changeContentList.location('강서구')"><a tabindex="-1">강서구</a></li>
+                        <li onclick="changeContentList.location('구로구')"><a tabindex="-1">구로구</a></li>
+                        <li onclick="changeContentList.location('금천구')"><a tabindex="-1">금천구</a></li>
+                        <li onclick="changeContentList.location('마포구')"><a tabindex="-1">마포구</a></li>
+                        <li onclick="changeContentList.location('서대문구')"><a tabindex="-1">서대문구</a></li>
+                        <li onclick="changeContentList.location('양천구')"><a tabindex="-1">양천구</a></li>
+                        <li onclick="changeContentList.location('영등포구')"><a tabindex="-1">영등포구</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-default" type="button" data-toggle="dropdown">
+                        서울남부
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li onclick="changeContentList.location('강남구')"><a tabindex="-1">강남구</a></li>
+                        <li onclick="changeContentList.location('관악구')"><a tabindex="-1">관악구</a></li>
+                        <li onclick="changeContentList.location('동작구')"><a tabindex="-1">동작구</a></li>
+                        <li onclick="changeContentList.location('서초구')"><a tabindex="-1">서초구</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-default" type="button" data-toggle="dropdown">
+                        서울북부
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li onclick="changeContentList.location('강북구')"><a tabindex="-1">강북구</a></li>
+                        <li onclick="changeContentList.location('노원구')"><a tabindex="-1">노원구</a></li>
+                        <li onclick="changeContentList.location('도봉구')"><a tabindex="-1">도봉구</a></li>
+                        <li onclick="changeContentList.location('성북구')"><a tabindex="-1">성북구</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="col-3" style="overflow:scroll;height:100vh;" >
