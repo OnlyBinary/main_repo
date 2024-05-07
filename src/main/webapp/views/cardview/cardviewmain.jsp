@@ -25,21 +25,21 @@
             <div class="h-100 p-5 text-bg-success rounded-3">
                 <h2>${list.get(0)}</h2>
 <%--                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>--%>
-                <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(0)}')"> -> 바로가기</button>
+                <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(0)}')"> &rarr; 바로가기</button>
             </div>
         </div>
         <div class="col-md-4">
             <div class="h-100 p-5 bg-body-tertiary border rounded-3">
                 <h2>${list.get(1)}</h2>
 <%--                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>--%>
-                <button class="btn btn-outline-secondary" type="button" onclick="movePage.init('${urlList.get(1)}')">-> 바로가기</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="movePage.init('${urlList.get(1)}')"> &rarr; 바로가기</button>
             </div>
         </div>
         <div class="col-md-4">
             <div class="h-100 p-5 text-bg-secondary rounded-3">
                 <h2>${list.get(2)}</h2>
 <%--                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>--%>
-                <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(2)}')">-> 바로가기</button>
+                <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(2)}')"> &rarr; 바로가기</button>
             </div>
         </div>
     </div>
@@ -48,14 +48,14 @@
             <div class="h-100 p-5 bg-body-secondary border rounded-3">
                 <h2>${list.get(3)}</h2>
 <%--                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>--%>
-                <button class="btn btn-outline-secondary" type="button" onclick="movePage.init('${urlList.get(3)}')">-> 바로가기</button>
+                <button class="btn btn-outline-secondary" type="button" onclick="movePage.init('${urlList.get(3)}')"> &rarr; 바로가기</button>
             </div>
         </div>
         <div class="col-md-4">
             <div class="h-100 p-5 text-bg-dark rounded-3">
                 <h2>${list.get(4)}</h2>
 <%--                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>--%>
-                <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(4)}')">-> 바로가기</button>
+                <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(4)}')"> &rarr; 바로가기</button>
             </div>
         </div>
     </div>

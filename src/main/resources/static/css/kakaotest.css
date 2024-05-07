@@ -26,7 +26,7 @@ ul{
 }
 
 .content div{
-    height:70px;background-color:greenyellow;display:flex;align-items:center;justify-content:center;
+    height:70px;background-color:beige;display:flex;align-items:center;justify-content:center;
 }
 /*#item:hover {*/
 /*    background-color: #6c757d !important;*/

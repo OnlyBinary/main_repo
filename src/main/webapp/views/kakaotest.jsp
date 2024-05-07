@@ -69,7 +69,6 @@
 <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}&libraries=services"></script>
 
 
-<script>
     let geo2 = {
 
         map: null,
@@ -81,7 +80,7 @@
                 document.getElementById('map'),
                 {
                     center: new kakao.maps.LatLng(37.5447611, 127.0564625), // 지도 중심좌표
-                    level: 8 // 지도 확대 레벨
+                    level: 6 // 지도 확대 레벨
                 }
             );
 
@@ -291,7 +290,7 @@
 <body>
 <div class="container">
     <div style="display: flex;" class="mb-5">
-        <div class="col-1" id="quickmenu" style="padding:0px;z-index:1;">
+        <div class="col-2" id="quickmenu" style="padding:0px;z-index:1;">
             <div class="dropdown">
                 <button id="cateBtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width:100%;">
                     선택
@@ -388,7 +387,7 @@
         <div class="col-3" style="overflow:scroll;height:100vh;" >
             <ul id="placeList"></ul>
         </div>
-        <div class="col-8" id="map"></div>
+        <div class="col-7" id="map"></div>
     </div>
 </div>
 </body>

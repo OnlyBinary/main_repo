@@ -8,6 +8,9 @@
         <id column="svcid" property="svcid"/>
         <result column="svcnm" property="svcnm"/>
         <result column="imgurl" property="imgurl"/>
+<!--        <association property="svccntDto" javaType="SvcCntDto">-->
+<!--            <result column="cnt" property="cnt"/>-->
+<!--        </association>-->
     </resultMap>
 
     <select id="selectOne" parameterType="String" resultType="ServiceDto">
@@ -28,6 +31,10 @@
     <select id="selectTopFive" resultMap="selectOrderByCnt">
         SELECT s.svcid, s.svcnm, s.imgurl
         FROM (select * from svccnt order by cnt desc limit 3) a join service s on a.svcid = s.svcid
+    </select>
+    <select id="selectOrderByDate" resultType="ServiceDto">
+        select svcid, svcnm, svcstr, svcfin
+        from service order by svcfin
     </select>
     <insert id="insert" parameterType="ServiceDto">
         INSERT INTO service VALUES (#{svcid}, #{svcnm}, #{placenm}, #{payatnm}, #{usertgtinfo}, #{areanm}, #{lat},

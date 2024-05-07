@@ -3,11 +3,8 @@ package com.hana.controller;
 import com.hana.data.KeyStore;
 import com.hana.data.dto.*;
 import com.hana.service.*;
-import com.hana.data.dto.InterestlistDto;
-import com.hana.data.dto.ServiceDto;
-import com.hana.data.dto.SvccntDto;
-import com.hana.service.InterestlistService;
 import com.hana.util.PublicServiceUtil;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +25,7 @@ public class DetailInfoController {
     final ServiceService serviceService;
     final InterestlistService interestlistService;
     final SvccntService svccntService;
+    final UserRecentViewService recentViewService;
     final ReviewService reviewService;
     final QnaService qnaService;
     final KeyStore keyStore;
@@ -131,10 +129,11 @@ public class DetailInfoController {
 
     // 행사 상세정보 클릭했을 때 조회수 증가 -> 메인화면 인기 행사 띄어주기 위해서
     @RequestMapping("/increaseCnt")
-    public void increaseServiceCnt(@RequestParam("serviceId") String serviceId) {
+    public void increaseServiceCnt(@RequestParam("serviceId") String serviceId, HttpSession session) {
         SvccntDto svccntDto = null;
 
         try {
+            // 행사 조회수 증가
             svccntDto = svccntService.get(serviceId);
             if (svccntDto == null) {
                 svccntDto = new SvccntDto(serviceId, 1);
@@ -142,6 +141,19 @@ public class DetailInfoController {
             } else {
                 svccntDto.setCnt(svccntDto.getCnt() + 1);
                 svccntService.modify(svccntDto);
+            }
+
+            // 로그인한 사용자에 한해 페이지 접속하면 최근 접속 페이지 저장
+            if (session.getAttribute("id") != null && session.getAttribute("id") != "") {
+                String memberId = session.getAttribute("id").toString();
+                // 조회한 적이 있다면 날짜를 업데이트
+                UserRecentViewDto recentViewDto = UserRecentViewDto.builder()
+                        .memberid(memberId).svcid(serviceId).build();
+                if (recentViewService.findByMemberAndService(memberId, serviceId) == null) {
+                    recentViewService.add(recentViewDto);
+                } else {
+                    recentViewService.modify(recentViewDto);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
