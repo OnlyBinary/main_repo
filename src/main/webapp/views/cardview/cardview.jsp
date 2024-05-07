@@ -14,14 +14,17 @@
             <div class="col-xl-4 col-lg-6">
               <article>
                 <div class="post-img">
-                  <img src="${d.imgurl}" alt="" class="img-fluid">
+                  <img src="${d.imgurl}" alt="" class="img-fluid" style="width:100%;height:10rem;">
                 </div>
 
-                <p class="post-category">${d.maxclassnm} > ${d.minclassnm}</p>
+                <div class="mt-3 mb-2">
+                  <span class="badge badge-primary">${d.maxclassnm}</span>
+                  <span class="badge badge-dark">${d.minclassnm}</span>
+                </div>
 
-                <h2 class="title">
+                <h4 class="title">
                   <a href="/service?detail=${d.svcid}">${d.svcnm}</a>
-                </h2>
+                </h4>
 
                 <div class="d-flex align-items-center">
                   <img src="/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">

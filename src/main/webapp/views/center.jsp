@@ -28,7 +28,7 @@
                     <div class="carousel-item${status.first ? ' active' : ''}"
                          onclick="window.location.href='/service?detail=${i.svcid}'">
                         <img src="${i.imgurl}" alt="${i.svcnm}" style="opacity: 0.2;width:100%;height:30rem;">
-                        <span style="position:absolute;top:0px;left:0px;">${i.svcnm}</span>
+<%--                        <h5 style="position:absolute;top:0px;left:0px;">${i.svcnm}</h5>--%>
                     </div>
                 </c:forEach>
                 <div class="container mt-auto mb-auto" style="z-index:1;display:flex;">

@@ -22,24 +22,31 @@
 </style>
 <script>
     let register = {
-        url:'',
-        init:function(url){
+        url: '',
+        init: function (url) {
             this.url = url;
 
-            $('#register_form  #btn_register').click(function(){
+            $('#register_form  #btn_register').click(function () {
                 register.send();
             });
         },
-        send:function(){
+        send: function () {
             $('#register_form').attr({
-                'method':'post',
-                'action':this.url
+                'method': 'post',
+                'action': this.url
             });
             $('#register_form').submit();
         }
     };
+    function showPasswordInput() {
+        document.getElementById("passwordInputGroup").style.display = "block";
+    }
+
+    function hidePasswordInput() {
+        document.getElementById("passwordInputGroup").style.display = "none";
+    }
     $(function(){
-        register.init('<c:url value="/review/addimpl"/>');
+        register.init('<c:url value="/qna/addgeneralimpl"/>');
     });
 </script>
 <!-- ======= Contact Section ======= -->
@@ -50,10 +57,10 @@
     <section class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <h2 class = "custom-heading">리뷰등록</h2>
+                <h2 class = "custom-heading">문의등록</h2>
                 <ol>
                     <li><a href="<c:url value="/"/>">Home</a></li>
-                    <li>리뷰등록</li>
+                    <li>문의등록</li>
                 </ol>
             </div>
 
@@ -62,29 +69,41 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <div class="col-lg-15 mt-5 mt-lg-0 d-flex align-items-stretch">
                 <form id="register_form" class="php-email-form">
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
                             아이디: <input type="text" class="form-control" name="memberid" id="memberid" value="${id}" readonly>
                         </div>
-                        <input type="hidden" name="svcid" value="${svcid}"/>
-                    </div>
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            서비스명: <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
-                        </div>
+                        <input type="hidden" name="svcid" value="0"/>
                     </div>
                     <div class="form-group col-md-8 mt-3 mt-md-0">
                         <div class="input-group mb-3">
-                            <label for="score">점수:</label>
-                            <input type="number" min="1" max="5" class="form-control" name="score" id="score" required>
+                            <label for="title">제목:</label>
+                            <input type="text" class="form-control" name="title" id="title" required>
                         </div>
                     </div>
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
                             <label for="content">내용:</label>
-                            <input type="text" class="form-control" name="content" id="content">
+                            <input style="height: 300px;" type="text" class="form-control" name="content" id="content">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 mt-3 mt-md-0">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" style="margin-right: 30px">공개여부</span>
+                            <div>
+                                <input id="openyn1" name="openyn" type="radio" value="1" onclick="hidePasswordInput()">
+                                <label for="openyn1" class="radio-label">동의</label>
+                                <input id="openyn2" name="openyn" type="radio" value="0" onclick="showPasswordInput()">
+                                <label for="openyn2" class="radio-label">미동의</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="passwordInputGroup" class="form-group col-md-5 mt-3 mt-md-0" style="display: none;">
+                        <div class="input-group mb-3">
+                            <label for="password">비밀번호:</label>
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
                     </div>
                     <div class="row justify-content-center">

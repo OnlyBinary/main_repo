@@ -109,7 +109,7 @@
                         <%--              <li><a href="#">Drop Down 4</a></li>--%>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="<c:url value="/contact"/>">Contact</a></li>
+                <li><a class="nav-link scrollto" href="<c:url value="/qna/list"/>">Contact</a></li>
                 <c:choose>
                     <c:when test="${sessionScope.id == null}">
                         <li><a href="<c:url value="/login"/>" style="font-size: 12px;">로그인</a></li>
