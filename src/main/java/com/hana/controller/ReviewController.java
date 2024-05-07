@@ -46,14 +46,13 @@ public class ReviewController {
     }
     @RequestMapping("/addimpl")
     public String addimpl(Model model,
-                          HttpSession httpSession){
-        ReviewlistDto reviewlistDto = null;
+                          ReviewlistDto reviewlistDto, HttpSession httpSession){
         try {
             reviewService.add(reviewlistDto);
             httpSession.setAttribute("id", reviewlistDto.getMemberid());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "redirect:/";
+        return "redirect:/service?detail="+reviewlistDto.getSvcid();
     }
 }

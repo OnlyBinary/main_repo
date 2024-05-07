@@ -25,14 +25,16 @@
       weatherSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
-  function moveToReview() {
-    const reviewSection = document.getElementById('review-list');
-    if (reviewSection) {
-      reviewSection.scrollIntoView({ behavior: 'smooth' });
   function moveToParkingLot() {
     const parkingSection = document.getElementById('parking-lot');
     if (parkingSection) {
       parkingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  function moveToReview() {
+    const reviewSection = document.getElementById('review-list');
+    if (reviewSection) {
+      reviewSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 </script>
@@ -384,9 +386,9 @@
 
           <div style="display:flex;">
             <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+            <p class="ml-1" style="align-items: center;" id="likeCnt"></p>
             <p class="ml-1" style="align-items: center;">1,200</p>
               <button id="btn_review" style="width:50%; margin-left: 40px" class="btn btn-success" onclick="moveToReview();">리뷰보기</button>
-            <p class="ml-1" style="align-items: center;" id="likeCnt"></p>
           </div>
 
           <div style="overflow:scroll;">
@@ -443,6 +445,25 @@
     </div>
   </section>
 
+  <section id = "parking-lot">
+      <div class="map_wrap">
+        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+        <div id="menu_wrap" class="bg_white" style="z-index: 1000">
+          <div class="option">
+            <div>
+              <form onsubmit="searchPlaces(); return false;">
+                <input hidden="" type="text" id="keyword" value="${service.areanm} + 주차장" size="15">
+                <button hidden type="submit">검색하기</button>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <ul id="placesList"></ul>
+          <div id="pagination"></div>
+        </div>
+
+    </div>
+  </section>
   <section id="review-list" class="testimonials section-bg">
     <div class="container">
       <div class="section-title">
@@ -468,8 +489,6 @@
                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
-
-
               </c:forEach>
               </div>
           </div><!-- End testimonial item -->
@@ -477,25 +496,6 @@
     </div>
     </section><!-- End Testimonials Section -->
 
-  <section id = "parking-lot">
-      <div class="map_wrap">
-        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-        <div id="menu_wrap" class="bg_white" style="z-index: 1000">
-          <div class="option">
-            <div>
-              <form onsubmit="searchPlaces(); return false;">
-                <input hidden="" type="text" id="keyword" value="${service.areanm} + 주차장" size="15">
-                <button hidden type="submit">검색하기</button>
-              </form>
-            </div>
-          </div>
-          <hr>
-          <ul id="placesList"></ul>
-          <div id="pagination"></div>
-        </div>
-
-    </div>
-  </section>
 
 </main><!-- End #main -->
 <script>

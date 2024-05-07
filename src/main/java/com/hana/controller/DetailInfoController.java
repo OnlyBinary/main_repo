@@ -2,8 +2,11 @@ package com.hana.controller;
 
 import com.hana.data.KeyStore;
 import com.hana.data.dto.ReviewlistDto;
+import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.ServiceDto;
 import com.hana.service.ReviewService;
+import com.hana.data.dto.SvccntDto;
+import com.hana.service.InterestlistService;
 import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.ServiceDto;
 import com.hana.data.dto.SvccntDto;
@@ -29,9 +32,9 @@ import java.util.List;
 public class DetailInfoController {
 
     final ServiceService serviceService;
-    final ReviewService reviewService;
     final InterestlistService interestlistService;
     final SvccntService svccntService;
+    final ReviewService reviewService;
     final KeyStore keyStore;
 
     // 지도로 찾아보기 -> 행사 상세정보

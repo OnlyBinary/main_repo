@@ -3,7 +3,9 @@ package com.hana.interestlist;
 
 
 import com.hana.data.dto.InterestlistDto;
+import com.hana.data.dto.ReviewlistDto;
 import com.hana.service.InterestlistService;
+import com.hana.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +21,19 @@ class SelectInterestTests {
     @Autowired
     InterestlistService interestlistService;
 
+    @Autowired
+    ReviewService reviewService;
+
     @Test
     void contextLoads() {
         try {
-            List<InterestlistDto> interestlistDto = null;
-            interestlistDto = interestlistService.selint("sid01");
+//            List<InterestlistDto> interestlistDto = null;
+//            interestlistDto = interestlistService.selint("sid01");
 
+            List<ReviewlistDto> reviewlistDto = null;
+            reviewlistDto = reviewService.selrev("S240111125908572569");
 
-            if(interestlistDto == null){
+            if(reviewlistDto == null){
                 log.info("--------NULL----------");
             }
             log.info("--------OK---------");

@@ -20,7 +20,28 @@
         border-color: #0d6efd !important;
     }
 </style>
+<script>
+    let register = {
+        url:'',
+        init:function(url){
+            this.url = url;
 
+            $('#register_form  #btn_register').click(function(){
+                register.send();
+            });
+        },
+        send:function(){
+            $('#register_form').attr({
+                'method':'post',
+                'action':this.url
+            });
+            $('#register_form').submit();
+        }
+    };
+    $(function(){
+        register.init('<c:url value="/review/addimpl"/>');
+    });
+</script>
 <!-- ======= Contact Section ======= -->
 
 <main id="main">
@@ -47,6 +68,7 @@
                         <div class="input-group mb-3">
                             아이디: <input type="text" class="form-control" name="memberid" id="memberid">
                         </div>
+                        <input type="hidden" name="svcid" value="${svcid}"/>
                     </div>
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
@@ -55,20 +77,19 @@
                     </div>
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
-                            내용: <input type="text" class="form-control" name="content" id="content" required>
+                            <label for="content">내용:</label>
+                            <input type="text" class="form-control" name="content" id="content">
                         </div>
                     </div>
                     <div class="form-group col-md-8 mt-3 mt-md-0">
                         <div class="input-group mb-3">
-                            점수: <input type="text" class="form-control" name="score" id="score" required>
-                            <input type="hidden" name="svcid" value="${svcid}"/>
+                            <label for="content">점수:</label>
+                            <input type="number" class="form-control" name="score" id="score">
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="form-group col-md-6 text-center">
-                            <a href="<c:url value="/review/addimpl">"/>
                             <button id= "btn_register" type="submit">등록</button>
-                            </a>
                         </div>
                     </div>
                 </form>
