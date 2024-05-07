@@ -28,7 +28,9 @@
   function moveToReview() {
     const reviewSection = document.getElementById('review-list');
     if (reviewSection) {
-      reviewSection.scrollIntoView({ behavior: 'smooth' });
+      reviewSection.scrollIntoView({behavior: 'smooth'});
+    }
+  }
   function moveToParkingLot() {
     const parkingSection = document.getElementById('parking-lot');
     if (parkingSection) {
@@ -39,7 +41,7 @@
 
 <%--날씨정보 script--%>
 <script type="module">
-  function getFormattedDate() {
+  function getFormattedNowDate() {
     const date = new Date(); // 현재 날짜와 시간을 가진 Date 객체 생성
 
     const year = date.getFullYear();
@@ -49,6 +51,22 @@
     const formattedMonth = month < 10 ? "0"+month : month;
     const formattedDay = day < 10 ? "0"+day : day;
     return year+"-"+formattedMonth+"-"+formattedDay;
+  }
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      hour12: true,
+      minute: '2-digit'
+    };
+
+    const formatter = new Intl.DateTimeFormat('ko-KR', options);
+    return formatter.format(date);
   }
 
   function applyWeatherClass(weatherId) {
@@ -145,6 +163,7 @@
     962: '허리케인',
   };
 
+
   let weather = {
     init: function () {
       $.ajax({
@@ -180,14 +199,26 @@
         type: 'GET',
         success: (result) => {
           this.display(result.list);
+          console.log(result.list)
         }
       });
     },
     display: function(list) {
-      const targetDate = getFormattedDate(); // 표시하려는 날짜
+      const targetDate = getFormattedNowDate(); // 표시하려는 날짜
+      // 날짜 데이터를 드롭다운 메뉴에 추가
+      let dates = list.map(forecast => forecast.dt_txt.split(" ")[0]);
+      dates = [...new Set(dates)];  // 중복 제거
+
       let content = `<table class='table'>
                             <tr>
-                              <th>날짜</th>
+                              <th>
+                              <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dateDisplayButton">
+                                  날짜
+                                </button>
+                                <ul class="dropdown-menu" id="dateDropdownMenu"></ul>
+                              </div>
+                              </th>
                               <th>날씨</th>
                               <th>온도</th>
                               <th>체감온도</th>
@@ -197,12 +228,11 @@
                               <th>습도</th>
                               <th>풍속</th>
                             </tr>`;
-      list.forEach((forecast, index) => {
-        // if (index < 5) {
+      list.forEach((forecast) => {
         const forecastDate = forecast.dt_txt.split(" ")[0]
         if (forecastDate === targetDate) {
           content += `<tr>
-                                    <td>\${new Date(forecast.dt * 1000).toLocaleString()}</td>
+                                    <td>\${formatDate(forecast.dt_txt)}</td>
                                     <td><img src="http://openweathermap.org/img/w/\${forecast.weather[0].icon}.png" width="50" height="50"></td>
                                     <td>\${forecast.main.temp}°C</td>
                                     <td>\${forecast.main.feels_like}°C</td>
@@ -216,6 +246,40 @@
       });
       content += '</table>';
       $('#forecast-container').html(content);
+      dates.forEach((date) => {
+        $('#dateDropdownMenu').append('<li><a class="dropdown-item" href="#">' + date + '</a></li>');
+      });
+      // 드롭다운 메뉴 선택 이벤트
+      $('#dateDropdownMenu').on('click', 'a', function(e) {
+        e.preventDefault();
+        const selectedDate = $(this).text();
+        refreshTable(selectedDate);
+        $('#selectedDate').text(selectedDate);
+      });
+
+      // 테이블 데이터 리프레시 함수
+      function refreshTable(date) {
+        // 모든 테이블 데이터를 초기화
+        $('#forecast-container tbody tr:gt(0)').remove();
+
+        // 선택된 날짜에 해당하는 데이터를 필터링하여 테이블에 추가
+        const filteredData = list.filter(forecast => forecast.dt_txt.split(" ")[0] == date);
+
+        filteredData.forEach(forecast => {
+          $('#forecast-container tbody').append(`
+      <tr>
+        <td>\${formatDate(forecast.dt_txt)}</td>
+        <td><img src="http://openweathermap.org/img/w/\${forecast.weather[0].icon}.png" width="50" height="50"></td>
+        <td>\${forecast.main.temp}°C</td>
+        <td>\${forecast.main.feels_like}°C</td>
+        <td>\${forecast.main.temp_min}°C</td>
+        <td>\${forecast.main.temp_max}°C</td>
+        <td>\${forecast.main.pressure} hPa</td>
+        <td>\${forecast.main.humidity}%</td>
+        <td>\${forecast.wind.speed} m/s</td>
+      </tr>`);
+        });
+      }
     }
   };
   let airPollution = {
@@ -243,7 +307,6 @@
         url: '/service/getLikeData',
         data: {"serviceId": '${service.svcid}', "memberId": '${sessionScope.id}'},
         success:function(data) {
-          // console.log("isLike?" + data);
           if (data === true) {
             likeBtn.classList.toggle('active');
           }
@@ -267,7 +330,6 @@
       });
     },
     like: function() {
-      console.log('like');
       $.ajax({
         url: '/service/dolike',
         data: {"serviceId": '${service.svcid}', "memberId": '${sessionScope.id}'},
@@ -436,8 +498,10 @@
             </div>
           </div>
         </div>
+        <div class="d-flex justify-content-end">
+          <div id="selectedDate">날짜 선택</div>
+        </div>
         <div id="forecast-container"></div>
-
 
       </div>
     </div>
