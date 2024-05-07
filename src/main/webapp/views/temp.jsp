@@ -25,14 +25,16 @@
       weatherSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
-  function moveToReview() {
-    const reviewSection = document.getElementById('review-list');
-    if (reviewSection) {
-      reviewSection.scrollIntoView({ behavior: 'smooth' });
   function moveToParkingLot() {
     const parkingSection = document.getElementById('parking-lot');
     if (parkingSection) {
       parkingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  function moveToReview() {
+    const reviewSection = document.getElementById('review-list');
+    if (reviewSection) {
+      reviewSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 </script>
@@ -385,6 +387,10 @@
             <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToParkingLot();">근처 주차장 정보</button>
             <button style="width:100%;" class="btn btn-success mb-2" id="btn_review" onclick="moveToReview();">리뷰보기</button>
           </div>
+          
+          <a href="<c:url value="/qna/add?serviceId=${service.svcid}"/>">
+              <button id="btn_qna" style="margin-left: 10px" class="btn btn-success">문의하기</button>
+          </a>
 
           <!-- 관심 등록 버튼 -->
           <div style="display:flex;">
@@ -444,38 +450,6 @@
     </div>
   </section>
 
-  <section id="review-list" class="testimonials section-bg">
-    <div class="container">
-      <div class="section-title">
-        <h3 style="text-align: left;">리뷰보기</h3>
-        <div style = "text-align: left; ">
-        <a href="<c:url value="/review/add?serviceId=${service.svcid}"/>">
-          <button id="btn_review_add" style="width:9%;" class="btn btn-success">리뷰등록</button>
-        </a>
-        </div>
-        </div>
-      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper-wrapper">
-              <div class="testimonial-item">
-                <c:forEach var="c" items="${review}">
-                  <h5 style="text-align: left;">${c.memberid}</h5>
-                  <h5 style="text-align: left;">${c.regdate}</h5>
-                  <c:if test="${c.score ==1}"><span>⭐</span></c:if>
-                  <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>
-                  <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>
-                  <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>
-                  <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>
-                  <p style="width: 1000px; height: 100px;">
-                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
-                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                </c:forEach>
-              </div>
-          </div><!-- End testimonial item -->
-      </div>
-    </div>
-    </section><!-- End Testimonials Section -->
-
   <section id = "parking-lot">
       <div class="map_wrap">
         <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -494,7 +468,49 @@
         </div>
 
     </div>
+
   </section>
+  <section id="review-list" class="testimonials section-bg">
+    <div class="container">
+      <div class="section-title">
+        <h3 style="text-align: left;">리뷰보기</h3>
+        <div style = "text-align: left; ">
+          <c:choose>
+            <c:when test="${sessionScope.id != null}">
+              <a href="<c:url value="/review/add?serviceId=${service.svcid}"/>">
+                <button style="width:9%;" class="btn btn-success">리뷰등록</button>
+              </a>
+          </c:when>
+            <c:when test="${sessionScope.id == null}">
+            <a href="<c:url value="/login"/>">
+              <button style="width:9%;" class="btn btn-success">리뷰등록</button>
+            </a>
+            </c:when>
+          </c:choose>
+        </div>
+        </div>
+      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+        <div class="swiper-wrapper">
+              <div class="testimonial-item">
+              <c:forEach var="c" items="${review}">
+                <h5 style="text-align: left;">${c.memberid}</h5>
+                <h5 style="text-align: left;">${c.regdate}</h5>
+                <c:if test="${c.score ==1}"><span>⭐</span></c:if>
+                <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>
+                <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>
+                <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>
+                <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>
+              <p style="width: 1000px; height: 100px;">
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              </c:forEach>
+              </div>
+          </div><!-- End testimonial item -->
+      </div>
+    </div>
+    </section><!-- End Testimonials Section -->
+
 
 </main><!-- End #main -->
 <script>

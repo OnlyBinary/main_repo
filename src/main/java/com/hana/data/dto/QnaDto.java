@@ -3,17 +3,20 @@ package com.hana.data.dto;
 import lombok.*;
 
 import java.sql.Date;
-import java.util.List;
 
 @Data
 @ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewlistDto {
-    private String svcid;
+public class QnaDto {
+    private int qnaid;
     private String memberid;
-    private String content;
-    private int score;
+	private String svcid;
+	private String title;
+	private String content;
     private Date regdate;
+	private String adminans;
+	private int openyn;
+	private String password;
 }

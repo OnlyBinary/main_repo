@@ -3,7 +3,6 @@ package com.hana.controller;
 import com.hana.data.KeyStore;
 import com.hana.data.dto.*;
 import com.hana.service.*;
-import com.hana.data.dto.ServiceDto;
 import com.hana.util.PublicServiceUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +23,11 @@ import java.util.List;
 public class DetailInfoController {
 
     final ServiceService serviceService;
-    final ReviewService reviewService;
     final InterestlistService interestlistService;
     final SvccntService svccntService;
     final UserRecentViewService recentViewService;
+    final ReviewService reviewService;
+    final QnaService qnaService;
     final KeyStore keyStore;
 
     // 지도로 찾아보기 -> 행사 상세정보
@@ -40,10 +40,12 @@ public class DetailInfoController {
         try {
             serviceDto = serviceService.get(serviceId);
             reviewlistDto = reviewService.selrev(serviceId);
+
             Object serviceDetailData = PublicServiceUtil.getServiceDetailData(keyStore.publicServiceKey, "1", "1", serviceId);
 
             model.addAttribute("service", serviceDto);
             model.addAttribute("review", reviewlistDto);
+
             // 서비스 상세정보
             model.addAttribute("detail", serviceDetailData);
             model.addAttribute("prevMenu", "지도로 찾아보기");
