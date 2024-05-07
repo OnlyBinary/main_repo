@@ -366,40 +366,43 @@
         <div class="col-lg-4">
           <!-- 행사 관련 간략 정보 -->
           <div class="portfolio-description" style="padding-top:0px!important;">
-            <h5>${service.svcnm}</h5>
+            <h5 class="mb-3">${service.svcnm}</h5>
             <p>가격 : ${service.payatnm}</p>
             <p>지역 : ${service.areanm}</p>
             <p>장소 : ${service.placenm}</p>
-            <p>행사기간: ${service.svcstr} ~ ${service.svcfin}</p>
+            <p>행사기간: ${service.svcstr.toString().split("T")[0]} ~ ${service.svcfin.toString().split("T")[0]}</p>
             <p>접수기간: ${service.rcptstr} ~ ${service.rcptfin}</p>
             <p>대상 : ${service.usertgtinfo}</p>
           </div>
           <button style="width:100%;" class="btn btn-success mb-2">홈페이지 이동</button>
-          <button style="width:100%;" class="btn btn-success mb-2" onclick="redirectToMap();">길찾기</button>
-          <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToWeather();">날씨보기</button>
-
-          <!-- 관심 등록 버튼 -->
-
-          <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToParkingLot();">근처 주차장 정보</button>
 
           <div style="display:flex;">
-            <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
-            <p class="ml-1" style="align-items: center;">1,200</p>
-              <button id="btn_review" style="width:50%; margin-left: 40px" class="btn btn-success" onclick="moveToReview();">리뷰보기</button>
-            <p class="ml-1" style="align-items: center;" id="likeCnt"></p>
+            <button style="width:100%;" class="btn btn-success mb-2 col-lg-6" onclick="redirectToMap();">길찾기</button>
+            <button style="width:100%;" class="btn btn-success mb-2 col-lg-6" onclick="moveToWeather();">날씨보기</button>
           </div>
 
-          <div style="overflow:scroll;">
-            <div class="portfolio-info">
-              <h3>교통정보</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>
+          <div style="display:flex;">
+            <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToParkingLot();">근처 주차장 정보</button>
+            <button style="width:100%;" class="btn btn-success mb-2" id="btn_review" onclick="moveToReview();">리뷰보기</button>
           </div>
+
+          <!-- 관심 등록 버튼 -->
+          <div style="display:flex;">
+            <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+            <h4 class="ml-2" style="align-items:center;" id="likeCnt"></h4>
+          </div>
+
+<%--          <div style="overflow:scroll;">--%>
+<%--            <div class="portfolio-info">--%>
+<%--              <h3>교통정보</h3>--%>
+<%--              <ul>--%>
+<%--                <li><strong>Category</strong>: Web design</li>--%>
+<%--                <li><strong>Client</strong>: ASU Company</li>--%>
+<%--                <li><strong>Project date</strong>: 01 March, 2020</li>--%>
+<%--                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>--%>
+<%--              </ul>--%>
+<%--            </div>--%>
+<%--          </div>--%>
         </div>
       </div>
     </div>
@@ -437,8 +440,6 @@
           </div>
         </div>
         <div id="forecast-container"></div>
-
-
       </div>
     </div>
   </section>
@@ -456,21 +457,19 @@
       <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
         <div class="swiper-wrapper">
               <div class="testimonial-item">
-              <c:forEach var="c" items="${review}">
-                <h5 style="text-align: left;">${c.memberid}</h5>
-                <h5 style="text-align: left;">${c.regdate}</h5>
-                <c:if test="${c.score ==1}"><span>⭐</span></c:if>
-                <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>
-                <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>
-                <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>
-                <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>
-              <p style="width: 1000px; height: 100px;">
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-
-
-              </c:forEach>
+                <c:forEach var="c" items="${review}">
+                  <h5 style="text-align: left;">${c.memberid}</h5>
+                  <h5 style="text-align: left;">${c.regdate}</h5>
+                  <c:if test="${c.score ==1}"><span>⭐</span></c:if>
+                  <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>
+                  <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>
+                  <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>
+                  <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>
+                  <p style="width: 1000px; height: 100px;">
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </c:forEach>
               </div>
           </div><!-- End testimonial item -->
       </div>

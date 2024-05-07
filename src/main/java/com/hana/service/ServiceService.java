@@ -69,4 +69,6 @@ public class ServiceService implements HanaService<String, ServiceDto> {
     public List<ServiceDto> selectTopFive() {
         return serviceRepository.selectTopFive();
     }
+
+    public List<ServiceDto> selectOrderByDate() { return serviceRepository.selectOrderByDate();}
 }
