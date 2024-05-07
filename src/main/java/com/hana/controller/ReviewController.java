@@ -28,8 +28,6 @@ public class ReviewController {
     final ServiceService serviceService;
 
 
-
-
     @RequestMapping("/add")
     public String register(Model model,
                            HttpSession httpSession,
