@@ -1,18 +1,12 @@
 package com.hana.controller;
 
 import com.hana.data.KeyStore;
-import com.hana.data.dto.ReviewlistDto;
-import com.hana.data.dto.InterestlistDto;
-import com.hana.data.dto.ServiceDto;
-import com.hana.service.ReviewService;
-import com.hana.data.dto.SvccntDto;
-import com.hana.service.InterestlistService;
+import com.hana.data.dto.*;
+import com.hana.service.*;
 import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.ServiceDto;
 import com.hana.data.dto.SvccntDto;
 import com.hana.service.InterestlistService;
-import com.hana.service.ServiceService;
-import com.hana.service.SvccntService;
 import com.hana.util.PublicServiceUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -35,6 +29,7 @@ public class DetailInfoController {
     final InterestlistService interestlistService;
     final SvccntService svccntService;
     final ReviewService reviewService;
+    final QnaService qnaService;
     final KeyStore keyStore;
 
     // 지도로 찾아보기 -> 행사 상세정보
@@ -47,10 +42,12 @@ public class DetailInfoController {
         try {
             serviceDto = serviceService.get(serviceId);
             reviewlistDto = reviewService.selrev(serviceId);
+
             Object serviceDetailData = PublicServiceUtil.getServiceDetailData(keyStore.publicServiceKey, "1", "1", serviceId);
 
             model.addAttribute("service", serviceDto);
             model.addAttribute("review", reviewlistDto);
+
             // 서비스 상세정보
             model.addAttribute("detail", serviceDetailData);
             model.addAttribute("prevMenu", "지도로 찾아보기");
