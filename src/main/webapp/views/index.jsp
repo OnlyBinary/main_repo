@@ -66,12 +66,12 @@
   </style>
 </head>
 <body>
+<div>
+  <div class="container" style="height:10rem;">
+    <jsp:include page="sidebar/header.jsp"/>
+  </div>
 
-<div class="container">
-  <jsp:include page="sidebar/header.jsp"/>
-</div>
-
-  <div style="margin-top:10rem;">
+  <div>
     <c:choose>
       <c:when test="${center==null}">
         <jsp:include page="center.jsp"/>
@@ -83,7 +83,7 @@
   </div>
 
   <jsp:include page="sidebar/footer.jsp"/>
-
+</div>
 </body>
 
 </html>

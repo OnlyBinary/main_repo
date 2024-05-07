@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hana.repository.SvccntRepository">
+
+    <select id="selectOne" parameterType="String" resultType="SvccntDto">
+        SELECT * FROM svccnt WHERE svcid=#{svcid}
+    </select>
+    <select id="select" resultType="SvccntDto">
+        SELECT * FROM svccnt
+    </select>
+    <insert id="insert" parameterType="SvccntDto">
+        INSERT INTO svccnt VALUES (#{svcid}, #{cnt})
+    </insert>
+    <update id="update" parameterType="SvccntDto">
+        UPDATE svccnt SET cnt=#{cnt} WHERE svcid=#{svcid}
+    </update>
+    <delete id="delete" parameterType="String">
+        DELETE FROM svccnt WHERE svcid=#{svcid}
+    </delete>
+
+</mapper>
