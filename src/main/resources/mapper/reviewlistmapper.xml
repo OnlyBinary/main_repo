@@ -4,6 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hana.repository.ReviewRepository">
 
+    <resultMap id="memberreview" type="reviewlistDto">
+        <id column="memberid" property="memberid"/>
+        <result column="svcid" property="svcid"/>
+        <result column="content" property="content"/>
+        <result column="score" property="score"/>
+        <result column="regdate" property="regdate"/>
+        <collection property="serviceList" ofType="serviceDto">
+            <id column="svcid" property="svcid"/>
+            <result column="svcnm" property="svcnm"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectreview" parameterType="String" resultMap="memberreview">
+        select a.memberid, a.content, a.score, a.regdate, b.svcnm
+        FROM reviewlist a
+        LEFT JOIN service b
+        ON a.svcid = b.svcid
+        WHERE a.svcid = #{svcid};
+    </select>
     <select id="selectOne" parameterType="String" resultType="reviewlistDto">
         SELECT * FROM reviewlist WHERE memberid=#{memberid}
     </select>
@@ -11,7 +30,7 @@
         SELECT * FROM reviewlist
     </select>
     <insert id="insert" parameterType="reviewlistDto">
-        INSERT INTO reviewlist VALUES ( #{svcid}, #{memberid}, #{score}, #{review} )
+        INSERT INTO reviewlist VALUES ( #{svcid}, #{memberid}, #{content}, #{score}, now() )
     </insert>
     <update id="update" parameterType="reviewlistDto">
         UPDATE reviewlist SET review=#{review} WHERE memberid=#{memberid}

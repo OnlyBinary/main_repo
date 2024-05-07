@@ -1,6 +1,9 @@
 package com.hana.controller;
 
 import com.hana.data.KeyStore;
+import com.hana.data.dto.ReviewlistDto;
+import com.hana.data.dto.ServiceDto;
+import com.hana.service.ReviewService;
 import com.hana.data.dto.InterestlistDto;
 import com.hana.data.dto.ServiceDto;
 import com.hana.data.dto.SvccntDto;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+import java.util.List;
+
 // 지역구별 컨텐츠 조회 컨트롤러
 @Controller
 @RequestMapping("/service")
@@ -24,6 +29,7 @@ import java.util.List;
 public class DetailInfoController {
 
     final ServiceService serviceService;
+    final ReviewService reviewService;
     final InterestlistService interestlistService;
     final SvccntService svccntService;
     final KeyStore keyStore;
@@ -33,12 +39,15 @@ public class DetailInfoController {
     public String serviceDetailShow(@RequestParam("detail") String serviceId, Model model) {
         // DB에서 serviceId로 조회해서 dto 가져오기
         ServiceDto serviceDto = null;
+        List<ReviewlistDto> reviewlistDto = null;
 
         try {
             serviceDto = serviceService.get(serviceId);
+            reviewlistDto = reviewService.selrev(serviceId);
             Object serviceDetailData = PublicServiceUtil.getServiceDetailData(keyStore.publicServiceKey, "1", "1", serviceId);
 
             model.addAttribute("service", serviceDto);
+            model.addAttribute("review", reviewlistDto);
             // 서비스 상세정보
             model.addAttribute("detail", serviceDetailData);
             model.addAttribute("prevMenu", "지도로 찾아보기");

@@ -23,14 +23,6 @@
 <script>
     let mypage = {
         init: function () {
-            console.log(${interest[0].serviceList[0]});
-
-            <%--for(let i =0; i<${interest}.length;i++){--%>
-            <%--    $('#svcnm').text(${interest.serviceList[i]})--%>
-            <%--}--%>
-            <%--$(${interest.serviceList}).forEach((item, idx)=> {--%>
-            <%--    $('#svcnm').text(item.serviceList[idx].svcnm);--%>
-            <%--})--%>
         }
     };
     $(function () {
@@ -51,17 +43,17 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-8 d-flex align-items-stretch">
                     <div class="info">
-                        <div class="id">
+                        <div class="address">
                             <i class="bi bi-check-circle"></i>
                             <h4>ID:</h4>
                             <p style ="font-size: 20px">${member.memberid}</p>
                         </div>
-                        <div class="name">
+                        <div class="address">
                             <i class="bi bi-person-square"></i>
                             <h4>이름:</h4>
                             <p style ="font-size: 20px">${member.membernm}</p>
                         </div>
-                        <div class="tel">
+                        <div class="address">
                             <i class="bi bi-phone"></i>
                             <h4>전화번호:</h4>
                             <p style ="font-size: 20px">${member.membertel}</p>
@@ -76,7 +68,7 @@
                             <h4>이메일:</h4>
                             <p style ="font-size: 20px">${member.memberemail}</p>
                         </div>
-                        <div class="favorites">
+                        <div class="address">
                             <i class="bi bi-bookmark-heart-fill favorites-icon"></i>
                             <h4 class="favorites-title">관심 추가한 목록:</h4>
                         </div>
@@ -98,7 +90,6 @@
                             </c:forEach>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
