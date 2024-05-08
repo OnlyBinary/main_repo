@@ -20,7 +20,7 @@
                                        AND memberemail = #{memberemail}
     </select>
     <insert id="insert" parameterType="memberDto">
-        INSERT INTO member VALUES (#{memberid}, #{membernm}, #{membertel}, #{memberpwd}, #{memberaddr}, #{memberemail}, #{snsagree})
+        INSERT INTO member VALUES (#{memberid}, #{membernm}, #{membertel}, #{memberpwd}, #{memberaddr}, #{memberemail}, #{snsagree},  #{memberzipcode},  #{memberaddrdetail})
     </insert>
     <update id="update" parameterType="memberDto">
         UPDATE member SET memberpwd=#{memberpwd} WHERE memberid=#{memberid}

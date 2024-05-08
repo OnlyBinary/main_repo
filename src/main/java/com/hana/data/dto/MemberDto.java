@@ -17,4 +17,7 @@ public class MemberDto {
     private String memberaddr;
     private String memberemail;
     private int snsagree;
+    private String memberzipcode;
+    private String memberaddrdetail;
+
 }

@@ -1,14 +1,8 @@
 package com.hana.controller;
 
 import com.hana.data.KeyStore;
-import com.hana.data.dto.InterestlistDto;
-import com.hana.data.dto.MemberDto;
-import com.hana.data.dto.ServiceDto;
-import com.hana.data.dto.SvccntDto;
-import com.hana.service.InterestlistService;
-import com.hana.service.MemberService;
-import com.hana.service.ServiceService;
-import com.hana.service.SvccntService;
+import com.hana.data.dto.*;
+import com.hana.service.*;
 import com.hana.util.AirPollutionUtil;
 import com.hana.util.PublicServiceUtil;
 import com.hana.util.WeatherUtil;
@@ -42,6 +36,7 @@ public class MainController {
     final MemberService memberService;
     final InterestlistService interestlistService;
     final SvccntService svccntService;
+    final UserRecentViewService userRecentViewService;
 
     @RequestMapping("/")
     public String main(Model model) {
@@ -152,14 +147,17 @@ public class MainController {
     public String mypage(Model model, HttpSession httpSession) {
         MemberDto memberDto = null;
         List<InterestlistDto> interestlistDto = null;
+        List<UserRecentViewDto> userRecentViewDto = null;
         String id = (String) httpSession.getAttribute("id");
 
         try {
             memberDto = memberService.get(id);
             interestlistDto = interestlistService.selint(id);
+            userRecentViewDto = userRecentViewService.memberRecentView(id);
 
             model.addAttribute("member", memberDto);
             model.addAttribute("interest", interestlistDto);
+            model.addAttribute("view", userRecentViewDto);
             model.addAttribute("center", "mypage");
 
         } catch (Exception e) {
@@ -181,10 +179,10 @@ public class MainController {
         try {
             memberService.add(memberDto);
             httpSession.setAttribute("id", memberDto.getMemberid());
-        } catch (Exception e) {
+        }   catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "index";
+        return "redirect:/";
     }
 
     @ResponseBody

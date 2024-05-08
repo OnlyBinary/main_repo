@@ -42,4 +42,8 @@ public class UserRecentViewService implements HanaService<String, UserRecentView
     public UserRecentViewDto findByMemberAndService(String memberId, String serviceId) {
         return recentViewRepository.findMemberService(memberId, serviceId);
     }
+    public List<UserRecentViewDto> memberRecentView(String memberId) {
+        return recentViewRepository.memberRecentView(memberId);
+    }
+
 }
