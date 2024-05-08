@@ -111,18 +111,6 @@
         </div>
     </div><!-- End Page Title -->
 
-<%--    <!-- ======= Breadcrumbs ======= -->--%>
-<%--    <section class="breadcrumbs">--%>
-<%--        <div class="container">--%>
-<%--            <div class="d-flex justify-content-between align-items-center">--%>
-<%--                <h2 class = "custom-heading">회원가입</h2>--%>
-<%--                <ol>--%>
-<%--                    <li><a href="<c:url value="/"/>">Home</a></li>--%>
-<%--                    <li>회원가입</li>--%>
-<%--                </ol>--%>
-<%--            </div>--%>
-
-<%--        </div>--%>
     </section><!-- End Breadcrumbs -->
             <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact">

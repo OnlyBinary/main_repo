@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tlqla
-  Date: 2024-04-30
-  Time: 오전 11:38
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
@@ -39,14 +33,10 @@
     <section id="contact" class="contact">
         <div class="container">
 
-            <div class="section-title">
-                <span>Mypage</span>
-                <h2>Mypage</h2>
-<%--                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>--%>
-            </div>
+            <h1 style="text-align:center; margin-bottom: 70px">My Page</h1>
 
             <div class="row justify-content-center mt-4">
-                <div class="col-lg-8 d-flex align-items-stretch">
+                <div class="col-lg-9 d-flex align-items-stretch">
                     <div class="info">
                         <div class="address">
                             <i class="bi bi-check-circle"></i>
