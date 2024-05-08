@@ -22,9 +22,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/modals/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <%--kakao map API--%>
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9e1c6a20d65fd94d833f6984f6e0f2ba&libraries=services"></script>
-
 </head>
 <style>
     #map {
@@ -124,14 +121,15 @@
             let content = '<div class="wrap" style="position: absolute;left: 0;bottom: 40px;width: 200px;height: 100px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: \'Malgun Gothic\', dotum, \'돋움\', sans-serif;line-height: 1.5;">' +
                 '<div class="info" style="width: 286px;height: 140px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;">' +
                 '<div class="title" style="padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;">' +
-                '<div>' + place.svcnm + '</div>' +
+                '<div><h6>' + geo2.trimString(place.svcnm) + '</h6></div>' +
                 // '<div style="float:right;margin:15px 10px 0 0;font-size:12px;font-color:red;text-align:center">위생등급: <h2>' + hgAsgnLv + '</h2></div>' +
                 '</div>' +
                 '<div class="body" style="position: relative;overflow: hidden;">' +
                 '<div class="desc" style="position: relative;margin: 10px 10px 10px 10px;height: 100px;">' +
                 // '<div class="jibun" style="font-size: 11px;color: #888;margin-top: -2px;">' + place.MAXCLASSNM + '>' + place.MINCLASSNM + '</div>' +
-                '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">장소) ' + place.placenm + '</div>' +
+                '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">장소) ' + geo2.trimString(place.placenm) + '</div>' +
                 '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">주소) ' + address + '</div>' +
+                '<div class="ellipsis" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">기간) ' + place.svcstr.split("T")[0] + ' ~ ' + place.svcfin.split("T")[0] + '</div>' +
                 // '<button type="button" onClick="window.location.href = \'' + place.place_url + '\'" style="margin:5px 0px 0px 10px;height:25px;width:150px;">카카오맵에서 보기</button>' +
                 '</div>' +
                 '</div>' +
@@ -224,6 +222,12 @@
                 }
                 geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
             });
+        },
+        trimString: function(data) {
+            if (data.length > 15) {
+                return data.substring(0, 15) + "...";
+            }
+            return data;
         }
     };
     let showList = {
@@ -245,46 +249,94 @@
                 el.style.display='none';
             });
             $('#cateBtn').text("전체");
-            geo2.getServiceData();
+            changeContentList.total(1);
         }
     }
     let changeContentList = {
-        content: function(data) {
+        content: function(data, pageNo) {
             // maxclassnm = data 가져와서 geo2.display()
+            console.log(data);
             $.ajax({
                 url: '<c:url value="/getContentListData"/>',
-                data: {'detail': data, 'category': 'content'},
+                data: {'detail': data, 'category': 'content', pageNo: pageNo},
                 success: function(result) {
-                    // console.log(result);
-                    changeContentList.initialization(result);
+                    changeContentList.initialization(result, data, 'content');
                 }
             })
         },
-        target: function(data) {
+        target: function(data, pageNo) {
+            // data -> "가족", pageNo -> 페이징넘버
             $.ajax({
                 url: '<c:url value="/getContentListData"/>',
-                data: {'detail': data, 'category': 'target'},
+                data: {'detail': data, 'category': 'target', pageNo: pageNo},
                 success: function(result) {
-                    changeContentList.initialization(result);
+                    // result -> "페이징 결과", data -> 위의 data, "가족"
+                    changeContentList.initialization(result, data, 'target');
                 }
             })
         },
-        location: function(data) {
+        location: function(data, pageNo) {
           $.ajax({
               url: '<c:url value="/getContentListData"/>',
-              data: {'detail': data, 'category': 'location'},
+              data: {'detail': data, 'category': 'location', pageNo: pageNo},
               success: function(result) {
-                  changeContentList.initialization(result);
+                  changeContentList.initialization(result, data, 'location');
               }
           })
         },
-        initialization: function(data) {
+        total: function(pageNo) {
+            $.ajax({
+                url: '<c:url value="/getPublicServiceData"/>',
+                data: {pageNo: pageNo},
+                success: function(result){
+                    changeContentList.initialization(result, '', '');
+                }
+            })
+        },
+        initialization: function(data, detail, category) {
             // 기존 지도 초기화
             document.querySelector("#map").innerHTML = '';
             geo2.mapdisplay(); // 기본지도 띄어주기
             // 옆에 목록 초기화
             document.querySelector("#placeList").innerHTML = '';
-            geo2.display(data); // 마커 찍어주기
+            geo2.display(data.list); // 마커 찍어주기
+
+            let paginationHtml = '';
+
+            if (data.prePage !== 0) {
+                paginationHtml += '<li class="page-item"><a class="page-link" href="' + data.prePageUrl + '">&lt;</a></li>';
+            } else {
+                paginationHtml += '<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>';
+            }
+
+            let range = 5;
+            for (let i = data.navigateFirstPage; i <= data.navigateLastPage; i++) {
+                if (data.pageNum === i) {
+                    paginationHtml += '<li class="page-item active"><a class="page-link" href="' + data.pageUrl + i + '">' + i + '</a></li>';
+                } else {
+                    if (category === 'content') {
+                        paginationHtml += '<li class="page-item page-link" onclick="changeContentList.content(\'' + detail + '\',\'' + i+ '\')">'+ i +'</li>';
+                    } else if (category === 'target'){
+                        paginationHtml += '<li class="page-item page-link" onclick="changeContentList.target(\'' + detail + '\',\'' + i+ '\')">'+ i +'</li>';
+                    } else if (category === 'location') {
+                        paginationHtml += '<li class="page-item page-link" onclick="changeContentList.location(\'' + detail + '\',\'' + i+ '\')">'+ i +'</li>';
+                    } else {
+                        paginationHtml += '<li class="page-item page-link" onclick="changeContentList.total(\'' + i+ '\')">'+ i +'</li>';
+                    }
+                }
+
+                if (i === data.navigateFirstPage + range + 1 && data.navigateLastPage - i > 1) {
+                    paginationHtml += '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                    i = data.navigateLastPage - range; // 다음 페이지를 범위의 마지막 페이지로 설정
+                }
+            }
+
+            if (data.nextPage !== 0) {
+                paginationHtml += '<li class="page-item"><a class="page-link" href="' + data.nextPageUrl + '">&gt;</a></li>';
+            } else {
+                paginationHtml += '<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>';
+            }
+            $('#pagination').html(paginationHtml);
         }
     }
     $(function() {
@@ -314,18 +366,18 @@
                 </div>
             </div>
             <div id="content1" class="content">
-                <div onclick="changeContentList.content('공간시설')">공간시설</div>
-                <div onclick="changeContentList.content('교육강좌')">교육강좌</div>
-                <div onclick="changeContentList.content('문화체험')">문화체험</div>
-                <div onclick="changeContentList.content('진료복지')">진료복지</div>
-                <div onclick="changeContentList.content('체육시설')">체육시설</div>
+                <div onclick="changeContentList.content('공간시설', 1)">공간시설</div>
+                <div onclick="changeContentList.content('교육강좌', 1)">교육강좌</div>
+                <div onclick="changeContentList.content('문화체험', 1)">문화체험</div>
+                <div onclick="changeContentList.content('진료복지', 1)">진료복지</div>
+                <div onclick="changeContentList.content('체육시설', 1)">체육시설</div>
             </div>
             <div id="content2" class="content">
-                <div onclick="changeContentList.target('가족')">가족</div>
-                <div onclick="changeContentList.target('성인')">성인</div>
-                <div onclick="changeContentList.target('청소년')">청소년</div>
-                <div onclick="changeContentList.target('어린이')">어린이</div>
-                <div onclick="changeContentList.target('')">기타</div>
+                <div onclick="changeContentList.target('가족', 1)">가족</div>
+                <div onclick="changeContentList.target('성인', 1)">성인</div>
+                <div onclick="changeContentList.target('청소년', 1)">청소년</div>
+                <div onclick="changeContentList.target('어린이', 1)">어린이</div>
+                <div onclick="changeContentList.target('', 1)">기타</div>
             </div>
             <div id="content3" class="content">
                 <div class="dropdown">
@@ -334,11 +386,11 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li onclick="changeContentList.location('동대문구')"><a tabindex="-1">동대문구</a></li>
-                        <li onclick="changeContentList.location('성동구')"><a tabindex="-1">성동구</a></li>
-                        <li onclick="changeContentList.location('용산구')"><a tabindex="-1">용산구</a></li>
-                        <li onclick="changeContentList.location('종로구')"><a tabindex="-1">종로구</a></li>
-                        <li onclick="changeContentList.location('중구')"><a tabindex="-1">중구</a></li>
+                        <li onclick="changeContentList.location('동대문구', 1)"><a tabindex="-1">동대문구</a></li>
+                        <li onclick="changeContentList.location('성동구', 1)"><a tabindex="-1">성동구</a></li>
+                        <li onclick="changeContentList.location('용산구', 1)"><a tabindex="-1">용산구</a></li>
+                        <li onclick="changeContentList.location('종로구', 1)"><a tabindex="-1">종로구</a></li>
+                        <li onclick="changeContentList.location('중구', 1)"><a tabindex="-1">중구</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -347,10 +399,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li onclick="changeContentList.location('강동구')"><a tabindex="-1">강동구</a></li>
-                        <li onclick="changeContentList.location('광진구')"><a tabindex="-1">광진구</a></li>
-                        <li onclick="changeContentList.location('송파구')"><a tabindex="-1">송파구</a></li>
-                        <li onclick="changeContentList.location('중랑구')"><a tabindex="-1">중랑구</a></li>
+                        <li onclick="changeContentList.location('강동구', 1)"><a tabindex="-1">강동구</a></li>
+                        <li onclick="changeContentList.location('광진구', 1)"><a tabindex="-1">광진구</a></li>
+                        <li onclick="changeContentList.location('송파구', 1)"><a tabindex="-1">송파구</a></li>
+                        <li onclick="changeContentList.location('중랑구', 1)"><a tabindex="-1">중랑구</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -359,13 +411,13 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li onclick="changeContentList.location('강서구')"><a tabindex="-1">강서구</a></li>
-                        <li onclick="changeContentList.location('구로구')"><a tabindex="-1">구로구</a></li>
-                        <li onclick="changeContentList.location('금천구')"><a tabindex="-1">금천구</a></li>
-                        <li onclick="changeContentList.location('마포구')"><a tabindex="-1">마포구</a></li>
-                        <li onclick="changeContentList.location('서대문구')"><a tabindex="-1">서대문구</a></li>
-                        <li onclick="changeContentList.location('양천구')"><a tabindex="-1">양천구</a></li>
-                        <li onclick="changeContentList.location('영등포구')"><a tabindex="-1">영등포구</a></li>
+                        <li onclick="changeContentList.location('강서구', 1)"><a tabindex="-1">강서구</a></li>
+                        <li onclick="changeContentList.location('구로구', 1)"><a tabindex="-1">구로구</a></li>
+                        <li onclick="changeContentList.location('금천구', 1)"><a tabindex="-1">금천구</a></li>
+                        <li onclick="changeContentList.location('마포구', 1)"><a tabindex="-1">마포구</a></li>
+                        <li onclick="changeContentList.location('서대문구', 1)"><a tabindex="-1">서대문구</a></li>
+                        <li onclick="changeContentList.location('양천구', 1)"><a tabindex="-1">양천구</a></li>
+                        <li onclick="changeContentList.location('영등포구', 1)"><a tabindex="-1">영등포구</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -374,10 +426,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li onclick="changeContentList.location('강남구')"><a tabindex="-1">강남구</a></li>
-                        <li onclick="changeContentList.location('관악구')"><a tabindex="-1">관악구</a></li>
-                        <li onclick="changeContentList.location('동작구')"><a tabindex="-1">동작구</a></li>
-                        <li onclick="changeContentList.location('서초구')"><a tabindex="-1">서초구</a></li>
+                        <li onclick="changeContentList.location('강남구', 1)"><a tabindex="-1">강남구</a></li>
+                        <li onclick="changeContentList.location('관악구', 1)"><a tabindex="-1">관악구</a></li>
+                        <li onclick="changeContentList.location('동작구', 1)"><a tabindex="-1">동작구</a></li>
+                        <li onclick="changeContentList.location('서초구', 1)"><a tabindex="-1">서초구</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -386,10 +438,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li onclick="changeContentList.location('강북구')"><a tabindex="-1">강북구</a></li>
-                        <li onclick="changeContentList.location('노원구')"><a tabindex="-1">노원구</a></li>
-                        <li onclick="changeContentList.location('도봉구')"><a tabindex="-1">도봉구</a></li>
-                        <li onclick="changeContentList.location('성북구')"><a tabindex="-1">성북구</a></li>
+                        <li onclick="changeContentList.location('강북구', 1)"><a tabindex="-1">강북구</a></li>
+                        <li onclick="changeContentList.location('노원구', 1)"><a tabindex="-1">노원구</a></li>
+                        <li onclick="changeContentList.location('도봉구', 1)"><a tabindex="-1">도봉구</a></li>
+                        <li onclick="changeContentList.location('성북구', 1)"><a tabindex="-1">성북구</a></li>
                     </ul>
                 </div>
             </div>
@@ -399,5 +451,6 @@
         </div>
         <div class="col-7" id="map"></div>
     </div>
+    <ul id="pagination" class="pagination justify-content-center align-items-center mt-2" style="width:100%!important;"></ul>
 </div>
 </body>

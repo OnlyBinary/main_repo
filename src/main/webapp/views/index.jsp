@@ -19,7 +19,6 @@
 
   <!-- Favicons -->
   <link href="/img/mainlogo.png" rel="icon">
-<%--  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">--%>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -30,11 +29,6 @@
   <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-<%--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">--%>
-
-<%--  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/modals/">--%>
-<%--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">--%>
 
   <!-- Template Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">

@@ -42,59 +42,41 @@
         register.init('<c:url value="/review/addimpl"/>');
     });
 </script>
-<!-- ======= Contact Section ======= -->
-
 <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
-<%--    <section class="breadcrumbs">--%>
-<%--        <div class="container">--%>
-<%--            <div class="d-flex justify-content-between align-items-center">--%>
-<%--                <h2 class = "custom-heading">리뷰등록</h2>--%>
-<%--                <ol>--%>
-<%--                    <li><a href="<c:url value="/"/>">Home</a></li>--%>
-<%--                    <li>리뷰등록</li>--%>
-<%--                </ol>--%>
-<%--            </div>--%>
-
-<%--        </div>--%>
-<%--    </section><!-- End Breadcrumbs -->--%>
-    <!-- ======= Contact Section ======= -->
     <div data-aos="fade" class="page-title">
         <div class="heading">
             <div class="container">
+                <h4>리뷰 등록하기</h4>
+                <p>해당 행사에 대한 여러분의 솔직한 리뷰를 남겨주세요!!</p>
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-lg-12">
-                        <%--                    <h1>${menu}</h1>--%>
-                        <img style="width:100%;" src="${menu}">
-                        <%--                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>--%>
+                        <img style="width:100%;height:20rem!important;" src="${menu}">
                     </div>
                 </div>
             </div>
         </div>
-<%--        <nav class="breadcrumbs">--%>
-<%--            <div class="container">--%>
-<%--                <ol>--%>
-<%--                    <li><a href="index.html">Home</a></li>--%>
-<%--                    <li>${currentDiv}</li>--%>
-<%--                    <li class="current">${submenu}</li>--%>
-<%--                </ol>--%>
-<%--            </div>--%>
-<%--        </nav>--%>
     </div><!-- End Page Title -->
     <section id="contact" class="contact">
         <div class="container">
-<%--            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">--%>
             <div class="reply-form">
-                <h4>리뷰 등록하기</h4>
-                <p>해당 행사에 대한 여러분의 솔직한 리뷰를 남겨주세요!!</p>
-                <form id="register_form" class="php-email-form">
+                <form id="register_form" class="php-email-form" style="padding-top:15px!important;">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <span class="badge badge-success">회원 ID</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="badge badge-primary">${svc.maxclassnm}</span>
+                            <span class="badge badge-dark">${svc.minclassnm}</span>
+                            <span class="badge badge-info">${svc.usertgtinfo}</span>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 form-group">
                             <input type="text" class="form-control" name="memberid" id="memberid" value="${sessionScope.id}" readonly>
                         </div>
                         <div class="col-md-8 form-group">
-                            <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
+                            <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svc.svcnm}" readonly>
+                            <input type="hidden" name="svcid" value="${svc.svcid}">
                         </div>
                     </div>
                     <div class="row">

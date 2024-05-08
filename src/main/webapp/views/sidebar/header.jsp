@@ -20,25 +20,14 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
-
-
-            <a href="<c:url value="/"/>">
-                <div style="display:flex !important; align-items:center;">
+        <a href="<c:url value="/"/>">
+            <div style="display:flex !important; align-items:center;">
                 <img src="/img/mainlogo.png" alt="mainlogo" style="height:82px;width:5rem;"/>
                 <h1 class="logo ml-2">Only Binary</h1>
-                </div>
-            </a>
-
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
+            </div>
+        </a>
         <nav id="navbar" class="navbar">
             <ul>
-<%--                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>--%>
-                <%--          <li><a class="nav-link scrollto" href="#about">About</a></li>--%>
-                <%--          <li><a class="nav-link scrollto" href="#services">Services</a></li>--%>
-                <%--          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>--%>
-                <%--          <li><a class="nav-link scrollto" href="#team">Team</a></li>--%>
                 <li class="dropdown"><a href="/contents/main"><span>컨텐츠별</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a class="nav-link scrollto " href="<c:url value="/contents/gongan?pageNo=1"/>">공간시설</a></li>
@@ -104,9 +93,6 @@
                                 <li><a href="/location/성북구?pageNo=1">성북구</a></li>
                             </ul>
                         </li>
-                        <%--              <li><a href="#">Drop Down 2</a></li>--%>
-                        <%--              <li><a href="#">Drop Down 3</a></li>--%>
-                        <%--              <li><a href="#">Drop Down 4</a></li>--%>
                     </ul>
                 </li>
                 <li><a class="nav-link scrollto" href="<c:url value="/qna/list"/>">Contact</a></li>

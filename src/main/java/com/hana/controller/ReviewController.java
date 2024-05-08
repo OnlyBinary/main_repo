@@ -33,8 +33,9 @@ public class ReviewController {
 
         ServiceDto serviceDto = serviceService.get(svcid);
 
-        model.addAttribute("svcnm", serviceDto.getSvcnm());
-        model.addAttribute("svcid", serviceDto.getSvcid());
+//        model.addAttribute("svcnm", serviceDto.getSvcnm());
+//        model.addAttribute("svcid", serviceDto.getSvcid());
+        model.addAttribute("svc", serviceDto);
         model.addAttribute("menu", serviceDto.getImgurl());
         model.addAttribute("center", dir + "add");
 

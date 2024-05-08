@@ -21,4 +21,5 @@ public interface ServiceRepository extends HanaRepository<String, ServiceDto> {
     Page<ServiceDto> getPage(String maxclassnm) throws Exception;
     Page<ServiceDto> getPageTarget(String usertgtinfo) throws Exception;
     Page<ServiceDto> getPageLocation(String location) throws Exception;
+    Page<ServiceDto> getTotal() throws Exception;
 }
