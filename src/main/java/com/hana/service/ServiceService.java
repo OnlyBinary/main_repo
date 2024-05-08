@@ -74,10 +74,21 @@ public class ServiceService implements HanaService<String, ServiceDto> {
 
     public List<ServiceDto> selectOrderByDate() { return serviceRepository.selectOrderByDate();}
 
+    public Page<ServiceDto> getPage(int pageNo, String option, String category) throws Exception {
+        Page<ServiceDto> page = null;
+        switch (category) {
+            case "content" -> page = getPage(pageNo, option);
+            case "target" -> page = getPageTarget(pageNo, option);
+            case "location" -> page = getPageLocation(pageNo, option);
+        }
+        return page;
+    }
+
     public Page<ServiceDto> getPage(int pageNo, String option) throws Exception {
         PageHelper.startPage(pageNo, 36);
         return serviceRepository.getPage(option);
     }
+
 
     public Page<ServiceDto> getPageTarget(int pageNo, String option) throws Exception {
         PageHelper.startPage(pageNo, 36);
@@ -87,5 +98,10 @@ public class ServiceService implements HanaService<String, ServiceDto> {
     public Page<ServiceDto> getPageLocation(int pageNo, String option) throws Exception {
         PageHelper.startPage(pageNo, 21);
         return serviceRepository.getPageLocation(option);
+    }
+
+    public Page<ServiceDto> getTotal(int pageNo) throws Exception {
+        PageHelper.startPage(pageNo,36);
+        return serviceRepository.getTotal();
     }
 }

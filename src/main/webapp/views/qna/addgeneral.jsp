@@ -49,17 +49,13 @@
         register.init('<c:url value="/qna/addgeneralimpl"/>');
     });
 </script>
-<!-- ======= Contact Section ======= -->
-
 <main id="main">
-
     <div class="container">
         <h4>Only Binary 서비스 관련 문의사항 등록하기</h4>
         <p>Only Binary 서비스에 대한 문의사항을 편하게 작성해주세요!!</p>
     </div>
     <section id="contact" class="contact">
         <div class="container">
-<%--            <div class="col-lg-15 mt-5 mt-lg-0 d-flex align-items-stretch">--%>
             <div class="replay-form">
                 <form id="register_form" class="php-email-form">
                     <div class="row">
@@ -80,7 +76,6 @@
                                    placeholder="내용을 입력해주세요" id="content">
                         </div>
                     </div>
-
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="margin-right: 30px">공개여부</span>

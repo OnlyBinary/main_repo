@@ -21,8 +21,6 @@
         list.init();
     });
 </script>
-
-
 <h1 style="text-align:center;">Contact</h1>
 <div class="container mb-3">
     <table class="table table-striped" style="margin-top: 30px" id ="board_table">

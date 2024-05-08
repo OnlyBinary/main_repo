@@ -1,12 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <link rel="stylesheet" href="/css/weather.css">
 <link rel="stylesheet" href="/css/kakaoparking.css">
 <style>
   #like {
     width:20px;
-    /*height:20vh;*/
     fill:#ddd;
   }
   #like.active{
@@ -38,7 +37,6 @@
     }
   }
 </script>
-
 <%--날씨정보 script--%>
 <script type="module">
   function getFormattedNowDate() {
@@ -374,10 +372,8 @@
     increaseCnt.init();
   });
 </script>
-
 <main id="main">
-
-  <!-- ======= Breadcrumbs ======= -->
+  <!-- header bar -->
   <section id="breadcrumbs" style="margin-top:0px!important;" class="breadcrumbs">
     <div class="container">
 
@@ -389,42 +385,25 @@
           <li>행사 상세정보</li>
         </ol>
       </div>
-
     </div>
-  </section><!-- End Breadcrumbs -->
-
-  <!-- ======= Portfolio Details Section ======= -->
+  </section>
+  <!-- 정보 페이지 시작 -->
   <section id="portfolio-details" class="portfolio-details">
     <div class="container">
-
       <div class="row gy-4">
-
         <div class="col-lg-8">
           <div class="portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
-
               <div class="swiper-slide">
                 <img src="${service.imgurl}" alt="">
               </div>
-
-<%--              <div class="swiper-slide">--%>
-<%--                <img src="assets/img/portfolio/portfolio-2.jpg" alt="">--%>
-<%--              </div>--%>
-
-<%--              <div class="swiper-slide">--%>
-<%--                <img src="assets/img/portfolio/portfolio-3.jpg" alt="">--%>
-<%--              </div>--%>
-
             </div>
             <div class="swiper-pagination"></div>
           </div>
           <div>
             ${detail.ListPublicReservationDetail.row[0].NOTICE}
-<%--            ${detail.ListPublicReservationDetail.row[0].DTLCONT}--%>
-<%--            ${service.detail}--%>
           </div>
         </div>
-
         <div class="col-lg-4">
           <!-- 행사 관련 간략 정보 -->
           <div class="portfolio-description" style="padding-top:0px!important;">
@@ -436,7 +415,8 @@
             <p>접수기간: ${service.rcptstr} ~ ${service.rcptfin}</p>
             <p>대상 : ${service.usertgtinfo}</p>
           </div>
-          <button style="width:100%;" class="btn btn-success mb-2">홈페이지 이동</button>
+          <button style="width:100%;" class="btn btn-success mb-2"
+          onclick={window.open("https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id="+'${service.svcid}')}>홈페이지 이동</button>
 
           <div style="display:flex;">
             <button style="width:100%;" class="btn btn-success mb-2 col-lg-6" onclick="redirectToMap();">길찾기</button>
@@ -460,25 +440,11 @@
             </div>
             <button style="width:100%;" class="btn btn-success mb-2 col-lg-6" id="btn_review" onclick="moveToReview();">리뷰보기</button>
           </div>
-
-<%--          <div style="overflow:scroll;">--%>
-<%--            <div class="portfolio-info">--%>
-<%--              <h3>교통정보</h3>--%>
-<%--              <ul>--%>
-<%--                <li><strong>Category</strong>: Web design</li>--%>
-<%--                <li><strong>Client</strong>: ASU Company</li>--%>
-<%--                <li><strong>Project date</strong>: 01 March, 2020</li>--%>
-<%--                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>--%>
-<%--              </ul>--%>
-<%--            </div>--%>
-<%--          </div>--%>
         </div>
       </div>
     </div>
-  </section><!-- End Portfolio Details Section -->
-
-
-
+  </section>
+  <!-- 날씨 정보 -->
   <section id="weather-details">
     <div class="portfolio-info">
       <div class="container">
@@ -515,7 +481,7 @@
       </div>
     </div>
   </section>
-
+  <!-- 주차장 정보 -->
   <section id = "parking-lot">
       <div class="map_wrap">
         <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -532,10 +498,9 @@
           <ul id="placesList"></ul>
           <div id="pagination"></div>
         </div>
-
     </div>
-
   </section>
+  <!-- 리뷰 정보 -->
   <section id="review-list" class="testimonials section-bg">
     <div class="container">
       <div class="section-title" style="display:flex;align-items:center;padding:15px 15px 15px 0!important;">
@@ -577,43 +542,19 @@
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
-<%--                <p>--%>
-<%--                  Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.--%>
-<%--                  Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.--%>
-<%--                </p>--%>
               </div>
             </div>
           </div>
         </c:forEach>
       </div>
-<%--      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">--%>
-<%--        <div class="swiper-wrapper">--%>
-<%--              <div class="testimonial-item">--%>
-<%--              <c:forEach var="c" items="${review}">--%>
-<%--                <h5 style="text-align: left;">${c.memberid}</h5>--%>
-<%--                <h5 style="text-align: left;">${c.regdate}</h5>--%>
-<%--                <c:if test="${c.score ==1}"><span>⭐</span></c:if>--%>
-<%--                <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>--%>
-<%--                <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>--%>
-<%--                <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>--%>
-<%--                <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>--%>
-<%--                <p style="width: 1000px; height: 100px;">--%>
-<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}--%>
-<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
-<%--                </p>--%>
-<%--              </c:forEach>--%>
-<%--              </div>--%>
-<%--          </div><!-- End testimonial item -->--%>
-<%--      </div>--%>
     </div>
     </section><!-- End Testimonials Section -->
-
-
 </main><!-- End #main -->
 <script>
   const latitude = ${lat};  // JSP EL(Expression Language)을 사용하여 값을 주입
   const longitude = ${lng};
   const area = ${service.areanm};
 </script>
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9e1c6a20d65fd94d833f6984f6e0f2ba&libraries=services"></script>
+<spring:eval var="kakaoKey" expression="@keyStore.kakaoServiceKey"/>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoKey}&libraries=services"></script>
 <script src="<c:url value="/js/kakao.js" />"></script>
