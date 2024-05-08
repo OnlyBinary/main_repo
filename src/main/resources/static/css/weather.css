@@ -58,3 +58,42 @@ h2 {
 .temp-max {
     color: red;
 }
+
+#selectedDate {
+    border: 2px solid limegreen;
+    border-radius: 10px!important; /* 모서리를 더 둥글게 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1)!important; /* 그림자 추가 */
+    background-color: white; /* 배경색 지정 */
+    margin-bottom: 10px!important; /* 주변 여백 추가 */
+    padding: 7px 5px!important; /* 내부 패딩 추가 */
+}
+
+#forecast-container table {
+    width: 100%;
+    border-collapse: separate; /* 각 셀의 보더가 분리되도록 설정 */
+    border: 1px solid limegreen;
+    border-spacing: 0; /* 셀 사이의 공간 제거 */
+    background-color: white; /* 배경색 설정 */
+    box-shadow: 0 2px 1px rgba(0,0,0,0.15); /* 더 크고 부드러운 그림자 효과 */
+    border-radius: 8px; /* 테이블의 모서리를 둥글게 */
+    overflow: hidden; /* 둥근 모서리와 함께 overflow 처리 */
+    margin-bottom: 20px; /* 아래쪽 여백 추가 */
+    vertical-align: middle; /* 텍스트 수직 중앙 정렬 */
+}
+
+#forecast-container th, #forecast-container td {
+    border: 1px solid limegreen; /* 보더 두껍게 설정 */
+    padding: 10px 10px; /* 더 넉넉한 패딩 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    align-items: center;
+}
+
+#forecast-container th {
+    background-color: #f8f8f8; /* 헤더의 배경색 조금 더 밝게 */
+    color: #444; /* 헤더 텍스트 색상 조금 더 진하게 */
+    font-weight: bold; /* 글씨 굵기 */
+}
+
+#forecast-container tr:hover {
+    background-color: #e0f7fa; /* 호버 시 배경색 더 부드럽게 변경 */
+}

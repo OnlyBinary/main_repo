@@ -150,8 +150,18 @@
 
             fragment.appendChild(el);
 
+            let markerImageSrc;
+            // 무료와 유료에 따라 다른 마커 이미지 사용
+            if (place.payatnm === "무료") {
+                markerImageSrc = '/img/free.png'; // 무료 마커 이미지
+            } else {
+                markerImageSrc = '/img/cash.webp'; // 유료 마커 이미지
+            }
+
+            let markerImage = new kakao.maps.MarkerImage(markerImageSrc, new kakao.maps.Size(35, 35));
             let marker = new kakao.maps.Marker({
-                position: dataLoc
+                position: new kakao.maps.LatLng(place.lat, place.lng),
+                image: markerImage
             });
 
             marker.setMap(geo2.map);
@@ -197,13 +207,13 @@
 
         },
         display: function (geoData) {
-            // console.log(geoData);
+            console.log(geoData);
             let listEl = document.querySelector("#placeList");
             fragment = document.createDocumentFragment();
             $(geoData).each(function (index, item) {
                 let geocoder = new kakao.maps.services.Geocoder();
 
-                let coord = new kakao.maps.LatLng(item.lat, item.lng);
+                let coord= new kakao.maps.LatLng(item.lat, item.lng);
                 let callback = function (result, status) {
                     if (status == kakao.maps.services.Status.OK) {
                         geo2.displayStoreGpsMarker(item, result[0].address.address_name);
