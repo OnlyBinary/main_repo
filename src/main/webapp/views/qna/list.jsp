@@ -1,22 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tlqla
-  Date: 2024-04-30
-  Time: 오전 11:38
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     .info p {
         margin-bottom: 20px; /* Increase the margin-bottom value to increase spacing between rows */
         line-height: 3; /* Adjust line height to make the cells taller */
-    }
-    .favorites-title {
-        margin-bottom: 100px; /* Adjust the margin bottom as needed */
-    }
-    .favorites-icon {
-        margin-bottom: 10px; /* 하트 아이콘과 테이블 사이에 여백을 만들려면 마진 오른쪽 값을 조정하세요. */
     }
     a {
          color: #777; /* 링크 색상을 검정색으로 지정 */

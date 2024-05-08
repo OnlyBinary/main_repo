@@ -95,11 +95,11 @@ register.init('<c:url value="/qna/addimpl"/>');
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="margin-right: 30px">공개여부</span>
-                            <div>
+                            <div style="display: flex; align-items: center;">
                                 <input id="openyn1" name="openyn" type="radio" value="1" onclick="hidePasswordInput()">
-                                <label for="openyn1" class="radio-label">동의</label>
+                                <label for="openyn1" class="radio-label ml-2" style="margin-bottom:0!important;">동의</label>
                                 <input id="openyn2" name="openyn" type="radio" value="0" onclick="showPasswordInput()">
-                                <label for="openyn2" class="radio-label">미동의</label>
+                                <label for="openyn2" class="radio-label ml-2" style="margin-bottom:0!important;">미동의</label>
                             </div>
                         </div>
                     </div>

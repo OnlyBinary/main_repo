@@ -21,7 +21,9 @@
         </div>
     </div>
 </section><!-- End Breadcrumbs -->
-
+<div class="container">
+    <h3>문의사항 상세보기</h3>
+</div>
 <div class="container">
     <form id="board_detail_form">
         <div class="form-group">
@@ -39,9 +41,5 @@
         <div class="form-group">
             <p>등록일: ${qnadetail.regdate}</p>
         </div>
-        <c:if test="${sessionScope.id == board.custId}">
-            <button id="btn_update" type="button" class="btn btn_primary">Update</button>
-            <button id="btn_delete" type="button" class="btn btn_primary">Delete</button>
-        </c:if>
     </form>
 </div>

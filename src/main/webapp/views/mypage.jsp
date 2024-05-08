@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tlqla
-  Date: 2024-04-30
-  Time: 오전 11:38
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
@@ -18,6 +12,11 @@
     .favorites-icon {
         margin-bottom: 10px; /* 하트 아이콘과 테이블 사이에 여백을 만들려면 마진 오른쪽 값을 조정하세요. */
     }
+    a {
+         color: #777; /* 링크 색상을 검정색으로 지정 */
+         text-decoration: none; /* 밑줄 제거 */
+     }
+
 </style>
 
 <script>
@@ -34,14 +33,10 @@
     <section id="contact" class="contact">
         <div class="container">
 
-            <div class="section-title">
-                <span>Mypage</span>
-                <h2>Mypage</h2>
-<%--                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>--%>
-            </div>
+            <h1 style="text-align:center; margin-bottom: 70px">My Page</h1>
 
             <div class="row justify-content-center mt-4">
-                <div class="col-lg-8 d-flex align-items-stretch">
+                <div class="col-lg-9 d-flex align-items-stretch">
                     <div class="info">
                         <div class="address">
                             <i class="bi bi-check-circle"></i>
@@ -61,7 +56,10 @@
                         <div class="address">
                             <i class="bi bi-geo-alt"></i>
                             <h4>주소:</h4>
-                            <p style ="font-size: 20px">${member.memberaddr}</p>
+                            <p style ="font-size: 20px">
+                                ${member.memberzipcode}
+                                ${member.memberaddr}
+                                ${member.memberaddrdetail}</p>
                         </div>
                         <div class="email">
                             <i class="bi bi-envelope"></i>
@@ -75,15 +73,37 @@
                         <table class="table table-striped" id="comment_table">
                             <thead>
                             <tr>
-                                <th>서비스명</th>
-                                <th>접수시작일자</th>
-                                <th>접수종료일자</th>
+                                <th style="width: 60%; text-align: center;">서비스명</th>
+                                <th style="width: 20%;">접수시작일자</th>
+                                <th style="width: 20%;">접수종료일자</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="c" items="${interest[0].serviceList}">
                                 <tr>
-                                    <td>${c.svcnm}</td>
+                                    <td><a href="<c:url value="/service?detail=${c.svcid}"/>">${c.svcnm}</td></a>
+                                    <td>${c.rcptstr}</td>
+                                    <td>${c.rcptfin}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <div class="address">
+                            <i class="bi bi-eye-fill favorites-icon"></i>
+                            <h4 class="favorites-title" style="margin-top: 50px">최근 조회한 목록:</h4>
+                        </div>
+                        <table class="table table-striped" id="view_table">
+                            <thead>
+                            <tr>
+                                <th style="width: 60%; text-align: center;">서비스명</th>
+                                <th style="width: 20%;">접수시작일자</th>
+                                <th style="width: 20%;">접수종료일자</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="c" items="${view[0].serviceList}">
+                                <tr>
+                                    <td><a href="<c:url value="/service?detail=${c.svcid}"/>">${c.svcnm}</td>
                                     <td>${c.rcptstr}</td>
                                     <td>${c.rcptfin}</td>
                                 </tr>

@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -130,10 +131,9 @@
 <section id="contact" class="contact">
     <div class="container">
 
-        <div class="section-title">
-            <span>LOGIN</span>
-            <h2>LOGIN</h2>
-        </div>
+        <h1 style="text-align:center;">Login</h1>
+        <p style="font-size: 20px; text-align: center; margin-bottom: 50px;">Only Binary 서비스에 오신 걸 환영합니다!!</p>
+
 
         <div class="row justify-content-center">
 
