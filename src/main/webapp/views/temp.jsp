@@ -444,18 +444,21 @@
           </div>
 
           <div style="display:flex;">
-            <button style="width:100%;" class="btn btn-success mb-2" onclick="moveToParkingLot();">근처 주차장 정보</button>
-            <button style="width:100%;" class="btn btn-success mb-2" id="btn_review" onclick="moveToReview();">리뷰보기</button>
+            <button style="width:100%;" class="btn btn-success mb-2 col-lg-6" onclick="moveToParkingLot();">근처 주차장 정보</button>
+            <button id="btn_qna" style="width:100%;"
+                    class="btn btn-success mb-2 col-lg-6"
+                    onclick={window.location.href="/qna/add?serviceId=${service.svcid}"}>
+              문의하기
+            </button>
           </div>
-          
-          <a href="<c:url value="/qna/add?serviceId=${service.svcid}"/>">
-              <button id="btn_qna" style="margin-left: 10px" class="btn btn-success">문의하기</button>
-          </a>
 
-          <!-- 관심 등록 버튼 -->
           <div style="display:flex;">
-            <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
-            <h4 class="ml-2" style="align-items:center;" id="likeCnt"></h4>
+            <!-- 관심 등록 버튼 -->
+            <div style="display:flex;width:100%;justify-content: center;">
+              <svg id="like" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+              <h4 class="ml-2" style="align-items:center;" id="likeCnt"></h4>
+            </div>
+            <button style="width:100%;" class="btn btn-success mb-2 col-lg-6" id="btn_review" onclick="moveToReview();">리뷰보기</button>
           </div>
 
 <%--          <div style="overflow:scroll;">--%>
@@ -535,42 +538,73 @@
   </section>
   <section id="review-list" class="testimonials section-bg">
     <div class="container">
-      <div class="section-title">
-        <h3 style="text-align: left;">리뷰보기</h3>
-        <div style = "text-align: left; ">
+      <div class="section-title" style="display:flex;align-items:center;padding:15px 15px 15px 0!important;">
+        <h3 style="text-align:left;" class="mr-4">리뷰보기</h3>
+        <div style = "text-align: left;">
           <c:choose>
             <c:when test="${sessionScope.id != null}">
               <a href="<c:url value="/review/add?serviceId=${service.svcid}"/>">
-                <button style="width:9%;" class="btn btn-success">리뷰등록</button>
+                <button class="btn btn-success">리뷰등록</button>
               </a>
           </c:when>
             <c:when test="${sessionScope.id == null}">
             <a href="<c:url value="/login"/>">
-              <button style="width:9%;" class="btn btn-success">리뷰등록</button>
+              <button class="btn btn-success">리뷰등록</button>
             </a>
             </c:when>
           </c:choose>
         </div>
-        </div>
-      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper-wrapper">
-              <div class="testimonial-item">
-              <c:forEach var="c" items="${review}">
-                <h5 style="text-align: left;">${c.memberid}</h5>
-                <h5 style="text-align: left;">${c.regdate}</h5>
-                <c:if test="${c.score ==1}"><span>⭐</span></c:if>
-                <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>
-                <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>
-                <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>
-                <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>
-              <p style="width: 1000px; height: 100px;">
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              </c:forEach>
-              </div>
-          </div><!-- End testimonial item -->
       </div>
+      <h5 style="text-align:left!important;" class="ml-3 mb-3">${review.size()} comments</h5>
+      <div class="comments">
+        <c:forEach var="c" items="${review}">
+          <div class="comment mb-2">
+            <div class="d-flex">
+              <div class="comment-img" style="margin-right:1rem;">
+                <img src="/img/about.png" style="width:60px;" alt="">
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;">
+                  <h5 style="text-align:left!important;" class="mr-2">${c.memberid}</h5>
+                  <c:if test="${c.score ==1}"><span>⭐</span></c:if>
+                  <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>
+                  <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>
+                  <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>
+                  <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>
+                </div>
+                <time datetime="2020-01-01">${c.regdate}</time>
+                <p style="width: 100%;" class="mt-2">
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+<%--                <p>--%>
+<%--                  Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.--%>
+<%--                  Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.--%>
+<%--                </p>--%>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+<%--      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">--%>
+<%--        <div class="swiper-wrapper">--%>
+<%--              <div class="testimonial-item">--%>
+<%--              <c:forEach var="c" items="${review}">--%>
+<%--                <h5 style="text-align: left;">${c.memberid}</h5>--%>
+<%--                <h5 style="text-align: left;">${c.regdate}</h5>--%>
+<%--                <c:if test="${c.score ==1}"><span>⭐</span></c:if>--%>
+<%--                <c:if test="${c.score ==2}"><span>⭐⭐</span></c:if>--%>
+<%--                <c:if test="${c.score ==3}"><span>⭐⭐⭐</span></c:if>--%>
+<%--                <c:if test="${c.score ==4}"><span>⭐⭐⭐⭐</span></c:if>--%>
+<%--                <c:if test="${c.score ==5}"><span>⭐⭐⭐⭐⭐</span></c:if>--%>
+<%--                <p style="width: 1000px; height: 100px;">--%>
+<%--                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>${c.content}--%>
+<%--                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>--%>
+<%--                </p>--%>
+<%--              </c:forEach>--%>
+<%--              </div>--%>
+<%--          </div><!-- End testimonial item -->--%>
+<%--      </div>--%>
     </div>
     </section><!-- End Testimonials Section -->
 

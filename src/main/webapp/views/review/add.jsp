@@ -47,49 +47,71 @@
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2 class = "custom-heading">리뷰등록</h2>
-                <ol>
-                    <li><a href="<c:url value="/"/>">Home</a></li>
-                    <li>리뷰등록</li>
-                </ol>
-            </div>
+<%--    <section class="breadcrumbs">--%>
+<%--        <div class="container">--%>
+<%--            <div class="d-flex justify-content-between align-items-center">--%>
+<%--                <h2 class = "custom-heading">리뷰등록</h2>--%>
+<%--                <ol>--%>
+<%--                    <li><a href="<c:url value="/"/>">Home</a></li>--%>
+<%--                    <li>리뷰등록</li>--%>
+<%--                </ol>--%>
+<%--            </div>--%>
 
-        </div>
-    </section><!-- End Breadcrumbs -->
+<%--        </div>--%>
+<%--    </section><!-- End Breadcrumbs -->--%>
     <!-- ======= Contact Section ======= -->
+    <div data-aos="fade" class="page-title">
+        <div class="heading">
+            <div class="container">
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-lg-12">
+                        <%--                    <h1>${menu}</h1>--%>
+                        <img style="width:100%;" src="${menu}">
+                        <%--                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%--        <nav class="breadcrumbs">--%>
+<%--            <div class="container">--%>
+<%--                <ol>--%>
+<%--                    <li><a href="index.html">Home</a></li>--%>
+<%--                    <li>${currentDiv}</li>--%>
+<%--                    <li class="current">${submenu}</li>--%>
+<%--                </ol>--%>
+<%--            </div>--%>
+<%--        </nav>--%>
+    </div><!-- End Page Title -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+<%--            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">--%>
+            <div class="reply-form">
+                <h4>리뷰 등록하기</h4>
+                <p>해당 행사에 대한 여러분의 솔직한 리뷰를 남겨주세요!!</p>
                 <form id="register_form" class="php-email-form">
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            아이디: <input type="text" class="form-control" name="memberid" id="memberid" value="${id}" readonly>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <input type="text" class="form-control" name="memberid" id="memberid" value="${sessionScope.id}" readonly>
                         </div>
-                        <input type="hidden" name="svcid" value="${svcid}"/>
-                    </div>
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            서비스명: <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
+                        <div class="col-md-8 form-group">
+                            <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
                         </div>
                     </div>
-                    <div class="form-group col-md-8 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            <label for="score">점수:</label>
-                            <input type="number" min="1" max="5" class="form-control" name="score" id="score" required>
+                    <div class="row">
+                        <div class="col form-group">
+                            <input type="number" min="1" max="5" class="form-control"
+                                   name="score" id="score" placeholder="평점을 입력해주세요" required>
                         </div>
                     </div>
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            <label for="content">내용:</label>
-                            <input type="text" class="form-control" name="content" id="content">
+                    <div class="row">
+                        <div class="col form-group">
+                            <input type="text" class="form-control" name="content" id="content"
+                            placeholder="리뷰 내용을 입력해주세요">
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="form-group col-md-6 text-center">
-                            <button id= "btn_register" type="submit">등록</button>
+                            <button id= "btn_register" type="submit">리뷰 남기기</button>
                         </div>
                     </div>
                 </form>

@@ -35,23 +35,20 @@
 </script>
 
 <!-- ======= Breadcrumbs ======= -->
-<section class="breadcrumbs">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2 class = "custom-heading">문의하기</h2>
-            <ol>
-                <li><a href="<c:url value="/"/>">Home</a></li>
-                <li>문의하기</li>
-            </ol>
-        </div>
+<%--<section class="breadcrumbs">--%>
+<%--    <div class="container">--%>
+<%--        <div class="d-flex justify-content-between align-items-center">--%>
+<%--            <h2 class = "custom-heading">문의하기</h2>--%>
+<%--            <ol>--%>
+<%--                <li><a href="<c:url value="/"/>">Home</a></li>--%>
+<%--                <li>문의하기</li>--%>
+<%--            </ol>--%>
+<%--        </div>--%>
 
-    </div>
-</section><!-- End Breadcrumbs -->
-
-<div class="container">
-    <a href="<c:url value="/qna/addgeneral"/>">
-        <button id="btn_qna" style="margin-left: 10px" class="btn btn-success">문의하기</button>
-    </a>
+<%--    </div>--%>
+<%--</section><!-- End Breadcrumbs -->--%>
+<h1 style="text-align:center;">Contact</h1>
+<div class="container mb-3">
     <table class="table table-striped" style="margin-top: 30px" id ="board_table">
         <thead>
         <tr>
@@ -72,4 +69,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <a href="<c:url value="/qna/addgeneral"/>" style="display:flex;justify-content: right;">
+        <button id="btn_qna" style="margin-left: 10px" class="btn btn-success">문의하기</button>
+    </a>
 </div>

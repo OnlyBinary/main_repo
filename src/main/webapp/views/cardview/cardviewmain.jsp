@@ -10,7 +10,7 @@
 <script>
     let movePage = {
         init: function (url) {
-            window.location.href="http://127.0.0.1"+url;
+            window.location.href="http://127.0.0.1"+url+"?pageNo=1";
             console.log("http://127.0.0.1"+url);
         }
     };

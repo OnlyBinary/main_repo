@@ -35,7 +35,7 @@ public class PublicServiceToDBTest {
     @Test
     void contextLoads() throws IOException, ParseException {
         // 먼저 하나만 받아와서 전체 개수 출력
-        JSONObject serviceData = (JSONObject) PublicServiceUtil.getServiceData(keyStore.publicServiceKey, "1", "500");
+        JSONObject serviceData = (JSONObject) PublicServiceUtil.getServiceData(keyStore.publicServiceKey, "1501", "2169");
         JSONObject collect = (JSONObject) serviceData.get("tvYeyakCOllect");
         JSONArray rows = (JSONArray) collect.get("row");
 
@@ -79,9 +79,11 @@ public class PublicServiceToDBTest {
                 Object placenm = obj.get("PLACENM");
                 JSONObject serviceData1 = (JSONObject) KakaoServiceUtil.getServiceData(keyStore.kakaoApiServiceKey, placenm.toString().split(" ")[0]);
                 JSONArray documents = (JSONArray) serviceData1.get("documents");
-                JSONObject o = (JSONObject) documents.get(0);
-
-                areanm = o.get("address_name").toString().split(" ")[1];
+                System.out.println(documents);
+                if (documents != null && !documents.isEmpty()) {
+                    JSONObject o = (JSONObject) documents.get(0);
+                    areanm = o.get("address_name").toString().split(" ")[1];
+                }
             } else {
                 areanm = obj.get("areanm").toString();
             }
@@ -109,10 +111,18 @@ public class PublicServiceToDBTest {
                 java.sql.Date rcptfin = java.sql.Date.valueOf(rcptfinLocal.toLocalDate());
 
                 // String -> SimpleDateFormat
+                Date minDate = null;
+                Date maxDate = null;
 
+                // 시작, 종료 시간 parsing
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-                Date minDate = simpleDateFormat.parse(obj.get("V_MIN").toString());
-                Date maxDate = simpleDateFormat.parse(obj.get("V_MAX").toString());
+                if (!obj.get("V_MIN").toString().equals("") && !obj.get("V_MAX").toString().equals("")) {
+                    minDate = simpleDateFormat.parse(obj.get("V_MIN").toString());
+                    maxDate = simpleDateFormat.parse(obj.get("V_MAX").toString());
+                } else {
+                    minDate = simpleDateFormat.parse("00:00");
+                    maxDate = simpleDateFormat.parse("00:00");
+                }
 
                 Time minTime = new Time(minDate.getTime());
                 Time maxTime = new Time(maxDate.getTime());

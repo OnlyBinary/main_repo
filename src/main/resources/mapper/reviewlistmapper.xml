@@ -12,7 +12,7 @@
         SELECT * FROM reviewlist WHERE memberid=#{memberid}
     </select>
     <select id="select" resultType="reviewlistDto">
-        SELECT * FROM reviewlist
+        SELECT * FROM reviewlist order by regdate desc;
     </select>
     <insert id="insert" parameterType="reviewlistDto">
         INSERT INTO reviewlist VALUES ( #{svcid}, #{memberid}, #{content}, #{score}, now() )

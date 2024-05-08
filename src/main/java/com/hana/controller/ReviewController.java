@@ -29,19 +29,18 @@ public class ReviewController {
 
 
     @RequestMapping("/add")
-    public String register(Model model,
-                           HttpSession httpSession,
-                           @RequestParam("serviceId") String svcid) throws Exception {
-        String memid = (String) httpSession.getAttribute("id");
+    public String register(Model model, @RequestParam("serviceId") String svcid) throws Exception {
 
         ServiceDto serviceDto = serviceService.get(svcid);
 
         model.addAttribute("svcnm", serviceDto.getSvcnm());
         model.addAttribute("svcid", serviceDto.getSvcid());
-        model.addAttribute("id", memid);
+        model.addAttribute("menu", serviceDto.getImgurl());
         model.addAttribute("center", dir + "add");
+
         return "index";
     }
+
     @RequestMapping("/addimpl")
     public String addimpl(Model model,
                           ReviewlistDto reviewlistDto, HttpSession httpSession){

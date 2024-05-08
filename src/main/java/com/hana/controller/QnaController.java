@@ -41,14 +41,18 @@ public class QnaController {
     public String add(Model model,
                            HttpSession httpSession,
                            @RequestParam("serviceId") String svcid) throws Exception {
-        String memid = (String) httpSession.getAttribute("id");
+//        String memid = (String) httpSession.getAttribute("id");
 
         ServiceDto serviceDto = serviceService.get(svcid);
 
         model.addAttribute("svcnm", serviceDto.getSvcnm());
         model.addAttribute("svcid", serviceDto.getSvcid());
-        model.addAttribute("id", memid);
-        model.addAttribute("center", dir + "add");
+//        model.addAttribute("id", memid);
+//        model.addAttribute("currentDiv", "Contact");
+//        model.addAttribute("submenu", "문의등록 / " + svcid);
+        model.addAttribute("menu", serviceDto.getImgurl());
+        model.addAttribute("center", dir + "center");
+        model.addAttribute("subcenter", "add");
         return "index";
     }
     @RequestMapping("/addimpl")
@@ -65,7 +69,10 @@ public class QnaController {
 
     @RequestMapping("/addgeneral")
     public String addgeneral(Model model) {
-        model.addAttribute("center", dir+"addgeneral");
+        model.addAttribute("currentDiv", "Contact");
+        model.addAttribute("submenu", "서비스 문의등록");
+        model.addAttribute("center", dir + "center");
+        model.addAttribute("subcenter", "addgeneral");
         return "index";
     }
     @RequestMapping("/addgeneralimpl")
@@ -88,7 +95,10 @@ public class QnaController {
         try {
             lists = qnaService.get();
             model.addAttribute("qna", lists);
-            model.addAttribute("center", dir + "list");
+            model.addAttribute("currentDiv", "Contact");
+            model.addAttribute("submenu", "문의하기");
+            model.addAttribute("center", dir + "center");
+            model.addAttribute("subcenter", "list");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -104,7 +114,10 @@ public class QnaController {
             qnaDto = qnaService.seldet(qnaid);
 
             model.addAttribute("qnadetail", qnaDto);
-            model.addAttribute("center", dir + "detail");
+            model.addAttribute("currentDiv", "Contact");
+            model.addAttribute("submenu", "문의등록");
+            model.addAttribute("center", dir + "center");
+            model.addAttribute("subcenter",  "detail");
         } catch (Exception e) {
             model.addAttribute("center", "registerfail");
         }

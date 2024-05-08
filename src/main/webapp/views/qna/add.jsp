@@ -53,47 +53,71 @@ register.init('<c:url value="/qna/addimpl"/>');
 
 <main id="main">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2 class = "custom-heading">문의등록</h2>
-                <ol>
-                    <li><a href="<c:url value="/"/>">Home</a></li>
-                    <li>문의등록</li>
-                </ol>
+    <div data-aos="fade" class="page-title">
+        <div class="heading">
+            <div class="container">
+                <h4>행사 문의 등록하기</h4>
+                <p>서비스에 대한 문의사항을 편하게 작성해주세요!!</p>
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-lg-12">
+                        <%--                    <h1>${menu}</h1>--%>
+                        <img style="width:100%;" src="${menu}">
+                        <%--                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>--%>
+                    </div>
+                </div>
             </div>
-
         </div>
-    </section><!-- End Breadcrumbs -->
-    <!-- ======= Contact Section ======= -->
+    </div><!-- End Page Title -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="col-lg-15 mt-5 mt-lg-0 d-flex align-items-stretch">
+<%--            <div class="col-lg-15 mt-5 mt-lg-0 d-flex align-items-stretch">--%>
+            <div class="replay-form">
+
                 <form id="register_form" class="php-email-form">
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            아이디: <input type="text" class="form-control" name="memberid" id="memberid" value="${id}" readonly>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <input type="text" class="form-control" name="memberid" id="memberid" value="${sessionScope.id}" readonly>
                         </div>
                         <input type="hidden" name="svcid" value="${svcid}"/>
-                    </div>
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            서비스명: <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
+                        <div class="col-md-8 form-group">
+                            <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
                         </div>
                     </div>
-                    <div class="form-group col-md-8 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            <label for="title">제목:</label>
-                            <input type="text" class="form-control" name="title" id="title" required>
+<%--                    <div class="form-group col-md-12 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            아이디: --%>
+<%--                        </div>--%>
+<%--                        --%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-12 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            서비스명: <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+                    <div class="row">
+                        <div class="col form-group">
+                            <input type="text" class="form-control" name="title" id="title"
+                                   placeholder="제목을 입력해주세요" required>
                         </div>
                     </div>
-                    <div class="form-group col-md-12 mt-3 mt-md-0">
-                        <div class="input-group mb-3">
-                            <label for="content">내용:</label>
-                            <input style="height: 300px;" type="text" class="form-control" name="content" id="content">
+                    <div class="row">
+                        <div class="col form-group">
+                            <input style="height: 300px;" type="text" class="form-control" name="content"
+                                   placeholder="내용을 입력해주세요" id="content">
                         </div>
                     </div>
+<%--                    <div class="form-group col-md-8 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <label for="title">제목:</label>--%>
+
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-12 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <label for="content">내용:</label>--%>
+<%--                            <input style="height: 300px;" type="text" class="form-control" name="content" id="content">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="margin-right: 30px">공개여부</span>

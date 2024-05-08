@@ -1,3 +1,5 @@
+/*@import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');*/
+
 /**
 * Template Name: eNno
 * Template URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
@@ -9,8 +11,14 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+@font-face {
+  font-family: 'nanumgothic';
+  src: url('../fonts/NanumGothic.ttf') format('truetype');
+}
 body {
-  font-family: "Open Sans", sans-serif;
+  /* Make the image fully responsive */
+  /*font-family: "Open Sans", sans-serif;*/
+  font-family: 'nanumgothic';
   color: #444444;
 }
 

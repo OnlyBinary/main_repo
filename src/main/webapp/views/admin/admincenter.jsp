@@ -71,7 +71,7 @@
         <div class="col-lg-6">
             <div class="card shadow mb-4" style="height:50vh;">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">리뷰 관리</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">리뷰 관리 (최근 등록순)</h6>
                 </div>
                 <div class="card-body" style="overflow:scroll;">
                     <c:forEach var="r" items="${reviewListDtos}">

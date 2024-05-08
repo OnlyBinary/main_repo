@@ -20,6 +20,7 @@
 <section id="hero" style="padding-top:0px!important;" class="d-flex align-items-center">
 
     <div class="container">
+        <h3 class="font-weight-bold" style="font-family:'nanumgothic';">인기 행사 TOP 3</h3>
         <%-- carousel --%>
         <div id="demo" class="carousel slide" data-ride="carousel">
             <!-- The slideshow -->
@@ -27,6 +28,8 @@
                 <c:forEach var="i" items="${imageList}" varStatus="status">
                     <div class="carousel-item${status.first ? ' active' : ''}"
                          onclick="window.location.href='/service?detail=${i.svcid}'">
+                        <p><span class="badge badge-danger">${status.index+1}위</span>
+                            <span class="badge badge-light">${i.svcnm}</span></p>
                         <img src="${i.imgurl}" alt="${i.svcnm}" style="opacity: 0.2;width:100%;height:30rem;">
 <%--                        <h5 style="position:absolute;top:0px;left:0px;">${i.svcnm}</h5>--%>
                     </div>
