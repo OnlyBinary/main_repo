@@ -41,4 +41,13 @@ public class MemberService implements HanaService<String, MemberDto> {
     public List<MemberDto> get() throws Exception {
         return repository.select();
     }
+
+    public MemberDto searchid(MemberDto memberDto) throws Exception {
+        return repository.searchid(memberDto);
+    }
+
+    public MemberDto searchpw(MemberDto memberDto) throws Exception {
+        return repository.searchpw(memberDto);
+    }
+
 }

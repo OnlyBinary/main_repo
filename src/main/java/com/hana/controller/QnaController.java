@@ -95,13 +95,13 @@ public class QnaController {
         return "index";
     }
 
+
     @RequestMapping("/detail")
     public String detail(Model model,
                          @RequestParam("qnaid") int qnaid, HttpSession httpSession) {
         QnaDto qnaDto = null;
         try {
             qnaDto = qnaService.seldet(qnaid);
-            // boardDto.getCommentList().stream().forEach(c->log.info(c.toString()));
 
             model.addAttribute("qnadetail", qnaDto);
             model.addAttribute("center", dir + "detail");
@@ -110,4 +110,8 @@ public class QnaController {
         }
         return "index";
     }
+
+    
+
+
 }

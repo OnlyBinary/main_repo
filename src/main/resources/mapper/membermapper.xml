@@ -10,11 +10,20 @@
     <select id="select" resultType="memberDto">
         SELECT * FROM member
     </select>
+    <select id="searchid" parameterType="memberDto" resultType="memberDto" >
+        SELECT * FROM member WHERE membernm= #{membernm}
+                                       AND memberemail = #{memberemail}
+    </select>
+    <select id="searchpw" parameterType="memberDto" resultType="memberDto" >
+        SELECT * FROM member WHERE membernm= #{membernm}
+                                       AND memberid = #{memberid}
+                                       AND memberemail = #{memberemail}
+    </select>
     <insert id="insert" parameterType="memberDto">
         INSERT INTO member VALUES (#{memberid}, #{membernm}, #{membertel}, #{memberpwd}, #{memberaddr}, #{memberemail}, #{snsagree})
     </insert>
     <update id="update" parameterType="memberDto">
-        UPDATE member SET memebernm=#{membernm} WHERE memberid=#{memberid}
+        UPDATE member SET memberpwd=#{memberpwd} WHERE memberid=#{memberid}
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM member WHERE memberid=#{memberid}
