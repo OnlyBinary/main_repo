@@ -10,4 +10,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface MemberRepository extends HanaRepository<String, MemberDto> {
 
+    MemberDto searchid(MemberDto memberDto);
+
+    MemberDto searchpw(MemberDto memberDto);
+
 }

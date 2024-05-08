@@ -92,6 +92,62 @@ public class MainController {
         }
         return "index";
     }
+
+    @ResponseBody
+    @RequestMapping("/idfindimpl")
+    public String idfindimpl(@RequestParam("membernm") String name,
+                             @RequestParam("memberemail") String email) throws Exception {
+        String result = null;
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMembernm(name);
+        memberDto.setMemberemail(email);
+        MemberDto searchedMember = memberService.searchid(memberDto);
+        if (searchedMember != null) {
+            result = searchedMember.getMemberid();
+        }
+        else {
+            result = null;
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/passwordfindimpl")
+    public String passwordfindimpl(@RequestParam("membernm") String name,
+                                   @RequestParam("memberid") String id,
+                                   @RequestParam("memberemail") String email) throws Exception {
+        String result = null;
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMembernm(name);
+        memberDto.setMemberid(id);
+        memberDto.setMemberemail(email);
+        MemberDto searchedMember = memberService.searchpw(memberDto);
+        if (searchedMember != null) {
+            result = "1";
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/passwordmodifiedimpl")
+    public Object passwordmodifiedimpl(@RequestParam("memberid") String id,
+                                   @RequestParam("memberpwd") String pwd,
+                                   @RequestParam("memberpwdcon") String pwdcon) throws Exception {
+        MemberDto memberDto = null;
+        memberDto = memberService.get(id);
+        String result = null;
+
+        if (pwdcon.equals(pwd)){
+            memberDto.setMemberpwd(pwd);
+            memberService.modify(memberDto);
+            result = "1";
+        } else {
+            result = "0";
+        }
+        return result;
+    }
+
+
     @RequestMapping("/mypage")
     public String mypage(Model model, HttpSession httpSession) {
         MemberDto memberDto = null;
