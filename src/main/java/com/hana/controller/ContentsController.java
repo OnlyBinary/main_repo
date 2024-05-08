@@ -1,11 +1,14 @@
 package com.hana.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hana.data.dto.ServiceDto;
 import com.hana.service.ServiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -53,18 +56,21 @@ public class ContentsController {
 
     // 공간시설
     @RequestMapping("/gongan")
-    public String gongan(Model model) {
+    public String gongan(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("공간시설", "content");
+            pageInfo = new PageInfo<>(serviceService.getPage(pageNo, "공간시설"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "공간시설");
+            model.addAttribute("submenu", "공간시설");
             model.addAttribute("currentDiv", "컨텐츠별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/contents/gongan");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,18 +81,21 @@ public class ContentsController {
 
     // 교육강좌
     @RequestMapping("/edulec")
-    public String edulec(Model model) {
+    public String edulec(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("교육강좌", "content");
+            pageInfo = new PageInfo<>(serviceService.getPage(pageNo, "교육강좌"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "교육강좌");
+            model.addAttribute("submenu", "교육강좌");
             model.addAttribute("currentDiv", "컨텐츠별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/contents/edulec");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,18 +106,21 @@ public class ContentsController {
 
     // 문화체험
     @RequestMapping("/culexper")
-    public String culexper(Model model) {
+    public String culexper(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("문화체험", "content");
+            pageInfo = new PageInfo<>(serviceService.getPage(pageNo, "교육강좌"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "문화체험");
+            model.addAttribute("submenu", "문화체험");
             model.addAttribute("currentDiv", "문화체험");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/contents/culexper");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,18 +131,21 @@ public class ContentsController {
 
     // 진료복지
     @RequestMapping("/medical")
-    public String medical(Model model) {
+    public String medical(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("진료복지", "content");
+            pageInfo = new PageInfo<>(serviceService.getPage(pageNo, "진료복지"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "진료복지");
+            model.addAttribute("submenu", "진료복지");
             model.addAttribute("currentDiv", "컨텐츠별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/contents/medical");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,18 +156,21 @@ public class ContentsController {
 
     // 체육시설
     @RequestMapping("/sportsfacilities")
-    public String sportsfacilities(Model model) {
+    public String sportsfacilities(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("체육시설", "content");
+            pageInfo = new PageInfo<>(serviceService.getPage(pageNo, "체육시설"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "체육시설");
+            model.addAttribute("submenu", "체육시설");
             model.addAttribute("currentDiv", "컨텐츠별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/contents/sportsfacilities");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();

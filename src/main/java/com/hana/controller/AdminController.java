@@ -1,12 +1,10 @@
 package com.hana.controller;
 
 import com.hana.data.dto.MemberDto;
+import com.hana.data.dto.QnaDto;
 import com.hana.data.dto.ReviewlistDto;
 import com.hana.data.dto.ServiceDto;
-import com.hana.service.MemberService;
-import com.hana.service.ReviewService;
-import com.hana.service.ServiceService;
-import com.hana.service.SvccntService;
+import com.hana.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,7 @@ public class AdminController {
     final ServiceService serviceService;
     final MemberService memberService;
     final ReviewService reviewService;
+    final QnaService qnaService;
 
     @RequestMapping("")
     public String adminMain(Model model) {
@@ -70,12 +69,12 @@ public class AdminController {
 
     @RequestMapping("/management/qna")
     public String qnaManage(Model model) {
-        List<MemberDto> memberDtoList = null;
+        List<QnaDto> qnaDtoList = null;
 
         try {
-            memberDtoList = memberService.get();
+            qnaDtoList = qnaService.get();
 
-            model.addAttribute("memberDtoList", memberDtoList);
+            model.addAttribute("qnaDtoList", qnaDtoList);
             model.addAttribute("center", "management/adminqna");
         } catch (Exception e) {
             e.printStackTrace();

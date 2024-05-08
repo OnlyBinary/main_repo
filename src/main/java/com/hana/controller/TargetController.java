@@ -1,11 +1,13 @@
 package com.hana.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hana.data.dto.ServiceDto;
 import com.hana.service.ServiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,18 +52,22 @@ public class TargetController {
 
     // 가족
     @RequestMapping("/family")
-    public String family(Model model) {
+    public String family(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("가족", "target");
+            pageInfo = new PageInfo<>(serviceService.getPageTarget(pageNo, "가족"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "가족");
+//            model.addAttribute("menu", "가족");
+            model.addAttribute("submenu", "가족");
             model.addAttribute("currentDiv", "서비스대상별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/target/family");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,18 +78,21 @@ public class TargetController {
 
     // 성인
     @RequestMapping("/adult")
-    public String adult(Model model) {
+    public String adult(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("성인", "target");
+            pageInfo = new PageInfo<>(serviceService.getPageTarget(pageNo, "성인"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "성인");
+            model.addAttribute("submenu", "성인");
             model.addAttribute("currentDiv", "서비스대상별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/target/adult");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,18 +103,21 @@ public class TargetController {
 
     // 청소년
     @RequestMapping("/teenager")
-    public String teenager(Model model) {
+    public String teenager(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("청소년", "target");
+            pageInfo = new PageInfo<>(serviceService.getPageTarget(pageNo, "성인"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "청소년");
+            model.addAttribute("submenu", "청소년");
             model.addAttribute("currentDiv", "서비스대상별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/target/teenager");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,18 +128,21 @@ public class TargetController {
 
     // 어린이
     @RequestMapping("/child")
-    public String child(Model model) {
+    public String child(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("유아", "target");
+            pageInfo = new PageInfo<>(serviceService.getPageTarget(pageNo, "성인"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "유아");
+            model.addAttribute("submenu", "유아");
             model.addAttribute("currentDiv", "서비스대상별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/target/child");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,18 +153,21 @@ public class TargetController {
 
     // 기타
     @RequestMapping("/etc")
-    public String etc(Model model) {
+    public String etc(Model model, @RequestParam("pageNo") int pageNo) {
         List<ServiceDto> list = null;
+        PageInfo<ServiceDto> pageInfo;
 
         try {
             list = serviceService.getByDetail("기타", "target");
+            pageInfo = new PageInfo<>(serviceService.getPageTarget(pageNo, "성인"), list.size()/36+1);
 
             // 메뉴단
-            model.addAttribute("menu", "기타");
+            model.addAttribute("submenu", "기타");
             model.addAttribute("currentDiv", "서비스대상별");
 
             // 카드뷰 데이터 뿌려주기
-            model.addAttribute("data", list);
+            model.addAttribute("data", pageInfo);
+            model.addAttribute("target","/target/etc");
             model.addAttribute("center", dir + "cardview");
         } catch (Exception e) {
             e.printStackTrace();

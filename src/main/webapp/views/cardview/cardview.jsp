@@ -4,13 +4,55 @@
   <main id="main">
 
     <!-- Blog Section - Blog Page -->
-    <section id="blog" class="blog">
-
+    <section id="blog" class="blog" style="padding-top:30px!important;">
+      <!-- pagination -->
+      <div class="col text-center mb-4">
+        <ul class="pagination justify-content-center align-items-center">
+          <c:choose>
+            <c:when test="${data.getPrePage() != 0}">
+              <li class="page-item">
+                <a class="page-link" href="<c:url value="${target}?pageNo=${data.getPrePage()}"/>">Previous</a>
+              </li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+            </c:otherwise>
+          </c:choose>
+          <c:forEach begin="${data.getNavigateFirstPage()}" end="${data.getNavigateLastPage()}" var="page">
+            <c:choose>
+              <c:when test="${data.getPageNum() == page}">
+                <li class="page-item active">
+                  <a class="page-link" href="<c:url value="${target}?pageNo=${page}"/>">${page}</a>
+                </li>
+              </c:when>
+              <c:otherwise>
+                <li class="page-item">
+                  <a class="page-link" href="<c:url value="${target}?pageNo=${page}"/>">${page}</a>
+                </li>
+              </c:otherwise>
+            </c:choose>
+          </c:forEach>
+          <c:choose>
+            <c:when test="${data.getNextPage() != 0}">
+              <li class="page-item">
+                <a class="page-link" href="<c:url value="${target}allpage?pageNo=${cpage.getNextPage()}"/>">Next</a>
+              </li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </c:otherwise>
+          </c:choose>
+        </ul>
+      </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-4 posts-list">
 <%--          나중에 foreach로 데이터 가져와서 돌려야함--%>
-          <c:forEach var="d" items="${data}">
+          <c:forEach var="d" items="${data.getList()}">
             <div class="col-xl-4 col-lg-6">
               <article>
                 <div class="post-img">
@@ -20,6 +62,7 @@
                 <div class="mt-3 mb-2">
                   <span class="badge badge-primary">${d.maxclassnm}</span>
                   <span class="badge badge-dark">${d.minclassnm}</span>
+                  <span class="badge badge-info">${d.usertgtinfo}</span>
                 </div>
 
                 <h4 class="title">
@@ -43,13 +86,14 @@
 
         </div><!-- End blog posts list -->
 
-        <div class="pagination d-flex justify-content-center">
-          <ul>
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-          </ul>
-        </div><!-- End pagination -->
+<%--        <div class="pagination d-flex justify-content-center">--%>
+<%--          <ul>--%>
+<%--            <li><a href="#">1</a></li>--%>
+<%--            <li class="active"><a href="#">2</a></li>--%>
+<%--            <li><a href="#">3</a></li>--%>
+<%--          </ul>--%>
+<%--        </div><!-- End pagination -->--%>
+
 
       </div>
 

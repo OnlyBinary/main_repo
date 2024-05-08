@@ -90,7 +90,7 @@ public class MainController {
         if(httpSession != null){
             httpSession.invalidate();
         }
-        return "index";
+        return "redirect:/";
     }
 
     @ResponseBody

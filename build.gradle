@@ -43,6 +43,9 @@ dependencies {
     // spring properties 암호화
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
 
+    // pageing
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
+
     // test
     testImplementation 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'

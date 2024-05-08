@@ -30,23 +30,23 @@
         <table class="table table-striped">
             <thead>
                 <th>ID</th>
-                <th>Title</th>
+                <th class="text-center" style="width:40%;">Title</th>
+                <th>Service ID (0 &rarr; 서비스 관련 문의)</th>
                 <th>Register Date</th>
                 <th>Writer</th>
-                <th>ServiceID</th>
                 <th>답변</th>
             </thead>
             <tbody>
-<%--                <c:forEach var="q" items="${qnaDtoList}">--%>
-<%--                    <tr>--%>
-<%--                        <td>${q.qnaid}</td>--%>
-<%--                        <td>${q.title}</td>--%>
-<%--                        <td>${q.regdate}</td>--%>
-<%--                        <td>${q.memberid}</td>--%>
-<%--                        <td>${q.svcid}</td>--%>
-<%--                        <td>답변</td>--%>
-<%--                    </tr>--%>
-<%--                </c:forEach>--%>
+                <c:forEach var="q" items="${qnaDtoList}">
+                    <tr>
+                        <td>${q.qnaid}</td>
+                        <td class="text-center">${q.title}</td>
+                        <td>${q.svcid}</td>
+                        <td>${q.regdate}</td>
+                        <td>${q.memberid}</td>
+                        <td><span class="badge badge-info">답변</span></td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>

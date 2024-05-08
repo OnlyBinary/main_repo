@@ -58,7 +58,6 @@
     <script src="/js/main.js"></script>
 
   <style>
-    /* Make the image fully responsive */
     .carousel-inner img {
       width: 100%;
       height: 100%;

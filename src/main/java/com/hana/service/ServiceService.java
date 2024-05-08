@@ -1,5 +1,7 @@
 package com.hana.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.hana.data.dto.ServiceDto;
 import com.hana.frame.HanaService;
 import com.hana.repository.ServiceRepository;
@@ -71,4 +73,19 @@ public class ServiceService implements HanaService<String, ServiceDto> {
     }
 
     public List<ServiceDto> selectOrderByDate() { return serviceRepository.selectOrderByDate();}
+
+    public Page<ServiceDto> getPage(int pageNo, String option) throws Exception {
+        PageHelper.startPage(pageNo, 36);
+        return serviceRepository.getPage(option);
+    }
+
+    public Page<ServiceDto> getPageTarget(int pageNo, String option) throws Exception {
+        PageHelper.startPage(pageNo, 36);
+        return serviceRepository.getPageTarget(option);
+    }
+
+    public Page<ServiceDto> getPageLocation(int pageNo, String option) throws Exception {
+        PageHelper.startPage(pageNo, 21);
+        return serviceRepository.getPageLocation(option);
+    }
 }
