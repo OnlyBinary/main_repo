@@ -15,7 +15,6 @@
             <result column="rcptfin" property="rcptfin"/>
         </collection>
     </resultMap>
-
     <select id="selectOne" parameterType="String" resultType="UserRecentViewDto">
         SELECT * FROM userrecentview WHERE memberid=#{memberid}
     </select>
@@ -25,7 +24,7 @@
     <select id="memberRecentView" parameterType="String" resultMap="memberview">
         SELECT u.*, s.svcnm, s.rcptstr, s.rcptfin
         FROM userrecentview u LEFT JOIN service s
-        ON u.svcid = s.svcid
+                                        ON u.svcid = s.svcid
         WHERE memberid = #{memberId}
         ORDER BY recentdate DESC limit 5;
     </select>
@@ -36,7 +35,7 @@
         INSERT INTO userrecentview VALUES (#{memberid}, #{svcid}, NOW())
     </insert>
     <update id="update" parameterType="UserRecentViewDto">
-        UPDATE userrecentview SET recentdate = NOW() WHERE memberid=#{memberid}
+        UPDATE userrecentview SET recentdate=NOW() WHERE memberid=#{memberid}
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM userrecentview WHERE memberid=#{memberid}

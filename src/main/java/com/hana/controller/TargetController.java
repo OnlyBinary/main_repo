@@ -43,7 +43,7 @@ public class TargetController {
         model.addAttribute("urlList", urlList);
 
         // 대표 메뉴 보여주기
-        model.addAttribute("menu", "컨텐츠별");
+        model.addAttribute("submenu", "서비스대상별");
         model.addAttribute("currentDiv", "메인");
         // 컨텐츠 메인
         model.addAttribute("center", dir + "cardviewmain");

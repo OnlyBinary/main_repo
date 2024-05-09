@@ -26,8 +26,38 @@ ul{
 }
 
 .content div{
-    height:70px;background-color:beige;display:flex;align-items:center;justify-content:center;
+    height:70px;
+    /*background-color:greenyellow;*/
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight: bold;
+}
+.content div:hover {
+    background-color: #f8f9fa; /* 호버 시 배경색 변경 */
 }
 /*#item:hover {*/
 /*    background-color: #6c757d !important;*/
 /*}*/
+
+.dropdown-menu {
+    width: 100%;
+    min-width: 150px; /* 드롭다운 메뉴의 최소 너비 설정 */
+    border-radius: 0.25rem; /* 모서리 둥글기 */
+    border: none; /* 테두리 제거 */
+    font-weight: bold; /* 텍스트를 굵게 설정 */
+}
+
+.dropdown-item {
+    color: black; /* 항목 텍스트 색상 */
+    padding: 10px 20px; /* 패딩 조정 */
+    font-weight: bold; /* 텍스트를 굵게 설정 */
+}
+
+.dropdown-item:hover {
+    background-color: #e9ecef; /* 호버 시 배경색 변경 */
+}
+
+.content-item.active {
+    background-color: lightgray; /* Bootstrap primary color */
+}

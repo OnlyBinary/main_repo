@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-
     .radio-label {
         margin-right: 20px; /* 원하는 간격 값으로 조정하세요. */
     }
@@ -25,7 +24,6 @@
         url:'',
         init:function(url){
             this.url = url;
-
             $('#register_form  #btn_register').click(function(){
                 register.send();
             });
@@ -88,7 +86,7 @@
                     <div class="row">
                         <div class="col form-group">
                             <input type="text" class="form-control" name="content" id="content"
-                            placeholder="리뷰 내용을 입력해주세요">
+                                   placeholder="리뷰 내용을 입력해주세요">
                         </div>
                     </div>
                     <div class="row justify-content-center">

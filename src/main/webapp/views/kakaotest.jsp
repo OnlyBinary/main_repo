@@ -34,6 +34,10 @@
 
     }
 
+    .col-7 {
+        height:calc(100vh - 160px)!important;
+    }
+
     #placeList .item {position:relative;overflow: hidden;cursor: pointer;min-height: 65px;}
     #placeList .item span {display: block;margin-top:4px;}
     #placeList .info .jibun {padding-left:0px;}
@@ -67,23 +71,21 @@
 
 <script>
     let geo2 = {
-
         map: null,
         fragment: null,
-        mapdisplay: function(){
-            <%--console.log(<%=KeyStore.kakaoServiceKey%>);--%>
-            // console.log('map');
+        mapdisplay: function(lat, lng){
             geo2.map = new kakao.maps.Map(
                 document.getElementById('map'),
                 {
-                    center: new kakao.maps.LatLng(37.5447611, 127.0564625), // 지도 중심좌표
+                    // 검색결과 첫번째 중심 좌표로
+                    center: new kakao.maps.LatLng(lat, lng), // 지도 중심좌표
                     level: 6 // 지도 확대 레벨
                 }
             );
 
-            let marker_position = new kakao.maps.LatLng(37.5447611, 127.0564625);
-            this.displayGpsMarker(marker_position);
-            this.go(37.5447611, 127.0564625); // 경도 위도 입력하면 주변 검색 넘겨서 띄우기
+            let marker_position = new kakao.maps.LatLng(lat, lng);
+            // this.displayGpsMarker(marker_position);
+            this.go(lat, lng); // 경도 위도 입력하면 주변 검색 넘겨서 띄우기
 
             // 우측 상단에 map control 추가
             var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -97,7 +99,7 @@
             this.map.panTo(moveLatLon);
 
             // 마커 새로고침
-            this.displayGpsMarker(moveLatLon);
+            // this.displayGpsMarker(moveLatLon);
             // this.getServiceData();
         },
         getServiceData: function() {
@@ -153,10 +155,10 @@
             if (place.payatnm === "무료") {
                 markerImageSrc = '/img/free.png'; // 무료 마커 이미지
             } else {
-                markerImageSrc = '/img/cash.webp'; // 유료 마커 이미지
+                markerImageSrc = '/img/money.png'; // 유료 마커 이미지
             }
 
-            let markerImage = new kakao.maps.MarkerImage(markerImageSrc, new kakao.maps.Size(35, 35));
+            let markerImage = new kakao.maps.MarkerImage(markerImageSrc, new kakao.maps.Size(50, 30));
             let marker = new kakao.maps.Marker({
                 position: new kakao.maps.LatLng(place.lat, place.lng),
                 image: markerImage
@@ -205,7 +207,6 @@
 
         },
         display: function (geoData) {
-            console.log(geoData);
             let listEl = document.querySelector("#placeList");
             fragment = document.createDocumentFragment();
             $(geoData).each(function (index, item) {
@@ -255,7 +256,6 @@
     let changeContentList = {
         content: function(data, pageNo) {
             // maxclassnm = data 가져와서 geo2.display()
-            console.log(data);
             $.ajax({
                 url: '<c:url value="/getContentListData"/>',
                 data: {'detail': data, 'category': 'content', pageNo: pageNo},
@@ -289,6 +289,7 @@
                 url: '<c:url value="/getPublicServiceData"/>',
                 data: {pageNo: pageNo},
                 success: function(result){
+                    console.log(result);
                     changeContentList.initialization(result, '', '');
                 }
             })
@@ -296,7 +297,15 @@
         initialization: function(data, detail, category) {
             // 기존 지도 초기화
             document.querySelector("#map").innerHTML = '';
-            geo2.mapdisplay(); // 기본지도 띄어주기
+            let lat, lng;
+            for (const item of data.list) {
+                if (item.lat !== 0) {
+                    lat = item.lat;
+                    lng = item.lng;
+                    break;
+                }
+            }
+            geo2.mapdisplay(lat, lng); // 기본지도 띄어주기
             // 옆에 목록 초기화
             document.querySelector("#placeList").innerHTML = '';
             geo2.display(data.list); // 마커 찍어주기
@@ -340,7 +349,7 @@
         }
     }
     $(function() {
-        geo2.mapdisplay();
+        geo2.mapdisplay(37.5447611, 127.0564625);
         showList.init(0);
         let currentPosition = parseInt($("#quickmenu").css("top"));
         $(window).scroll(function() {
@@ -349,10 +358,20 @@
         });
     })
 </script>
+<script>
+    function selectItem(element) {
+        var items = document.querySelectorAll('.content-item');
+        items.forEach(function(item) {
+            item.classList.remove('active'); // 모든 항목에서 active 클래스 제거
+        });
+        element.classList.add('active'); // 클릭된 항목에만 active 클래스 추가
+    }
+</script>
+
 <body>
-<div class="container">
-    <div style="display: flex;" class="mb-5">
-        <div class="col-2" id="quickmenu" style="padding:0px;z-index:1;">
+<div class="container" style="margin: 0 0 0 0!important; width:100% !important; max-width: unset !important;height: calc(100vh - 50px)!important;">
+    <div style="display: flex;" class="mb-3">
+        <div class="col-2" id="quickmenu" style="padding:0px; z-index:1; height: calc(100vh - 160px)!important; cursor: pointer">
             <div class="dropdown">
                 <button id="cateBtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width:100%;">
                     선택
@@ -365,19 +384,19 @@
                     <a class="dropdown-item" onclick="showList.init('content3')">지역구별</a>
                 </div>
             </div>
-            <div id="content1" class="content">
-                <div onclick="changeContentList.content('공간시설', 1)">공간시설</div>
-                <div onclick="changeContentList.content('교육강좌', 1)">교육강좌</div>
-                <div onclick="changeContentList.content('문화체험', 1)">문화체험</div>
-                <div onclick="changeContentList.content('진료복지', 1)">진료복지</div>
-                <div onclick="changeContentList.content('체육시설', 1)">체육시설</div>
+            <div id="content1" class="content" style="cursor: pointer">
+                <div class="content-item" onclick="changeContentList.content('공간시설', 1)">공간시설</div>
+                <div class="content-item" onclick="changeContentList.content('교육강좌', 1)">교육강좌</div>
+                <div class="content-item" onclick="changeContentList.content('문화체험', 1)">문화체험</div>
+                <div class="content-item" onclick="changeContentList.content('진료복지', 1)">진료복지</div>
+                <div class="content-item" onclick="changeContentList.content('체육시설', 1)">체육시설</div>
             </div>
             <div id="content2" class="content">
-                <div onclick="changeContentList.target('가족', 1)">가족</div>
-                <div onclick="changeContentList.target('성인', 1)">성인</div>
-                <div onclick="changeContentList.target('청소년', 1)">청소년</div>
-                <div onclick="changeContentList.target('어린이', 1)">어린이</div>
-                <div onclick="changeContentList.target('', 1)">기타</div>
+                <div class="content-item" onclick="changeContentList.target('가족', 1); selectItem(this);">가족</div>
+                <div class="content-item" onclick="changeContentList.target('성인', 1); selectItem(this);">성인</div>
+                <div class="content-item" onclick="changeContentList.target('청소년', 1); selectItem(this);">청소년</div>
+                <div class="content-item" onclick="changeContentList.target('어린이', 1); selectItem(this);">어린이</div>
+                <div class="content-item" onclick="changeContentList.target('', 1); selectItem(this);">기타</div>
             </div>
             <div id="content3" class="content">
                 <div class="dropdown">
@@ -446,7 +465,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3" style="overflow:scroll;height:100vh;" >
+        <div class="col-3 placeList-container" style="overflow:scroll;height:calc(100vh - 160px)!important;">
             <ul id="placeList"></ul>
         </div>
         <div class="col-7" id="map"></div>

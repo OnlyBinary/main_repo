@@ -60,7 +60,7 @@ register.init('<c:url value="/qna/addimpl"/>');
                 <p>서비스에 대한 문의사항을 편하게 작성해주세요!!</p>
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-lg-12">
-                        <img style="width:100%;" src="${menu}">
+                        <img style="width:100%;height:20rem!important;" src="${menu}">
                     </div>
                 </div>
             </div>
@@ -69,15 +69,24 @@ register.init('<c:url value="/qna/addimpl"/>');
     <section id="contact" class="contact">
         <div class="container">
             <div class="replay-form">
-
-                <form id="register_form" class="php-email-form">
+                <form id="register_form" class="php-email-form" style="padding-top:15px!important;">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <span class="badge badge-success">회원 ID</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="badge badge-primary">${svc.maxclassnm}</span>
+                            <span class="badge badge-dark">${svc.minclassnm}</span>
+                            <span class="badge badge-info">${svc.usertgtinfo}</span>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 form-group">
                             <input type="text" class="form-control" name="memberid" id="memberid" value="${sessionScope.id}" readonly>
                         </div>
-                        <input type="hidden" name="svcid" value="${svcid}"/>
+                        <input type="hidden" name="svcid" value="${svc.svcid}"/>
                         <div class="col-md-8 form-group">
-                            <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
+                            <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svc.svcnm}" readonly>
                         </div>
                     </div>
                     <div class="row">
