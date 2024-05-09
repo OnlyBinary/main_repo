@@ -10,7 +10,7 @@
 <script>
     let movePage = {
         init: function (url) {
-            window.location.href="http://127.0.0.1"+url+"?pageNo=1";
+            window.location.href="http://172.16.21.242"+url+"?pageNo=1";
             console.log("http://127.0.0.1"+url);
         }
     };
@@ -25,7 +25,7 @@
             <div class="col-md-4 mt-2">
                 <div class="h-100 p-5 text-bg-primary rounded-3">
                     <h2>${l}</h2>
-                    <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(status.index)}')"> &rarr; 바로가기</button>
+                    <button class="btn btn-outline-light" type="button" onclick="movePage.init('<c:url value="${urlList.get(status.index)}"/>')"> &rarr; 바로가기</button>
                 </div>
             </div>
         </c:if>
@@ -33,7 +33,7 @@
             <div class="col-md-4 mt-2">
                 <div class="h-100 p-5 text-bg-secondary rounded-3">
                     <h2>${l}</h2>
-                    <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(status.index)}')"> &rarr; 바로가기</button>
+                    <button class="btn btn-outline-light" type="button" onclick="movePage.init('<c:url value="${urlList.get(status.index)}"/>')"> &rarr; 바로가기</button>
                 </div>
             </div>
         </c:if>
@@ -41,7 +41,7 @@
             <div class="col-md-4 mt-2">
                 <div class="h-100 p-5 text-bg-success rounded-3">
                     <h2>${l}</h2>
-                    <button class="btn btn-outline-light" type="button" onclick="movePage.init('${urlList.get(status.index)}')"> &rarr; 바로가기</button>
+                    <button class="btn btn-outline-light" type="button" onclick="movePage.init('<c:url value="${urlList.get(status.index)}"/>')"> &rarr; 바로가기</button>
                 </div>
             </div>
         </c:if>
@@ -49,7 +49,7 @@
             <div class="col-md-4 mt-2">
                 <div class="h-100 p-5 text-bg-info rounded-3">
                     <h2>${l}</h2>
-                    <button class="btn btn-outline-dark" type="button" onclick="movePage.init('${urlList.get(status.index)}')"> &rarr; 바로가기</button>
+                    <button class="btn btn-outline-dark" type="button" onclick="movePage.init('<c:url value="${urlList.get(status.index)}"/>')"> &rarr; 바로가기</button>
                 </div>
             </div>
         </c:if>
@@ -57,7 +57,7 @@
             <div class="col-md-4 mt-2">
                 <div class="h-100 p-5 text-bg-warning rounded-3">
                     <h2>${l}</h2>
-                    <button class="btn btn-outline-dark" type="button" onclick="movePage.init('${urlList.get(status.index)}')"> &rarr; 바로가기</button>
+                    <button class="btn btn-outline-dark" type="button" onclick="movePage.init('<c:url value="${urlList.get(status.index)}"/>')"> &rarr; 바로가기</button>
                 </div>
             </div>
         </c:if>

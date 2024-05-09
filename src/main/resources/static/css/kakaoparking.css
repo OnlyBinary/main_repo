@@ -34,3 +34,35 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
+#like {
+    width: 32px; /* 아이콘의 너비 */
+    height: 32px; /* 아이콘의 높이 */
+    fill: #ccc; /* 아이콘의 기본 색상 */
+    cursor: pointer; /* 마우스 오버 시 커서 변경 */
+}
+
+#like:hover {
+    fill: #ff4500; /* 호버 시 아이콘 색상 변경 */
+}
+
+#likeCnt {
+    font-size: 24px; /* 좋아요 수의 글자 크기 */
+    color: #333; /* 좋아요 수의 글자 색상 */
+    margin-left: 8px; /* 아이콘과 텍스트 간의 여백 */
+    display: flex; /* 세로 정렬을 위한 flex 설정 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+#likeBtn {
+    display:flex;
+    width:100%;
+    align-items: center;
+    justify-content: start;
+    margin-right: 16px;
+}
+
+#likeMsg {
+    font-size: 15px;
+    font-weight: bold;
+}
