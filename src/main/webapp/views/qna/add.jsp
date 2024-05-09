@@ -60,7 +60,9 @@ register.init('<c:url value="/qna/addimpl"/>');
                 <p>서비스에 대한 문의사항을 편하게 작성해주세요!!</p>
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-lg-12">
+                        <%--                    <h1>${menu}</h1>--%>
                         <img style="width:100%;" src="${menu}">
+                        <%--                    <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>--%>
                     </div>
                 </div>
             </div>
@@ -68,6 +70,7 @@ register.init('<c:url value="/qna/addimpl"/>');
     </div><!-- End Page Title -->
     <section id="contact" class="contact">
         <div class="container">
+<%--            <div class="col-lg-15 mt-5 mt-lg-0 d-flex align-items-stretch">--%>
             <div class="replay-form">
 
                 <form id="register_form" class="php-email-form">
@@ -80,6 +83,17 @@ register.init('<c:url value="/qna/addimpl"/>');
                             <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>
                         </div>
                     </div>
+<%--                    <div class="form-group col-md-12 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            아이디: --%>
+<%--                        </div>--%>
+<%--                        --%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-12 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            서비스명: <input type="text" class="form-control" name="svcnm" id="svcnm" value="${svcnm}" readonly>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <div class="row">
                         <div class="col form-group">
                             <input type="text" class="form-control" name="title" id="title"
@@ -92,14 +106,26 @@ register.init('<c:url value="/qna/addimpl"/>');
                                    placeholder="내용을 입력해주세요" id="content">
                         </div>
                     </div>
+<%--                    <div class="form-group col-md-8 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <label for="title">제목:</label>--%>
+
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group col-md-12 mt-3 mt-md-0">--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <label for="content">내용:</label>--%>
+<%--                            <input style="height: 300px;" type="text" class="form-control" name="content" id="content">--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <div class="form-group col-md-12 mt-3 mt-md-0">
                         <div class="input-group mb-3">
                             <span class="input-group-text" style="margin-right: 30px">공개여부</span>
-                            <div style="display: flex; align-items: center;">
+                            <div>
                                 <input id="openyn1" name="openyn" type="radio" value="1" onclick="hidePasswordInput()">
-                                <label for="openyn1" class="radio-label ml-2" style="margin-bottom:0!important;">동의</label>
+                                <label for="openyn1" class="radio-label">동의</label>
                                 <input id="openyn2" name="openyn" type="radio" value="0" onclick="showPasswordInput()">
-                                <label for="openyn2" class="radio-label ml-2" style="margin-bottom:0!important;">미동의</label>
+                                <label for="openyn2" class="radio-label">미동의</label>
                             </div>
                         </div>
                     </div>

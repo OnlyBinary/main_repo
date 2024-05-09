@@ -48,9 +48,6 @@
         SELECT b.*, (select count(*) from service where svcid = b.svcid) as comment_cnt FROM service b
         where b.areanm = #{location}
     </select>
-    <select id="getTotal" parameterType="String" resultType="ServiceDto">
-        SELECT b.*, (select count(*) from service where svcid = b.svcid) as comment_cnt FROM service b
-    </select>
     <insert id="insert" parameterType="ServiceDto">
         INSERT INTO service VALUES (#{svcid}, #{svcnm}, #{placenm}, #{payatnm}, #{usertgtinfo}, #{areanm}, #{lat},
                                     #{imgurl}, #{lng}, #{tel}, #{svcstr}, #{svcfin}, #{rcptstr}, #{rcptfin},

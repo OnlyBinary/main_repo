@@ -60,7 +60,7 @@
 </head>
 <body>
 <div>
-  <div class="container" style="height:10rem;">
+  <div class="container" style=height:112px;">
     <jsp:include page="sidebar/header.jsp"/>
   </div>
 

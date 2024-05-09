@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Builder
@@ -16,5 +15,4 @@ public class UserRecentViewDto {
     private String memberid;
     private String svcid;
     private Date recentdate;
-    private List<ServiceDto> serviceList;
 }

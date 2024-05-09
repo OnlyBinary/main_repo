@@ -4,30 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hana.repository.UserRecentViewRepository">
 
-    <resultMap id="memberview" type="UserRecentViewDto">
-        <id column="memberid" property="memberid"/>
-        <result column="svcid" property="svcid"/>
-        <result column="recentdate" property="recentdate"/>
-        <collection property="serviceList" ofType="serviceDto">
-            <id column="svcid" property="svcid"/>
-            <result column="svcnm" property="svcnm"/>
-            <result column="rcptstr" property="rcptstr"/>
-            <result column="rcptfin" property="rcptfin"/>
-        </collection>
-    </resultMap>
-
     <select id="selectOne" parameterType="String" resultType="UserRecentViewDto">
         SELECT * FROM userrecentview WHERE memberid=#{memberid}
     </select>
     <select id="findMemberService" parameterType="String" resultType="UserRecentViewDto">
         SELECT * FROM userrecentview WHERE memberid=#{memberId} and svcid=#{serviceId}
-    </select>
-    <select id="memberRecentView" parameterType="String" resultMap="memberview">
-        SELECT u.*, s.svcnm, s.rcptstr, s.rcptfin
-        FROM userrecentview u LEFT JOIN service s
-        ON u.svcid = s.svcid
-        WHERE memberid = #{memberId}
-        ORDER BY recentdate DESC limit 5;
     </select>
     <select id="select" resultType="UserRecentViewDto">
         SELECT * FROM userrecentview
@@ -36,7 +17,7 @@
         INSERT INTO userrecentview VALUES (#{memberid}, #{svcid}, NOW())
     </insert>
     <update id="update" parameterType="UserRecentViewDto">
-        UPDATE userrecentview SET recentdate = NOW() WHERE memberid=#{memberid}
+        UPDATE userrecentview SET recentdate=NOW() WHERE memberid=#{memberid}
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM userrecentview WHERE memberid=#{memberid}
