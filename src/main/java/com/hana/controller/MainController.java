@@ -161,6 +161,17 @@ public class MainController {
         return "index";
     }
 
+//    @RequestMapping("/mypageupdate")
+//    public String mypageupdate(Model model, HttpSession httpSession) throws Exception {
+//        String id = (String) httpSession.getAttribute("id");
+//        MemberDto memberDto = memberService.get(id);
+//        model.addAttribute("member", memberDto);
+//        model.addAttribute("center","mypageupdate");
+//        return "index";
+//    }
+
+
+
     @RequestMapping("/register")
     public String register(Model model) {
         model.addAttribute("center", "register");
@@ -179,6 +190,8 @@ public class MainController {
         }
         return "redirect:/";
     }
+
+
 
     @ResponseBody
     @RequestMapping("/registercheckid")

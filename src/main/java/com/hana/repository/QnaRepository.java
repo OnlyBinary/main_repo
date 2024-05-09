@@ -14,4 +14,6 @@ public interface QnaRepository extends HanaRepository<String, QnaDto> {
 
     QnaDto selectdetail(int s) throws Exception;
 
+    int deleteqna(int s) throws Exception;
+
 }

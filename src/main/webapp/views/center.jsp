@@ -30,7 +30,7 @@
                              onclick="window.location.href='/service?detail=${i.svcid}'">
                             <p><span class="badge badge-danger">${status.index+1}위</span>
                                 <span class="badge badge-light">${i.svcnm}</span></p>
-                            <img src="${i.imgurl}" alt="${i.svcnm}" style="opacity: 0.2;width:100%;height:30rem;">
+                            <img src="${i.imgurl}" alt="${i.svcnm}" style="width:100%;height:30rem;">
                         </div>
                     </c:forEach>
                 </div>

@@ -45,4 +45,8 @@ public class QnaService implements HanaService<String, QnaDto> {
     public QnaDto seldet(int s) throws Exception {
         return repository.selectdetail(s);
     }
+
+    public int delqna(int s) throws Exception {
+        return repository.deleteqna(s);
+    }
 }
