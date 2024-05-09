@@ -359,9 +359,9 @@
 </script>
 
 <body>
-<div class="container" style="margin: 0 0 0 150px!important; width:100% !important; max-width: unset !important;height: calc(100vh - 160px)!important;">
-    <div style="display: flex;" class="mb-5">
-        <div class="col-2" id="quickmenu" style="padding:0px; z-index:1; height: 100vh; cursor: pointer">
+<div class="container" style="margin: 0 0 0 150px!important; width:100% !important; max-width: unset !important;height: calc(100vh - 50px)!important;">
+    <div style="display: flex;" class="mb-3">
+        <div class="col-2" id="quickmenu" style="padding:0px; z-index:1; height: calc(100vh - 160px)!important; cursor: pointer">
             <div class="dropdown">
                 <button id="cateBtn" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width:100%;">
                     선택
@@ -455,7 +455,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 placeList-container" style="overflow:scroll;height:100vh;">
+        <div class="col-3 placeList-container" style="overflow:scroll;height:calc(100vh - 160px)!important;">
             <ul id="placeList"></ul>
         </div>
         <div class="col-7" id="map"></div>
