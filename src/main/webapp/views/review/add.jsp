@@ -25,6 +25,12 @@
         init:function(url){
             this.url = url;
             $('#register_form  #btn_register').click(function(){
+                let content = $('#content').val();
+                if (content == '' || content == null) {
+                    alert("내용을 입력하세요");
+                    $('#content').focus();
+                    return;
+                }
                 register.send();
             });
         },
@@ -77,16 +83,21 @@
                             <input type="hidden" name="svcid" value="${svc.svcid}">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col form-group">
-                            <input type="number" min="1" max="5" class="form-control"
-                                   name="score" id="score" placeholder="평점을 입력해주세요" required>
-                        </div>
-                    </div>
-                    <div class="row">
+                    <div class="row" style="display:flex; align-items:center;">
+
                         <div class="col form-group">
                             <input type="text" class="form-control" name="content" id="content"
-                                   placeholder="리뷰 내용을 입력해주세요">
+                                   placeholder="리뷰 내용을 입력해주세요" required>
+                        </div>
+                        <div class="col-4 form-group" style="display: flex; align-items: center;">
+                            <select class="form-select" id="score"  name="score">
+                                <option value="0">평점을 선택해주세요</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row justify-content-center">
