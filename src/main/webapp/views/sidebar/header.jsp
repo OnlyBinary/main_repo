@@ -18,7 +18,7 @@
     })
 </script>
 <!-- ======= Header ======= -->
-<header id="header" class="fixed-top">
+<header id="header" class="fixed-top" style="padding: 15px 0">
     <div class="container d-flex align-items-center justify-content-between">
         <a href="<c:url value="/"/>">
             <div style="display:flex !important; align-items:center;">
