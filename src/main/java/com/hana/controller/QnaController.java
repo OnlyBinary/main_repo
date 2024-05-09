@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -118,7 +119,28 @@ public class QnaController {
         return "index";
     }
 
-    
 
 
+    @RequestMapping("/updateimpl")
+    public String updateimpl(QnaDto qnaDto, Model model) {
+
+        try {
+            qnaService.modify(qnaDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("center", dir + "detail");
+        return "redirect:/qna/detail?qnaid=" + qnaDto.getQnaid();
+
+    }
+
+    @RequestMapping("/deleteimpl")
+    public String deleteimpl(@RequestParam("qnaid") int qnaid, Model model) {
+        try {
+            qnaService.delqna(qnaid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/qna/list";
+    }
 }

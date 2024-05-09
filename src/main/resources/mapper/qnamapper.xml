@@ -8,19 +8,22 @@
         SELECT * FROM qna WHERE memberid=#{memberid}
     </select>
     <select id="selectdetail" parameterType="int" resultType="qnaDto">
-        SELECT * FROM qna WHERE qnaid=#{qnaid}
+        SELECT * FROM qna WHERE qnaid=#{qnaid};
     </select>
     <select id="select" resultType="qnaDto">
-        SELECT * FROM qna
+        SELECT * FROM qna ORDER BY regdate desc
     </select>
     <insert id="insert" parameterType="qnaDto">
         INSERT INTO qna VALUES (0, #{memberid}, #{svcid}, #{title}, #{content}, now(), #{adminans}, #{openyn}, #{password} )
     </insert>
     <update id="update" parameterType="qnaDto">
-        UPDATE qna SET memebernm=#{membernm} WHERE memberid=#{memberid}
+        UPDATE qna SET title=#{title}, content=#{content} WHERE qnaid=#{qnaid}
     </update>
     <delete id="delete" parameterType="String">
         DELETE FROM qna WHERE memberid=#{memberid}
+    </delete>
+    <delete id="deleteqna" parameterType="int">
+        DELETE FROM qna WHERE qnaid=#{qnaid}
     </delete>
 
 </mapper>

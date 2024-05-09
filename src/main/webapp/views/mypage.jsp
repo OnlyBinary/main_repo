@@ -24,6 +24,7 @@
         init: function () {
         }
     };
+
     $(function () {
         mypage.init();
     });
@@ -32,9 +33,8 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
         <div class="container">
-
             <h1 style="text-align:center; margin-bottom: 70px">My Page</h1>
-
+            <form id="mypage_detail_form">
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-9 d-flex align-items-stretch">
                     <div class="info">
@@ -113,5 +113,7 @@
                     </div>
                 </div>
             </div>
+            </form>
+<%--            <button id="btn_update" style="display: flex; justify-content: center; width: 70px; margin-top: 10px; margin-left: 10px" class="btn btn-success">수정하기</button>--%>
         </div>
-    </section><!-- End Contact Section
+    </section><!-- End Contact Section -->

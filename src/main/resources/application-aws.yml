@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+    session:
+      timeout: 10m
+spring:
+  messages:
+    basename: messages/message
+    encoding: utf-8
+    cache-duration: 10
+    fallback-to-system-locale: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: aaaaa
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://sb2.cdmkygage9u5.ap-northeast-2.rds.amazonaws.com:3306/publicdb?characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: ENC(fGIHFnBehqbzi4DDRRE5yA==)
+    password: ENC(qF1qCuCQEp/b2NzFzUX2oQ==)
+
+mybatis:
+  type-aliases-package: com.hana.data.dto
+  mapper-locations: classpath:/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    root: error
+
+app:
+  key:
+    psKey: ENC(9stHTg5o2wiRj5+q7PSJlq96y7mCUWybdxtM0QC9SkuVMXBvbhyXjg==)
+    kakaoKey: ENC(oafLF1dlQJ9jj4wo4T4myOqUx0xyGOk4A4/k02yc8JEKqfMJPjrICRXOZMnGG9Ow)
+    whkey: ENC(BcBf+XEhqKXwC3pP2Z5Uui/JZce+Ebfpb9pVJyTUdat1uUwkCSJZ4qrrlH5T67Es)
+    kakaoApiKey: ENC(WvOFQwlEvv5FDU/beqhOivSH+033Pkxr5xT+M0uwVIy+J9z/f18ZbLtFMrQ+EFb5)
