@@ -46,7 +46,7 @@
                         <li><a class="nav-link scrollto " href="<c:url value="/target/etc?pageNo=1"/>">기타</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>지역구별</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/location/main"><span>지역구별</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <%--              <li><a href="#">서울 북부</a></li>--%>
                         <li class="dropdown"><a href="#"><span>서울 중부</span> <i class="bi bi-chevron-right"></i></a>

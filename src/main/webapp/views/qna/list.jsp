@@ -26,8 +26,9 @@
     <table class="table table-striped" style="margin-top: 30px" id ="board_table">
         <thead>
         <tr>
-            <th>글번호</th>
-            <th>제목</th>
+            <th style="text-align:center;">글번호</th>
+            <th style="text-align:center;">제목</th>
+            <th style="text-align:center;">분류</th>
             <th>아이디</th>
             <th>등록일시</th>
         </tr>
@@ -35,10 +36,18 @@
         <tbody>
         <c:forEach var="c" items="${qna}" varStatus="status">
             <tr>
-            <td>${status.index + 1}</td>
-            <td style="width: 40%"><a href="<c:url value="/qna/detail?qnaid=${c.qnaid}"/>">${c.title}</a></td>
-            <td>${c.memberid}</td>
-            <td>${c.regdate}</td>
+                <td style="text-align:center;">${status.index + 1}</td>
+                <td style="width: 40%;text-align:center;"><a href="<c:url value="/qna/detail?qnaid=${c.qnaid}"/>">${c.title}</a></td>
+                <td style="text-align:center;">
+                    <c:if test="${c.svcid == '0'}">
+                        서비스 문의
+                    </c:if>
+                    <c:if test="${c.svcid != '0'}">
+                        행사관련 문의
+                    </c:if>
+                </td>
+                <td>${c.memberid}</td>
+                <td>${c.regdate}</td>
             </tr>
         </c:forEach>
         </tbody>

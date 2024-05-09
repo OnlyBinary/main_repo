@@ -74,6 +74,8 @@ public class ServiceService implements HanaService<String, ServiceDto> {
 
     public List<ServiceDto> selectOrderByDate() { return serviceRepository.selectOrderByDate();}
 
+    public List<ServiceDto> selectTodayFinishedService() { return serviceRepository.selectTodayFinishedService();}
+
     public Page<ServiceDto> getPage(int pageNo, String option, String category) throws Exception {
         Page<ServiceDto> page = null;
         switch (category) {

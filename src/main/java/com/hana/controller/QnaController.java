@@ -41,15 +41,9 @@ public class QnaController {
     public String add(Model model,
                            HttpSession httpSession,
                            @RequestParam("serviceId") String svcid) throws Exception {
-//        String memid = (String) httpSession.getAttribute("id");
-
         ServiceDto serviceDto = serviceService.get(svcid);
 
-        model.addAttribute("svcnm", serviceDto.getSvcnm());
-        model.addAttribute("svcid", serviceDto.getSvcid());
-//        model.addAttribute("id", memid);
-//        model.addAttribute("currentDiv", "Contact");
-//        model.addAttribute("submenu", "문의등록 / " + svcid);
+        model.addAttribute("svc", serviceDto);
         model.addAttribute("menu", serviceDto.getImgurl());
         model.addAttribute("center", dir + "center");
         model.addAttribute("subcenter", "add");

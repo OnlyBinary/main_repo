@@ -314,6 +314,11 @@
 
       // 하트 버튼 클릭 이벤트 리스너
       likeBtn.addEventListener('click', function() {
+        // 로그인 안하면 좋아요 안눌리게
+        if ('${sessionScope.id}'==="" || '${sessionScope.id}'==null) {
+          alert("로그인 후 이용해주세요");
+          return;
+        }
         if (likeBtn.classList.contains('active')) {
           likeBtn.classList.remove('active');
           // 해당 유저의 해당 게시글 좋아요 취소 쿼리

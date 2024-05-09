@@ -55,7 +55,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="icon-box">
                         <div class="icon"><i class="bi bi-laptop"></i></div>
-                        <h4 class="title"><a href="">지역구별 서비스 조회</a></h4>
+                        <h4 class="title"><a href="/location/main">지역구별 서비스 조회</a></h4>
                         <p class="description">가고싶은 지역구를 선택하세요! 해당 지역구에서 제공하는 서비스를 조회할 수 있습니다</p>
                     </div>
                 </div>
