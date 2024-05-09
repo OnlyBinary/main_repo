@@ -36,13 +36,16 @@ public class AdminController {
     @RequestMapping("/dashboard")
     public String adminDashBoard(Model model) {
         List<ServiceDto> serviceDtoList = null;
+        List<ServiceDto> todayFinishList = null;
         List<ReviewlistDto> reviewListDtos = null;
 
         try {
             serviceDtoList = serviceService.selectTopFive();
             reviewListDtos = reviewService.get();
+            todayFinishList = serviceService.selectTodayFinishedService();
             model.addAttribute("serviceDtoList", serviceDtoList);
             model.addAttribute("reviewListDtos", reviewListDtos);
+            model.addAttribute("todayFinished", todayFinishList);
             model.addAttribute("center", "admincenter");
         } catch (Exception e) {
             e.printStackTrace();

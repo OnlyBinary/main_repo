@@ -18,6 +18,8 @@ public interface ServiceRepository extends HanaRepository<String, ServiceDto> {
     void deleteAreaIsNull();
     List<ServiceDto> selectTopFive();
     List<ServiceDto> selectOrderByDate();
+    List<ServiceDto> selectTodayFinishedService();
+    // paging
     Page<ServiceDto> getPage(String maxclassnm) throws Exception;
     Page<ServiceDto> getPageTarget(String usertgtinfo) throws Exception;
     Page<ServiceDto> getPageLocation(String location) throws Exception;

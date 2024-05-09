@@ -36,6 +36,10 @@
         select svcid, svcnm, svcstr, svcfin
         from service order by svcfin
     </select>
+    <select id="selectTodayFinishedService" resultType="ServiceDto">
+        select svcid, svcnm, svcstr, svcfin
+        from service where date(svcfin) = date(date_add(now(), interval 8 hour))
+    </select>
     <select id="getPage" parameterType="String" resultType="ServiceDto">
         SELECT b.*, (select count(*) from service where svcid = b.svcid) as comment_cnt FROM service b
         where b.maxclassnm = #{maxclassnm}
@@ -47,6 +51,9 @@
     <select id="getPageLocation" parameterType="String" resultType="ServiceDto">
         SELECT b.*, (select count(*) from service where svcid = b.svcid) as comment_cnt FROM service b
         where b.areanm = #{location}
+    </select>
+    <select id="getTotal" parameterType="String" resultType="ServiceDto">
+        SELECT b.*, (select count(*) from service where svcid = b.svcid) as comment_cnt FROM service b
     </select>
     <insert id="insert" parameterType="ServiceDto">
         INSERT INTO service VALUES (#{svcid}, #{svcnm}, #{placenm}, #{payatnm}, #{usertgtinfo}, #{areanm}, #{lat},

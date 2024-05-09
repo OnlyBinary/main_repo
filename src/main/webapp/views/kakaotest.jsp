@@ -73,18 +73,19 @@
     let geo2 = {
         map: null,
         fragment: null,
-        mapdisplay: function(){
+        mapdisplay: function(lat, lng){
             geo2.map = new kakao.maps.Map(
                 document.getElementById('map'),
                 {
-                    center: new kakao.maps.LatLng(37.5447611, 127.0564625), // 지도 중심좌표
+                    // 검색결과 첫번째 중심 좌표로
+                    center: new kakao.maps.LatLng(lat, lng), // 지도 중심좌표
                     level: 6 // 지도 확대 레벨
                 }
             );
 
-            let marker_position = new kakao.maps.LatLng(37.5447611, 127.0564625);
-            this.displayGpsMarker(marker_position);
-            this.go(37.5447611, 127.0564625); // 경도 위도 입력하면 주변 검색 넘겨서 띄우기
+            let marker_position = new kakao.maps.LatLng(lat, lng);
+            // this.displayGpsMarker(marker_position);
+            this.go(lat, lng); // 경도 위도 입력하면 주변 검색 넘겨서 띄우기
 
             // 우측 상단에 map control 추가
             var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -98,7 +99,7 @@
             this.map.panTo(moveLatLon);
 
             // 마커 새로고침
-            this.displayGpsMarker(moveLatLon);
+            // this.displayGpsMarker(moveLatLon);
             // this.getServiceData();
         },
         getServiceData: function() {
@@ -288,6 +289,7 @@
                 url: '<c:url value="/getPublicServiceData"/>',
                 data: {pageNo: pageNo},
                 success: function(result){
+                    console.log(result);
                     changeContentList.initialization(result, '', '');
                 }
             })
@@ -295,7 +297,15 @@
         initialization: function(data, detail, category) {
             // 기존 지도 초기화
             document.querySelector("#map").innerHTML = '';
-            geo2.mapdisplay(); // 기본지도 띄어주기
+            let lat, lng;
+            for (const item of data.list) {
+                if (item.lat !== 0) {
+                    lat = item.lat;
+                    lng = item.lng;
+                    break;
+                }
+            }
+            geo2.mapdisplay(lat, lng); // 기본지도 띄어주기
             // 옆에 목록 초기화
             document.querySelector("#placeList").innerHTML = '';
             geo2.display(data.list); // 마커 찍어주기
@@ -339,7 +349,7 @@
         }
     }
     $(function() {
-        geo2.mapdisplay();
+        geo2.mapdisplay(37.5447611, 127.0564625);
         showList.init(0);
         let currentPosition = parseInt($("#quickmenu").css("top"));
         $(window).scroll(function() {
@@ -359,7 +369,7 @@
 </script>
 
 <body>
-<div class="container" style="margin: 0 0 0 150px!important; width:100% !important; max-width: unset !important;height: calc(100vh - 50px)!important;">
+<div class="container" style="margin: 0 0 0 0!important; width:100% !important; max-width: unset !important;height: calc(100vh - 50px)!important;">
     <div style="display: flex;" class="mb-3">
         <div class="col-2" id="quickmenu" style="padding:0px; z-index:1; height: calc(100vh - 160px)!important; cursor: pointer">
             <div class="dropdown">
