@@ -19,15 +19,27 @@
 ### :rocket: &nbsp; 기능 소개
 1️⃣ 메인화면
 
+![메인화면](https://github.com/OnlyBinary/main_repo/assets/111037279/303951ff-fe35-4a3a-9364-f18f39a84966)
+
 2️⃣ 지도로 서비스 조회하기
+
+![지도](https://github.com/OnlyBinary/main_repo/assets/111037279/0383b41e-2952-4917-a66a-dc14a8a2bfe7)
 
 3️⃣ 서비스 상세정보 확인
 
+![상세페이지](https://github.com/OnlyBinary/main_repo/assets/111037279/4761ce9f-2e72-45cd-a73a-23266ba5209f)
+
 4️⃣ 지역구별, 컨텐츠별, 서비스 대상별 서비스 조회
+
+![기능별조회](https://github.com/OnlyBinary/main_repo/assets/111037279/4c96f342-126e-4dcd-a496-ae3373676192)
 
 5️⃣ Contact
 
+![1대1문의](https://github.com/OnlyBinary/main_repo/assets/111037279/9cbd0861-801b-4e7a-9706-283676c1a6a7)
+
 6️⃣ 마이페이지
+
+![마이페이지, 관심, 최근조회 목록](https://github.com/OnlyBinary/main_repo/assets/111037279/b0166c70-d21f-4332-99d8-d001f26042d6)
 
 ### :information_desk_person: &nbsp; About Team
 > 디지털하나로 2기 게시판 프로젝트 6조
@@ -35,7 +47,7 @@
 No|이름|역할|
 ---|---|---|
 1|이상민| 서울시공공서비스API와 카카오맵API를 활용한 서비스 조회 기능 개발
-2|변정흠|서비스별상세정보출력담당
+2|변정흠| 날씨API 기능, 서비스별상세정보출력, 상세페이지 개발
 3|유민아|회원가입,마이페이지,리뷰작성및문의기능 개발
 
 
